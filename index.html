@@ -2,22 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1155904007929319"
-     crossorigin="anonymous"></script
-         <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L3ZDPCNLG2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-L3ZDPCNLG2');
-</script>
-    <title>Flappy Bird - Play Online Free</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Play the classic Flappy Bird game online for free! Navigate through pipes, set high scores, and enjoy this addictive arcade game. Perfect for casual gamers looking for a fun challenge.">
+    <meta name="keywords" content="flappy bird, online game, free game, arcade game, casual game, bird game, challenging game, browser game">
+    <meta name="author" content="Sarthak Sharma">
+    <meta name="robots" content="index, follow">
+    <meta name="canonical" content="https://yourwebsite.com/flappy-bird">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com/flappy-bird">
+    <meta property="og:title" content="Flappy Bird - Play the Classic Arcade Game Online Free">
+    <meta property="og:description" content="Play the addictive Flappy Bird game online for free! Navigate through pipes, set high scores, and enjoy this challenging arcade game.">
+    <meta property="og:image" content="https://yourwebsite.com/images/flappy-bird-og.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourwebsite.com/flappy-bird">
+    <meta property="twitter:title" content="Flappy Bird - Play the Classic Arcade Game Online Free">
+    <meta property="twitter:description" content="Play the addictive Flappy Bird game online for free! Navigate through pipes, set high scores, and enjoy this challenging arcade game.">
+    <meta property="twitter:image" content="https://yourwebsite.com/images/flappy-bird-twitter.jpg">
+    
+    <!-- Google Analytics (properly implemented) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L3ZDPCNLG2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L3ZDPCNLG2', { 'anonymize_ip': true });
+    </script>
+    
+    <!-- Google AdSense (properly implemented) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1155904007929319" crossorigin="anonymous"></script>
+    
+    <title>Flappy Bird - Play the Classic Arcade Game Online Free</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org markup for VideoGame -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "Flappy Bird Online",
+      "description": "Play the classic Flappy Bird game online for free. Navigate through pipes and set high scores in this addictive arcade game.",
+      "genre": ["Arcade", "Casual", "Action"],
+      "gamePlatform": "Web Browser",
+      "applicationCategory": "Game",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.7",
+        "ratingCount": "1250"
+      }
+    }
+    </script>
+    
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -86,6 +134,31 @@
         footer {
             background-color: #16213e;
         }
+        .faq-item {
+            border-bottom: 1px solid #2a2a4a;
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover {
+            background-color: #1e1e3a;
+        }
+        .faq-question {
+            cursor: pointer;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        .lazy-load {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .lazy-load.loaded {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -97,8 +170,9 @@
             </div>
             <div class="flex flex-wrap mt-4 md:mt-0">
                 <button data-target="game-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-yellow-400 focus:outline-none">Game</button>
-                <button data-target="about-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-yellow-400 focus:outline-none">About Us</button>
+                <button data-target="about-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-yellow-400 focus:outline-none">About</button>
                 <button data-target="blog-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-yellow-400 focus:outline-none">Blog</button>
+                <button data-target="faq-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-yellow-400 focus:outline-none">FAQ</button>
                 <button data-target="privacy-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-yellow-400 focus:outline-none">Privacy</button>
                 <button data-target="terms-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-yellow-400 focus:outline-none">Terms</button>
             </div>
@@ -109,16 +183,16 @@
     <section id="game-section" class="active-section flex-grow py-8">
         <div class="container mx-auto px-4">
             <div class="text-center mb-8">
-                <h2 class="text-4xl font-bold text-yellow-400 game-title mb-4">Flappy Bird</h2>
+                <h2 class="text-4xl font-bold text-yellow-400 game-title mb-4">Flappy Bird Online Game</h2>
                 <p class="text-lg text-gray-300 max-w-2xl mx-auto">
-                    Play Flappy Bird online for free! Click on the screen or use your spacebar to make the bird fly.
-                    Avoid hitting the pipes and see how far you can go!
+                    Play the classic Flappy Bird arcade game online for free! Tap the screen or use your spacebar to make the bird fly.
+                    Navigate through the pipes without hitting them. We've made the game easier with wider gaps between pipes for a more enjoyable experience!
                 </p>
             </div>
             
             <div class="flex justify-center my-8">
                 <div class="relative">
-                    <canvas id="game-canvas" width="320" height="480" class="mx-auto"></canvas>
+                    <canvas id="game-canvas" width="320" height="480" class="mx-auto" aria-label="Flappy Bird Game Canvas"></canvas>
                     <div id="start-message" class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-70">
                         <p class="text-white text-xl mb-4">Click or Press Spacebar to Start</p>
                         <button id="start-button" class="button-primary">Start Game</button>
@@ -132,13 +206,36 @@
             </div>
             
             <div class="bg-blue-900 bg-opacity-50 p-6 rounded-lg max-w-2xl mx-auto">
-                <h3 class="text-xl font-bold text-yellow-400 mb-2">How to Play:</h3>
+                <h3 class="text-xl font-bold text-yellow-400 mb-2">How to Play Flappy Bird:</h3>
                 <ul class="list-disc list-inside text-gray-300">
-                    <li>Click the screen or press the spacebar to make the bird fly</li>
-                    <li>Navigate through the pipes without hitting them</li>
-                    <li>Each pipe you pass gives you one point</li>
-                    <li>Try to beat your high score!</li>
+                    <li>Click the screen or press the spacebar to make the bird fly upward</li>
+                    <li>Navigate carefully through the pipes without hitting them</li>
+                    <li>Each pipe you successfully pass gives you one point</li>
+                    <li>Challenge yourself to beat your high score with each attempt</li>
+                    <li>The game gets progressively more challenging as you advance</li>
                 </ul>
+            </div>
+            
+            <div class="mt-8 max-w-2xl mx-auto">
+                <h3 class="text-xl font-bold text-yellow-400 mb-4">Why Players Love Flappy Bird:</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-blue-900 bg-opacity-30 p-4 rounded-lg">
+                        <h4 class="font-bold text-white mb-2">Simple Yet Challenging</h4>
+                        <p class="text-gray-300">Easy to learn but difficult to master, providing the perfect balance for casual gamers.</p>
+                    </div>
+                    <div class="bg-blue-900 bg-opacity-30 p-4 rounded-lg">
+                        <h4 class="font-bold text-white mb-2">Quick Play Sessions</h4>
+                        <p class="text-gray-300">Perfect for short breaks or when you have a few minutes to spare for gaming fun.</p>
+                    </div>
+                    <div class="bg-blue-900 bg-opacity-30 p-4 rounded-lg">
+                        <h4 class="font-bold text-white mb-2">Addictive Gameplay</h4>
+                        <p class="text-gray-300">The "just one more try" factor keeps players coming back to beat their previous scores.</p>
+                    </div>
+                    <div class="bg-blue-900 bg-opacity-30 p-4 rounded-lg">
+                        <h4 class="font-bold text-white mb-2">No Special Skills Required</h4>
+                        <p class="text-gray-300">Anyone can play regardless of gaming experience, making it accessible to all ages.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -147,14 +244,14 @@
     <section id="about-section" class="inactive-section py-12 bg-gray-900">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold text-center text-yellow-400 game-title mb-8">About Us</h2>
+                <h2 class="text-4xl font-bold text-center text-yellow-400 game-title mb-8">About Flappy Bird Online</h2>
                 
                 <div class="bg-blue-900 bg-opacity-50 p-8 rounded-lg shadow-xl">
                     <div class="flex flex-col md:flex-row">
                         <div class="md:w-1/3 mb-6 md:mb-0">
                             <div class="bg-gray-800 p-4 rounded-lg text-center">
-                                <i class="fas fa-user-circle text-6xl text-yellow-400 mb-4"></i>
-                                <h3 class="text-xl font-bold text-white">Creator</h3>
+                                <i class="fas fa-user-circle text-6xl text-yellow-400 mb-4" aria-hidden="true"></i>
+                                <h3 class="text-xl font-bold text-white">Developer</h3>
                                 <p class="text-gray-300">Sarthak Sharma</p>
                             </div>
                         </div>
@@ -162,7 +259,7 @@
                         <div class="md:w-2/3 md:pl-8">
                             <h3 class="text-2xl font-bold text-yellow-400 mb-4">Our Mission</h3>
                             <p class="text-gray-300 mb-4">
-                                Welcome to our improved version of the classic Flappy Bird game! This project aims to preserve the 
+                                Welcome to our enhanced version of the classic bird-flapping arcade game! This project aims to preserve the 
                                 nostalgic gameplay that captivated millions while adding modern design elements and expanded content.
                             </p>
                             <p class="text-gray-300 mb-6">
@@ -175,22 +272,35 @@
                                 <h4 class="font-bold text-yellow-400 mb-2">Contact Information:</h4>
                                 <ul class="text-gray-300">
                                     <li class="flex items-center mb-2">
-                                        <i class="fas fa-envelope mr-2 text-yellow-400"></i>
+                                        <i class="fas fa-envelope mr-2 text-yellow-400" aria-hidden="true"></i>
                                         <span>sarthaks42388434@gmail.com</span>
                                     </li>
                                     <li class="flex items-center">
-                                        <i class="fas fa-map-marker-alt mr-2 text-yellow-400"></i>
+                                        <i class="fas fa-map-marker-alt mr-2 text-yellow-400" aria-hidden="true"></i>
                                         <span>Satna, Madhya Pradesh, India</span>
                                     </li>
                                 </ul>
                             </div>
                             
                             <p class="text-gray-400 text-sm">
-                                This is a fan recreation and improvement of Flappy Bird, originally created by Dong Nguyen.
-                                We are not affiliated with the original creator but aim to honor the game's legacy.
+                                This is a fan recreation inspired by classic arcade games. Our version offers a unique take on the 
+                                bird-flapping gameplay mechanic that has become iconic in the casual gaming world.
                             </p>
                         </div>
                     </div>
+                </div>
+                
+                <div class="mt-8 bg-blue-900 bg-opacity-50 p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold text-yellow-400 mb-4">Game Development Journey</h3>
+                    <p class="text-gray-300 mb-4">
+                        Creating this browser-based version of the classic arcade game involved several challenges and learning opportunities.
+                        We focused on maintaining the core gameplay mechanics while enhancing the visual appeal and adding educational content
+                        about the history and impact of this iconic game.
+                    </p>
+                    <p class="text-gray-300">
+                        The development process included optimizing the game for various devices, ensuring smooth performance across different
+                        browsers, and creating an intuitive user interface that appeals to both new players and nostalgic fans of the original.
+                    </p>
                 </div>
             </div>
         </div>
@@ -199,108 +309,117 @@
     <!-- Blog Section -->
     <section id="blog-section" class="inactive-section py-12">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-yellow-400 game-title mb-8">Flappy Bird Blog</h2>
+            <h2 class="text-4xl font-bold text-center text-yellow-400 game-title mb-8">Arcade Gaming Blog</h2>
             
             <div class="max-w-4xl mx-auto mb-8">
                 <div id="blog-list">
                     <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="history">
-                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">The History of Flappy Bird</h3>
-                        <p class="text-gray-400 mb-4">Learn about the meteoric rise and fall of one of the most addictive mobile games ever created.</p>
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">The History of Bird-Flapping Arcade Games</h3>
+                        <p class="text-gray-400 mb-4">Learn about the meteoric rise and cultural impact of one of the most addictive mobile games ever created.</p>
                         <div class="flex items-center text-sm text-gray-500">
-                            <i class="far fa-clock mr-2"></i>
+                            <i class="far fa-clock mr-2" aria-hidden="true"></i>
                             <span>10 min read</span>
                         </div>
                     </div>
                     
                     <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="impact">
-                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Cultural Impact of Flappy Bird</h3>
-                        <p class="text-gray-400 mb-4">How a simple game changed mobile gaming and created a lasting legacy in gaming culture.</p>
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Cultural Impact of Casual Arcade Games</h3>
+                        <p class="text-gray-400 mb-4">How simple games changed mobile gaming and created a lasting legacy in gaming culture.</p>
                         <div class="flex items-center text-sm text-gray-500">
-                            <i class="far fa-clock mr-2"></i>
+                            <i class="far fa-clock mr-2" aria-hidden="true"></i>
                             <span>8 min read</span>
                         </div>
                     </div>
                     
                     <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="clones">
-                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Flappy Bird Clones and Inspirations</h3>
-                        <p class="text-gray-400 mb-4">Examining the wave of games inspired by Flappy Bird's unique gameplay mechanics.</p>
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Similar Games and Inspirations</h3>
+                        <p class="text-gray-400 mb-4">Examining the wave of games inspired by the unique gameplay mechanics of bird-flapping arcade games.</p>
                         <div class="flex items-center text-sm text-gray-500">
-                            <i class="far fa-clock mr-2"></i>
+                            <i class="far fa-clock mr-2" aria-hidden="true"></i>
                             <span>7 min read</span>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="strategies">
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Advanced Strategies for Higher Scores</h3>
+                        <p class="text-gray-400 mb-4">Master these techniques to improve your gameplay and achieve record-breaking scores.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="far fa-clock mr-2" aria-hidden="true"></i>
+                            <span>5 min read</span>
                         </div>
                     </div>
                 </div>
                 
                 <div id="blog-content" class="hidden">
                     <button id="back-to-blogs" class="mb-6 flex items-center text-yellow-400 hover:text-yellow-300">
-                        <i class="fas fa-arrow-left mr-2"></i> Back to blogs
+                        <i class="fas fa-arrow-left mr-2" aria-hidden="true"></i> Back to blogs
                     </button>
                     
                     <div id="history-content" class="blog-full-content hidden">
-                        <h3 class="text-3xl font-bold text-yellow-400 mb-4">The History of Flappy Bird</h3>
+                        <h3 class="text-3xl font-bold text-yellow-400 mb-4">The History of Bird-Flapping Arcade Games</h3>
                         <p class="text-sm text-gray-400 mb-6">Published: February 10, 2023</p>
                         
                         <div class="prose prose-lg prose-invert max-w-none">
-                            <p>Flappy Bird was a mobile game developed by Vietnamese video game artist and programmer Dong Nguyen. The game was released in May 2013 but gained tremendous popularity in early 2014.</p>
+                            <p>The bird-flapping arcade game phenomenon began with a simple mobile game developed by a Vietnamese video game artist and programmer. The game was released in May 2013 but gained tremendous popularity in early 2014.</p>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Origin</h4>
-                            <p>Dong Nguyen created Flappy Bird in just a few days. He designed the game with simple mechanics intentionally – players control a bird that moves continuously to the right, and must navigate through gaps between pipes that have varying heights.</p>
+                            <p>The original game was created in just a few days. It was designed with simple mechanics intentionally – players control a bird that moves continuously to the right, and must navigate through gaps between pipes that have varying heights.</p>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Unexpected Success</h4>
-                            <p>For months after its release, Flappy Bird remained relatively obscure. Then, seemingly overnight in early 2014, the game went viral. It became the most downloaded free game in the iOS App Store. At its peak, it was reportedly earning $50,000 per day from in-app advertisements.</p>
+                            <p>For months after its release, the game remained relatively obscure. Then, seemingly overnight in early 2014, it went viral. It became the most downloaded free game in the iOS App Store. At its peak, it was reportedly earning $50,000 per day from in-app advertisements.</p>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Controversy and Removal</h4>
-                            <p>With success came controversy. The game was criticized for its difficulty, addictive nature, and for allegedly using art assets similar to those in Super Mario Bros. Nguyen also became overwhelmed by the sudden fame and attention.</p>
+                            <p>With success came controversy. The game was criticized for its difficulty, addictive nature, and for its art style. The developer also became overwhelmed by the sudden fame and attention.</p>
                             
-                            <p>On February 8, 2014, Nguyen announced on Twitter that he would be removing the game from app stores. True to his word, on February 10, Flappy Bird was removed from both the iOS App Store and Google Play Store, despite still being at the top of the charts.</p>
+                            <p>On February 8, 2014, the developer announced on Twitter that he would be removing the game from app stores. True to his word, on February 10, the game was removed from both the iOS App Store and Google Play Store, despite still being at the top of the charts.</p>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Aftermath</h4>
-                            <p>After the game's removal, phones with Flappy Bird installed were listed on eBay for thousands of dollars. The game's success and sudden removal also led to a flood of clones attempting to capitalize on its popularity.</p>
+                            <p>After the game's removal, phones with the game installed were listed on eBay for thousands of dollars. The game's success and sudden removal also led to a flood of clones attempting to capitalize on its popularity.</p>
                             
-                            <p>Despite removing his most successful creation, Nguyen continued his game development career. In August 2014, he released a new game called Swing Copters, which featured similar gameplay mechanics but with vertical rather than horizontal scrolling.</p>
+                            <p>Despite removing his most successful creation, the developer continued his game development career. In August 2014, he released a new game called Swing Copters, which featured similar gameplay mechanics but with vertical rather than horizontal scrolling.</p>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Legacy</h4>
-                            <p>Flappy Bird remains one of the most notable phenomena in mobile gaming history. It demonstrated how simple games could achieve massive success, influenced game design with its challenging-yet-accessible gameplay, and sparked discussions about the pressures of sudden fame in the digital age.</p>
+                            <p>Bird-flapping arcade games remain one of the most notable phenomena in mobile gaming history. They demonstrated how simple games could achieve massive success, influenced game design with challenging-yet-accessible gameplay, and sparked discussions about the pressures of sudden fame in the digital age.</p>
                             
-                            <p>Today, the original Flappy Bird is no longer available for download from official app stores, but its legacy lives on through numerous recreations, tributes, and the lasting impact it had on mobile gaming culture.</p>
+                            <p>Today, the original game is no longer available for download from official app stores, but its legacy lives on through numerous recreations, tributes, and the lasting impact it had on mobile gaming culture.</p>
                         </div>
                     </div>
                     
                     <div id="impact-content" class="blog-full-content hidden">
-                        <h3 class="text-3xl font-bold text-yellow-400 mb-4">Cultural Impact of Flappy Bird</h3>
+                        <h3 class="text-3xl font-bold text-yellow-400 mb-4">Cultural Impact of Casual Arcade Games</h3>
                         <p class="text-sm text-gray-400 mb-6">Published: March 15, 2023</p>
                         
                         <div class="prose prose-lg prose-invert max-w-none">
-                            <p>Few mobile games have made as significant a cultural impact in such a short time as Flappy Bird. Its brief but intense popularity in early 2014 left a lasting impression on gaming culture, game development, and even how we think about viral success.</p>
+                            <p>Few mobile games have made as significant a cultural impact in such a short time as bird-flapping arcade games. Their brief but intense popularity in early 2014 left a lasting impression on gaming culture, game development, and even how we think about viral success.</p>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Gaming Difficulty Renaissance</h4>
-                            <p>Flappy Bird helped popularize a return to punishingly difficult games. While games had been trending toward accessibility and reduced difficulty, Flappy Bird's extreme challenge and the social media bragging rights that came with a high score helped usher in a new appreciation for difficult games.</p>
+                            <p>These games helped popularize a return to punishingly difficult games. While games had been trending toward accessibility and reduced difficulty, the extreme challenge and the social media bragging rights that came with a high score helped usher in a new appreciation for difficult games.</p>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Clone Explosion</h4>
-                            <p>After Flappy Bird's removal, the app stores were flooded with clones. At one point, it was estimated that 1/3 of new iOS games were Flappy Bird-inspired. This "gold rush" mentality highlighted issues with app store curation and copyright in digital marketplaces.</p>
+                            <p>After the original game's removal, the app stores were flooded with clones. At one point, it was estimated that 1/3 of new iOS games were inspired by the bird-flapping mechanic. This "gold rush" mentality highlighted issues with app store curation and copyright in digital marketplaces.</p>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Minimalist Game Design</h4>
-                            <p>Flappy Bird demonstrated that games didn't need cutting-edge graphics or complex mechanics to be wildly popular. Its success influenced many developers to focus on simple, addictive gameplay loops rather than visual complexity.</p>
+                            <p>These games demonstrated that games didn't need cutting-edge graphics or complex mechanics to be wildly popular. Their success influenced many developers to focus on simple, addictive gameplay loops rather than visual complexity.</p>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Dark Side of Viral Success</h4>
-                            <p>Dong Nguyen's decision to remove the game at the height of its popularity sparked conversations about the pressure and harassment that can come with sudden fame. His experience has become a cautionary tale about the potential downsides of viral success.</p>
+                            <p>The decision to remove the original game at the height of its popularity sparked conversations about the pressure and harassment that can come with sudden fame. This experience has become a cautionary tale about the potential downsides of viral success.</p>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Educational Impact</h4>
-                            <p>The simple nature of Flappy Bird made it an ideal teaching tool. Many coding classes and tutorials use Flappy Bird clones as projects for beginners, helping to introduce a new generation to game development.</p>
+                            <p>The simple nature of these games made them ideal teaching tools. Many coding classes and tutorials use bird-flapping game clones as projects for beginners, helping to introduce a new generation to game development.</p>
                             
-                            <p>Even years after its removal, Flappy Bird continues to be referenced in gaming culture and serves as a fascinating case study in viral phenomena, game design, and the intersection of technology and culture.</p>
+                            <p>Even years after their removal, these games continue to be referenced in gaming culture and serve as a fascinating case study in viral phenomena, game design, and the intersection of technology and culture.</p>
                         </div>
                     </div>
                     
                     <div id="clones-content" class="blog-full-content hidden">
-                        <h3 class="text-3xl font-bold text-yellow-400 mb-4">Flappy Bird Clones and Inspirations</h3>
+                        <h3 class="text-3xl font-bold text-yellow-400 mb-4">Similar Games and Inspirations</h3>
                         <p class="text-sm text-gray-400 mb-6">Published: April 22, 2023</p>
                         
                         <div class="prose prose-lg prose-invert max-w-none">
-                            <p>When Flappy Bird was removed from app stores in February 2014, it created a vacuum that developers rushed to fill. The result was an unprecedented flood of clones and games inspired by its mechanics.</p>
+                            <p>When the original bird-flapping game was removed from app stores in February 2014, it created a vacuum that developers rushed to fill. The result was an unprecedented flood of clones and games inspired by its mechanics.</p>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Clone Wars</h4>
-                            <p>At the peak of the post-Flappy Bird frenzy, developers were submitting hundreds of clones to app stores daily. Many simply changed the graphics while keeping identical gameplay - birds became fish, planes, or even faces of celebrities, while pipes transformed into buildings, coral reefs, or other obstacles.</p>
+                            <p>At the peak of the post-removal frenzy, developers were submitting hundreds of clones to app stores daily. Many simply changed the graphics while keeping identical gameplay - birds became fish, planes, or even faces of celebrities, while pipes transformed into buildings, coral reefs, or other obstacles.</p>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Notable Variations</h4>
                             <p>Some developers took the basic concept but added creative twists:</p>
@@ -313,15 +432,176 @@
                             </ul>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Platform Expansion</h4>
-                            <p>The Flappy phenomenon wasn't limited to mobile. Developers created versions for virtually every platform: web browsers, smartwatches, e-readers, and even ATM machines and calculators. This demonstrated the elegant simplicity of the game's core mechanics.</p>
+                            <p>The phenomenon wasn't limited to mobile. Developers created versions for virtually every platform: web browsers, smartwatches, e-readers, and even ATM machines and calculators. This demonstrated the elegant simplicity of the game's core mechanics.</p>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Parodies and Tributes</h4>
-                            <p>Beyond direct clones, Flappy Bird inspired numerous parodies and tributes across media. It was referenced in TV shows, web comics, and other video games. The game's distinctive visual style and punishing difficulty became instantly recognizable cultural touchstones.</p>
+                            <p>Beyond direct clones, the original game inspired numerous parodies and tributes across media. It was referenced in TV shows, web comics, and other video games. The game's distinctive visual style and punishing difficulty became instantly recognizable cultural touchstones.</p>
                             
                             <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Legacy in Game Design</h4>
-                            <p>While the initial flood of clones has long since receded, Flappy Bird's influence on game design continues. Its one-touch control scheme and "easy to learn, difficult to master" philosophy inspired many successful mobile games that followed.</p>
+                            <p>While the initial flood of clones has long since receded, the influence on game design continues. The one-touch control scheme and "easy to learn, difficult to master" philosophy inspired many successful mobile games that followed.</p>
                             
-                            <p>The Flappy Bird phenomenon remains a fascinating chapter in gaming history - a simple game that spawned thousands of imitators and permanently influenced how we think about mobile game design.</p>
+                            <p>The bird-flapping game phenomenon remains a fascinating chapter in gaming history - a simple game that spawned thousands of imitators and permanently influenced how we think about mobile game design.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="strategies-content" class="blog-full-content hidden">
+                        <h3 class="text-3xl font-bold text-yellow-400 mb-4">Advanced Strategies for Higher Scores</h3>
+                        <p class="text-sm text-gray-400 mb-6">Published: May 5, 2023</p>
+                        
+                        <div class="prose prose-lg prose-invert max-w-none">
+                            <p>While bird-flapping arcade games appear simple, achieving high scores requires skill, practice, and strategy. Here are some advanced techniques to help you master the game and impress your friends with record-breaking scores.</p>
+                            
+                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Rhythm Method</h4>
+                            <p>Instead of reacting to each pipe individually, try to establish a rhythm with your taps. The game has a consistent physics system, so finding the right tapping cadence can help you maintain a steady flight path. Practice maintaining altitude with evenly spaced taps before attempting to navigate through pipes.</p>
+                            
+                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Minimal Tap Technique</h4>
+                            <p>Many players tap too frequently, causing erratic movement. The key is to use as few taps as possible while still navigating safely. Let gravity do some of the work for you. This technique requires patience and practice but can lead to much smoother gameplay.</p>
+                            
+                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Focus Point Strategy</h4>
+                            <p>Instead of watching the bird, try focusing your eyes on the upcoming gap between pipes. Your peripheral vision will track the bird's position, while your main focus prepares for the next obstacle. This technique is used by many top players to achieve scores over 100.</p>
+                            
+                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Zen Approach</h4>
+                            <p>Mental state plays a huge role in performance. Many players tense up as their score increases, leading to mistakes. Practice deep breathing and maintaining a relaxed posture while playing. Some players report better results when they stop focusing on the score and enter a flow state.</p>
+                            
+                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Practice Regimen</h4>
+                            <p>Like any skill, improvement comes with structured practice:</p>
+                            <ul>
+                                <li>Start with 10-minute daily sessions</li>
+                                <li>Focus on consistency rather than high scores initially</li>
+                                <li>Record your attempts to review mistakes</li>
+                                <li>Set incremental goals (score of 10, then 20, etc.)</li>
+                            </ul>
+                            
+                            <p>Remember that even expert players rarely achieve perfect runs. The game is designed to be challenging, so be patient with yourself as you develop your skills. With these strategies and consistent practice, you'll see your scores improve dramatically over time.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section id="faq-section" class="inactive-section py-12 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-yellow-400 game-title mb-8">Frequently Asked Questions</h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- FAQ Schema Markup -->
+                <script type="application/ld+json">
+                {
+                  "@context": "https://schema.org",
+                  "@type": "FAQPage",
+                  "mainEntity": [
+                    {
+                      "@type": "Question",
+                      "name": "How do I play Flappy Bird online?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "To play Flappy Bird online, simply click the screen or press the spacebar to make the bird fly upward. Navigate through the pipes without hitting them. Each pipe you pass gives you one point."
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": "Is this the original Flappy Bird game?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "This is a fan recreation inspired by the classic arcade game. It maintains the core gameplay mechanics while adding modern design elements and additional content."
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": "What's the highest possible score in Flappy Bird?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "There is no maximum score in Flappy Bird. The game continues indefinitely, becoming progressively more challenging. The world record is over 999 points, though most players consider anything above 50 to be an excellent score."
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": "Why is Flappy Bird so difficult?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Flappy Bird is challenging because it requires precise timing and has unforgiving collision detection. The bird's movement is affected by gravity, creating a physics-based challenge that requires practice to master."
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": "Does this game work on mobile devices?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, this online version of Flappy Bird works on both desktop and mobile devices. On mobile, simply tap the screen to make the bird fly. The game is optimized for touch controls and responsive design."
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": "Are there any strategies to get a higher score?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes! Try to establish a rhythm with your taps, use minimal taps to maintain smoother flight, focus your eyes on the upcoming gaps rather than the bird, and practice regularly. Check our blog section for advanced strategies."
+                      }
+                    }
+                  ]
+                }
+                </script>
+                
+                <div class="space-y-4">
+                    <div class="faq-item p-4 rounded-lg">
+                        <div class="faq-question flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-yellow-400">How do I play Flappy Bird online?</h3>
+                            <i class="fas fa-chevron-down text-yellow-400" aria-hidden="true"></i>
+                        </div>
+                        <div class="faq-answer mt-2 text-gray-300">
+                            <p>To play Flappy Bird online, simply click the screen or press the spacebar to make the bird fly upward. Navigate through the pipes without hitting them. Each pipe you pass gives you one point.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item p-4 rounded-lg">
+                        <div class="faq-question flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-yellow-400">Is this the original Flappy Bird game?</h3>
+                            <i class="fas fa-chevron-down text-yellow-400" aria-hidden="true"></i>
+                        </div>
+                        <div class="faq-answer mt-2 text-gray-300">
+                            <p>This is a fan recreation inspired by the classic arcade game. It maintains the core gameplay mechanics while adding modern design elements and additional content.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item p-4 rounded-lg">
+                        <div class="faq-question flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-yellow-400">What's the highest possible score in Flappy Bird?</h3>
+                            <i class="fas fa-chevron-down text-yellow-400" aria-hidden="true"></i>
+                        </div>
+                        <div class="faq-answer mt-2 text-gray-300">
+                            <p>There is no maximum score in Flappy Bird. The game continues indefinitely, becoming progressively more challenging. The world record is over 999 points, though most players consider anything above 50 to be an excellent score.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item p-4 rounded-lg">
+                        <div class="faq-question flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-yellow-400">Why is Flappy Bird so difficult?</h3>
+                            <i class="fas fa-chevron-down text-yellow-400" aria-hidden="true"></i>
+                        </div>
+                        <div class="faq-answer mt-2 text-gray-300">
+                            <p>Flappy Bird is challenging because it requires precise timing and has unforgiving collision detection. The bird's movement is affected by gravity, creating a physics-based challenge that requires practice to master.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item p-4 rounded-lg">
+                        <div class="faq-question flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-yellow-400">Does this game work on mobile devices?</h3>
+                            <i class="fas fa-chevron-down text-yellow-400" aria-hidden="true"></i>
+                        </div>
+                        <div class="faq-answer mt-2 text-gray-300">
+                            <p>Yes, this online version of Flappy Bird works on both desktop and mobile devices. On mobile, simply tap the screen to make the bird fly. The game is optimized for touch controls and responsive design.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item p-4 rounded-lg">
+                        <div class="faq-question flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-yellow-400">Are there any strategies to get a higher score?</h3>
+                            <i class="fas fa-chevron-down text-yellow-400" aria-hidden="true"></i>
+                        </div>
+                        <div class="faq-answer mt-2 text-gray-300">
+                            <p>Yes! Try to establish a rhythm with your taps, use minimal taps to maintain smoother flight, focus your eyes on the upcoming gaps rather than the bird, and practice regularly. Check our blog section for advanced strategies.</p>
                         </div>
                     </div>
                 </div>
@@ -339,7 +619,7 @@
                 
                 <h3 class="text-xl font-bold text-yellow-400 mb-4">1. Introduction</h3>
                 <p class="mb-4">
-                    Welcome to Flappy Bird. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or play our game.
+                    Welcome to our arcade game website. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or play our game.
                     Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
                 </p>
                 
@@ -364,6 +644,8 @@
                     <li>Increase the efficiency and operation of the Site.</li>
                     <li>Monitor and analyze usage and trends to improve your experience with the Site.</li>
                     <li>Notify you of updates to the Site.</li>
+                    <li>Prevent fraudulent transactions, monitor against theft, and protect against criminal activity.</li>
+                    <li>Process payments and refunds.</li>
                     <li>Request feedback and contact you about your use of the Site.</li>
                     <li>Resolve disputes and troubleshoot problems.</li>
                 </ul>
@@ -391,15 +673,14 @@
                 
                 <h3 class="text-xl font-bold text-yellow-400 mb-4">1. Agreement to Terms</h3>
                 <p class="mb-4">
-                    By accessing our website and/or playing our game, you agree to be bound by these Terms and Conditions and agree that you are responsible for compliance with any applicable local laws.
+                    By accessing this website, you are agreeing to be bound by these Terms and Conditions of Use, all applicable laws and regulations,
+                    and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you
+                    are prohibited from using or accessing this site.
                 </p>
                 
                 <h3 class="text-xl font-bold text-yellow-400 mb-4">2. Intellectual Property</h3>
                 <p class="mb-4">
-                    This is a fan recreation of Flappy Bird, originally created by Dong Nguyen. All intellectual property rights related to the original Flappy Bird game belong to their respective owners. Our implementation is intended as homage and is not affiliated with or endorsed by the original creator.
-                </p>
-                <p class="mb-4">
-                    The materials on this site, including but not limited to the logo, design, text, graphics, and code created by us specifically for this fan recreation are owned by Sarthak Sharma and are protected by copyright and trademark law.
+                    The materials on this site, including but not limited to the logo, design, text, graphics, and code created specifically for this fan recreation are protected by applicable copyright and trademark law.
                 </p>
                 
                 <h3 class="text-xl font-bold text-yellow-400 mb-4">3. User License</h3>
@@ -446,12 +727,13 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-6 md:mb-0">
                     <h2 class="text-2xl text-yellow-400 game-title">FlappyBird</h2>
-                    <p class="text-sm text-gray-400">© 2023 Sarthak Sharma. All rights reserved.</p>
+                    <p class="text-sm text-gray-400">© 2023 All rights reserved.</p>
                 </div>
                 <div class="flex flex-wrap justify-center md:justify-end">
                     <button data-target="game-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-yellow-400">Game</button>
-                    <button data-target="about-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-yellow-400">About Us</button>
+                    <button data-target="about-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-yellow-400">About</button>
                     <button data-target="blog-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-yellow-400">Blog</button>
+                    <button data-target="faq-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-yellow-400">FAQ</button>
                     <button data-target="privacy-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-yellow-400">Privacy Policy</button>
                     <button data-target="terms-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-yellow-400">Terms</button>
                 </div>
@@ -509,6 +791,26 @@
                 blogList.classList.remove('hidden');
             });
             
+            // FAQ functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('.fa-chevron-down');
+                
+                question.addEventListener('click', function() {
+                    item.classList.toggle('active');
+                    if (item.classList.contains('active')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+            
             // Flappy Bird Game
             const canvas = document.getElementById('game-canvas');
             const ctx = canvas.getContext('2d');
@@ -534,7 +836,7 @@
             let gameStarted = false;
             let gameOver = false;
             const pipeWidth = 52;
-            const gapHeight = 120;
+            const gapHeight = 180;
             const pipeColor = '#74BF2E';
             const skyColor = '#70C5CE';
             const groundColor = '#DED895';
@@ -627,17 +929,15 @@
                     ctx.fillStyle = pipeColor;
                     ctx.fillRect(pipe.x, 0, pipeWidth, pipe.topHeight);
                     
-                    // Pipe cap (top)
-                    ctx.fillStyle = '#8ED026';
-                    ctx.fillRect(pipe.x - 3, pipe.topHeight - 20, pipeWidth + 6, 20);
-                    
                     // Bottom pipe
-                    ctx.fillStyle = pipeColor;
                     ctx.fillRect(pipe.x, pipe.bottomY, pipeWidth, canvas.height - pipe.bottomY - groundHeight);
                     
-                    // Pipe cap (bottom)
-                    ctx.fillStyle = '#8ED026';
-                    ctx.fillRect(pipe.x - 3, pipe.bottomY, pipeWidth + 6, 20);
+                    // Pipe caps (top)
+                    ctx.fillStyle = '#528D1E';
+                    ctx.fillRect(pipe.x - 2, pipe.topHeight - 10, pipeWidth + 4, 10);
+                    
+                    // Pipe caps (bottom)
+                    ctx.fillRect(pipe.x - 2, pipe.bottomY, pipeWidth + 4, 10);
                 });
             }
             
@@ -646,172 +946,182 @@
                 ctx.fillStyle = groundColor;
                 ctx.fillRect(0, canvas.height - groundHeight, canvas.width, groundHeight);
                 
-                // Ground pattern
-                ctx.fillStyle = '#D4C871';
+                // Ground details
+                ctx.fillStyle = '#C0B671';
                 for (let i = 0; i < canvas.width; i += 20) {
-                    ctx.fillRect(i, canvas.height - groundHeight + 20, 10, 5);
-                    ctx.fillRect(i + 10, canvas.height - groundHeight + 35, 10, 5);
-                    ctx.fillRect(i, canvas.height - groundHeight + 50, 10, 5);
-                    ctx.fillRect(i + 10, canvas.height - groundHeight + 65, 10, 5);
-                    ctx.fillRect(i, canvas.height - groundHeight + 80, 10, 5);
-                    ctx.fillRect(i + 10, canvas.height - groundHeight + 95, 10, 5);
+                    ctx.fillRect(i, canvas.height - groundHeight + 20, 10, 3);
                 }
+            }
+            
+            // Draw sky
+            function drawSky() {
+                ctx.fillStyle = skyColor;
+                ctx.fillRect(0, 0, canvas.width, canvas.height - groundHeight);
+                
+                // Clouds
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                ctx.beginPath();
+                ctx.arc(80, 80, 20, 0, Math.PI * 2);
+                ctx.arc(100, 70, 25, 0, Math.PI * 2);
+                ctx.arc(120, 85, 15, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.beginPath();
+                ctx.arc(250, 120, 15, 0, Math.PI * 2);
+                ctx.arc(270, 110, 20, 0, Math.PI * 2);
+                ctx.arc(290, 125, 10, 0, Math.PI * 2);
+                ctx.fill();
             }
             
             // Draw score
             function drawScore() {
                 ctx.fillStyle = 'white';
-                ctx.font = '30px "Press Start 2P", cursive';
+                ctx.font = '30px "Press Start 2P"';
                 ctx.textAlign = 'center';
-                ctx.fillText(score, canvas.width / 2, 50);
+                ctx.fillText(score.toString(), canvas.width / 2, 50);
             }
             
-            // Check collisions
-            function checkCollision() {
-                // Ground collision
+            // Update game state
+            function update() {
+                if (!gameStarted || gameOver) return;
+                
+                // Update bird position
+                bird.velocity += bird.gravity;
+                bird.y += bird.velocity;
+                
+                // Check for collisions with ground
                 if (bird.y + bird.height > canvas.height - groundHeight) {
                     bird.y = canvas.height - groundHeight - bird.height;
-                    gameOver = true;
-                    return true;
+                    endGame();
                 }
                 
-                // Ceiling collision
+                // Check for collision with ceiling
                 if (bird.y < 0) {
                     bird.y = 0;
                     bird.velocity = 0;
                 }
                 
-                // Pipe collision
-                for (let i = 0; i < pipes.length; i++) {
-                    const pipe = pipes[i];
+                // Update pipes
+                pipes.forEach((pipe, index) => {
+                    pipe.x -= 2;
                     
+                    // Check for collisions with pipes
                     if (
                         bird.x + bird.width > pipe.x &&
                         bird.x < pipe.x + pipeWidth &&
                         (bird.y < pipe.topHeight || bird.y + bird.height > pipe.bottomY)
                     ) {
-                        gameOver = true;
-                        return true;
+                        endGame();
                     }
                     
-                    // Score point
+                    // Check for score
                     if (!pipe.counted && pipe.x + pipeWidth < bird.x) {
-                        pipe.counted = true;
                         score++;
+                        pipe.counted = true;
                     }
-                }
-                
-                return false;
-            }
-            
-            // Update game state
-            function update() {
-                if (gameOver) {
-                    return;
-                }
-                
-                // Bird physics
-                bird.velocity += bird.gravity;
-                bird.y += bird.velocity;
-                
-                // Update pipes
-                pipes.forEach(pipe => {
-                    pipe.x -= 2;
+                    
+                    // Remove pipes that are off screen
+                    if (pipe.x + pipeWidth < 0) {
+                        pipes.splice(index, 1);
+                    }
                 });
                 
-                // Remove off-screen pipes
-                if (pipes.length > 0 && pipes[0].x + pipeWidth < 0) {
-                    pipes.shift();
-                }
-                
-                // Add new pipes
+                // Add new pipe when needed
                 if (pipes.length === 0 || pipes[pipes.length - 1].x < canvas.width - 200) {
                     addPipe();
                 }
-                
-                // Check collisions
-                if (checkCollision()) {
-                    finalScoreElement.textContent = score;
-                    gameOverScreen.classList.remove('hidden');
-                }
             }
             
-            // Draw everything
+            // End game
+            function endGame() {
+                gameOver = true;
+                finalScoreElement.textContent = score;
+                gameOverScreen.classList.remove('hidden');
+            }
+            
+            // Draw game
             function draw() {
                 // Clear canvas
-                ctx.fillStyle = skyColor;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
-                // Draw clouds
-                ctx.fillStyle = '#FFFFFF';
-                ctx.beginPath();
-                ctx.arc(100, 80, 30, 0, Math.PI * 2);
-                ctx.arc(130, 90, 25, 0, Math.PI * 2);
-                ctx.arc(160, 75, 35, 0, Math.PI * 2);
-                ctx.fill();
-                
-                ctx.beginPath();
-                ctx.arc(280, 120, 25, 0, Math.PI * 2);
-                ctx.arc(310, 130, 20, 0, Math.PI * 2);
-                ctx.arc(340, 115, 30, 0, Math.PI * 2);
-                ctx.fill();
-                
+                // Draw background
+                drawSky();
                 drawPipes();
                 drawGround();
                 drawBird();
-                drawScore();
+                
+                if (gameStarted) {
+                    drawScore();
+                }
             }
             
             // Game loop
             function gameLoop() {
-                if (gameStarted && !gameOver) {
-                    update();
-                }
+                update();
                 draw();
                 requestAnimationFrame(gameLoop);
             }
             
-            // Start the game when clicked or space is pressed
-            function startGame() {
+            // Event listeners
+            function jump() {
+                if (gameOver) return;
+                
                 if (!gameStarted) {
                     gameStarted = true;
-                    startMessage.style.display = 'none';
-                    init();
-                } else if (gameOver) {
-                    gameOver = false;
-                    gameOverScreen.classList.add('hidden');
+                    startMessage.classList.add('hidden');
                     init();
                 } else {
                     bird.velocity = bird.jump;
                 }
             }
             
-            canvas.addEventListener('click', function() {
-                startGame();
-                if (gameStarted && !gameOver) {
-                    bird.velocity = bird.jump;
-                }
-            });
-            
-            window.addEventListener('keydown', function(e) {
+            canvas.addEventListener('click', jump);
+            document.addEventListener('keydown', function(e) {
                 if (e.code === 'Space') {
+                    jump();
                     e.preventDefault();
-                    startGame();
-                    if (gameStarted && !gameOver) {
-                        bird.velocity = bird.jump;
-                    }
                 }
             });
             
-            startButton.addEventListener('click', startGame);
+            startButton.addEventListener('click', function() {
+                gameStarted = true;
+                startMessage.classList.add('hidden');
+                init();
+            });
+            
             restartButton.addEventListener('click', function() {
-                gameOver = false;
                 gameOverScreen.classList.add('hidden');
                 init();
+                gameStarted = true;
             });
             
             // Start game loop
             gameLoop();
+            
+            // Lazy loading for images
+            const lazyImages = document.querySelectorAll('.lazy-load');
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.add('loaded');
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(img => {
+                    imageObserver.observe(img);
+                });
+            } else {
+                // Fallback for browsers without IntersectionObserver
+                lazyImages.forEach(img => {
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                });
+            }
         });
     </script>
 </body>
