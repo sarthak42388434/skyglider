@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="description" content="Play the classic Flappy Bird game online for free! Navigate through pipes, set high scores, and enjoy this addictive arcade game. Perfect for casual gamers looking for a fun challenge.">
-    <meta name="keywords" content="flappy bird, online game, free game, arcade game, casual game, bird game, challenging game, browser game">
+    <meta name="description" content="Play the exciting Sky Glider game online for free! Navigate through obstacles, set high scores, and enjoy this addictive arcade game. Perfect for casual gamers looking for a fun challenge.">
+    <meta name="keywords" content="sky glider, online game, free game, arcade game, casual game, glider game, challenging game, browser game">
     <meta name="author" content="Sarthak Sharma">
     <meta name="robots" content="index, follow">
-    <meta name="canonical" content="https://yourwebsite.com/flappy-bird">
+    <meta name="canonical" content="https://yourwebsite.com/sky-glider">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourwebsite.com/flappy-bird">
-    <meta property="og:title" content="Flappy Bird - Play the Classic Arcade Game Online Free">
-    <meta property="og:description" content="Play the addictive Flappy Bird game online for free! Navigate through pipes, set high scores, and enjoy this challenging arcade game.">
-    <meta property="og:image" content="https://yourwebsite.com/images/flappy-bird-og.jpg">
+    <meta property="og:url" content="https://yourwebsite.com/sky-glider">
+    <meta property="og:title" content="Sky Glider - Play the Exciting Arcade Game Online Free">
+    <meta property="og:description" content="Play the addictive Sky Glider game online for free! Navigate through obstacles, set high scores, and enjoy this challenging arcade game.">
+    <meta property="og:image" content="https://yourwebsite.com/images/sky-glider-og.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://yourwebsite.com/flappy-bird">
-    <meta property="twitter:title" content="Flappy Bird - Play the Classic Arcade Game Online Free">
-    <meta property="twitter:description" content="Play the addictive Flappy Bird game online for free! Navigate through pipes, set high scores, and enjoy this challenging arcade game.">
-    <meta property="twitter:image" content="https://yourwebsite.com/images/flappy-bird-twitter.jpg">
+    <meta property="twitter:url" content="https://yourwebsite.com/sky-glider">
+    <meta property="twitter:title" content="Sky Glider - Play the Exciting Arcade Game Online Free">
+    <meta property="twitter:description" content="Play the addictive Sky Glider game online for free! Navigate through obstacles, set high scores, and enjoy this challenging arcade game.">
+    <meta property="twitter:image" content="https://yourwebsite.com/images/sky-glider-twitter.jpg">
     
     <!-- Google Analytics (properly implemented) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L3ZDPCNLG2"></script>
@@ -35,19 +35,19 @@
     <!-- Google AdSense (properly implemented) -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1155904007929319" crossorigin="anonymous"></script>
     
-    <title>Flappy Bird - Play the Classic Arcade Game Online Free</title>
+    <title>Sky Glider - Play the Exciting Arcade Game Online Free</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     
     <!-- Schema.org markup for VideoGame -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "VideoGame",
-      "name": "Flappy Bird Online",
-      "description": "Play the classic Flappy Bird game online for free. Navigate through pipes and set high scores in this addictive arcade game.",
+      "name": "Sky Glider Online",
+      "description": "Play the exciting Sky Glider game online for free. Navigate through obstacles and set high scores in this addictive arcade game.",
       "genre": ["Arcade", "Casual", "Action"],
       "gamePlatform": "Web Browser",
       "applicationCategory": "Game",
@@ -61,30 +61,40 @@
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.7",
-        "ratingCount": "1250"
+        "ratingCount": "1350"
       }
     }
     </script>
     
     <style>
+        :root {
+            --primary-color: #3498db;
+            --accent-color: #f39c12;
+            --dark-bg: #1a1a2e;
+            --medium-bg: #16213e;
+            --light-bg: #0f3460;
+            --text-light: #e6e6e6;
+            --text-highlight: #ffffff;
+        }
+        
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #1a1a2e;
-            color: #e6e6e6;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
         }
         .game-title {
-            font-family: 'Press Start 2P', cursive;
+            font-family: 'Exo 2', sans-serif;
             text-shadow: 3px 3px 0 #000;
         }
         .nav-link {
             transition: all 0.3s ease;
         }
         .nav-link:hover {
-            background-color: #4a4a82;
+            background-color: var(--light-bg);
             transform: translateY(-2px);
         }
         canvas {
-            border: 4px solid #ffd700;
+            border: 4px solid var(--accent-color);
             border-radius: 5px;
             background-color: #70c5ce;
         }
@@ -94,23 +104,23 @@
         .inactive-section {
             display: none;
         }
-        .pipe {
+        .obstacle {
             position: absolute;
             width: 52px;
             height: 320px;
-            background-color: green;
+            background-color: #3498db;
         }
         .policy-content {
             max-width: 800px;
             margin: 0 auto;
-            background-color: #16213e;
+            background-color: var(--medium-bg);
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
         .blog-card {
-            background-color: #16213e;
-            border-left: 4px solid #ffd700;
+            background-color: var(--medium-bg);
+            border-left: 4px solid var(--accent-color);
             cursor: pointer;
             transition: transform 0.3s ease;
         }
@@ -118,8 +128,8 @@
             transform: translateX(5px);
         }
         .button-primary {
-            background-color: #ffd700;
-            color: #1a1a2e;
+            background-color: var(--primary-color);
+            color: var(--text-highlight);
             font-weight: bold;
             padding: 10px 20px;
             border: none;
@@ -128,18 +138,18 @@
             transition: all 0.3s ease;
         }
         .button-primary:hover {
-            background-color: #ffeb3b;
+            background-color: #2980b9;
             transform: translateY(-2px);
         }
         footer {
-            background-color: #16213e;
+            background-color: var(--medium-bg);
         }
         .faq-item {
             border-bottom: 1px solid #2a2a4a;
             transition: all 0.3s ease;
         }
         .faq-item:hover {
-            background-color: #1e1e3a;
+            background-color: var(--light-bg);
         }
         .faq-question {
             cursor: pointer;
@@ -159,22 +169,49 @@
         .lazy-load.loaded {
             opacity: 1;
         }
+        .feature-card {
+            background-color: rgba(15, 52, 96, 0.7);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .highlight-box {
+            border-left: 4px solid var(--accent-color);
+            background-color: rgba(243, 156, 18, 0.1);
+        }
+        .game-controls {
+            background-color: rgba(52, 152, 219, 0.2);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
     <!-- Navigation -->
-    <nav class="bg-gray-900 p-4 shadow-lg">
+    <nav class="bg-gray-900 p-4 shadow-lg sticky top-0 z-50">
         <div class="container mx-auto flex flex-wrap items-center justify-between">
             <div class="flex items-center">
-                <h1 class="text-3xl md:text-4xl text-yellow-400 game-title">FlappyBird</h1>
+                <h1 class="text-3xl md:text-4xl text-blue-400 game-title">SkyGlider</h1>
             </div>
             <div class="flex flex-wrap mt-4 md:mt-0">
-                <button data-target="game-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-yellow-400 focus:outline-none">Game</button>
-                <button data-target="about-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-yellow-400 focus:outline-none">About</button>
-                <button data-target="blog-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-yellow-400 focus:outline-none">Blog</button>
-                <button data-target="faq-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-yellow-400 focus:outline-none">FAQ</button>
-                <button data-target="privacy-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-yellow-400 focus:outline-none">Privacy</button>
-                <button data-target="terms-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-yellow-400 focus:outline-none">Terms</button>
+                <button data-target="game-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-blue-400 focus:outline-none">Game</button>
+                <button data-target="about-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-blue-400 focus:outline-none">About</button>
+                <button data-target="blog-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-blue-400 focus:outline-none">Blog</button>
+                <button data-target="faq-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-blue-400 focus:outline-none">FAQ</button>
+                <button data-target="privacy-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-blue-400 focus:outline-none">Privacy</button>
+                <button data-target="terms-section" class="nav-link px-4 py-2 mx-1 rounded text-white hover:text-blue-400 focus:outline-none">Terms</button>
             </div>
         </div>
     </nav>
@@ -183,16 +220,16 @@
     <section id="game-section" class="active-section flex-grow py-8">
         <div class="container mx-auto px-4">
             <div class="text-center mb-8">
-                <h2 class="text-4xl font-bold text-yellow-400 game-title mb-4">Flappy Bird Online Game</h2>
+                <h2 class="text-4xl font-bold text-blue-400 game-title mb-4">Sky Glider Online Game</h2>
                 <p class="text-lg text-gray-300 max-w-2xl mx-auto">
-                    Play the classic Flappy Bird arcade game online for free! Tap the screen or use your spacebar to make the bird fly.
-                    Navigate through the pipes without hitting them. We've made the game easier with wider gaps between pipes for a more enjoyable experience!
+                    Experience the thrill of gliding through the sky in our free online arcade game! Tap the screen or use your spacebar to make the glider soar.
+                    Navigate through obstacles without hitting them. We've designed the game with balanced difficulty for a more enjoyable experience!
                 </p>
             </div>
             
             <div class="flex justify-center my-8">
                 <div class="relative">
-                    <canvas id="game-canvas" width="320" height="480" class="mx-auto" aria-label="Flappy Bird Game Canvas"></canvas>
+                    <canvas id="game-canvas" width="320" height="480" class="mx-auto" aria-label="Sky Glider Game Canvas"></canvas>
                     <div id="start-message" class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-70">
                         <p class="text-white text-xl mb-4">Click or Press Spacebar to Start</p>
                         <button id="start-button" class="button-primary">Start Game</button>
@@ -205,35 +242,91 @@
                 </div>
             </div>
             
-            <div class="bg-blue-900 bg-opacity-50 p-6 rounded-lg max-w-2xl mx-auto">
-                <h3 class="text-xl font-bold text-yellow-400 mb-2">How to Play Flappy Bird:</h3>
+            <div class="game-controls p-6 rounded-lg max-w-2xl mx-auto">
+                <h3 class="text-xl font-bold text-blue-400 mb-2">How to Play Sky Glider:</h3>
                 <ul class="list-disc list-inside text-gray-300">
-                    <li>Click the screen or press the spacebar to make the bird fly upward</li>
-                    <li>Navigate carefully through the pipes without hitting them</li>
-                    <li>Each pipe you successfully pass gives you one point</li>
+                    <li>Click the screen or press the spacebar to make the glider soar upward</li>
+                    <li>Navigate carefully through the obstacles without hitting them</li>
+                    <li>Each obstacle you successfully pass gives you one point</li>
                     <li>Challenge yourself to beat your high score with each attempt</li>
                     <li>The game gets progressively more challenging as you advance</li>
                 </ul>
             </div>
             
-            <div class="mt-8 max-w-2xl mx-auto">
-                <h3 class="text-xl font-bold text-yellow-400 mb-4">Why Players Love Flappy Bird:</h3>
+            <div class="mt-8 max-w-4xl mx-auto">
+                <h3 class="text-xl font-bold text-blue-400 mb-4">Why Players Love Sky Glider:</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-blue-900 bg-opacity-30 p-4 rounded-lg">
-                        <h4 class="font-bold text-white mb-2">Simple Yet Challenging</h4>
-                        <p class="text-gray-300">Easy to learn but difficult to master, providing the perfect balance for casual gamers.</p>
+                    <div class="feature-card p-5 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="bg-blue-500 rounded-full p-2 mr-3">
+                                <i class="fas fa-gamepad text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">Simple Yet Challenging</h4>
+                                <p class="text-gray-300">Easy to learn but difficult to master, providing the perfect balance for casual gamers.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-blue-900 bg-opacity-30 p-4 rounded-lg">
-                        <h4 class="font-bold text-white mb-2">Quick Play Sessions</h4>
-                        <p class="text-gray-300">Perfect for short breaks or when you have a few minutes to spare for gaming fun.</p>
+                    <div class="feature-card p-5 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="bg-blue-500 rounded-full p-2 mr-3">
+                                <i class="fas fa-clock text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">Quick Play Sessions</h4>
+                                <p class="text-gray-300">Perfect for short breaks or when you have a few minutes to spare for gaming fun.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-blue-900 bg-opacity-30 p-4 rounded-lg">
-                        <h4 class="font-bold text-white mb-2">Addictive Gameplay</h4>
-                        <p class="text-gray-300">The "just one more try" factor keeps players coming back to beat their previous scores.</p>
+                    <div class="feature-card p-5 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="bg-blue-500 rounded-full p-2 mr-3">
+                                <i class="fas fa-fire text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">Addictive Gameplay</h4>
+                                <p class="text-gray-300">The "just one more try" factor keeps players coming back to beat their previous scores.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-blue-900 bg-opacity-30 p-4 rounded-lg">
-                        <h4 class="font-bold text-white mb-2">No Special Skills Required</h4>
-                        <p class="text-gray-300">Anyone can play regardless of gaming experience, making it accessible to all ages.</p>
+                    <div class="feature-card p-5 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="bg-blue-500 rounded-full p-2 mr-3">
+                                <i class="fas fa-users text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-2">For Everyone</h4>
+                                <p class="text-gray-300">Anyone can play regardless of gaming experience, making it accessible to all ages.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 max-w-4xl mx-auto bg-blue-900 bg-opacity-20 p-6 rounded-lg shadow-lg">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
+                        <div class="rounded-full bg-blue-500 p-8 shadow-lg">
+                            <i class="fas fa-trophy text-4xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 md:pl-8 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-white mb-3">Challenge Your Friends!</h3>
+                        <p class="text-gray-300 mb-4">
+                            Share your high scores on social media and challenge your friends to beat them! 
+                            Sky Glider is perfect for friendly competitions and seeing who has the best reflexes.
+                        </p>
+                        <div class="flex justify-center md:justify-start space-x-4">
+                            <a href="#" class="text-blue-400 hover:text-blue-300" aria-label="Share on Facebook">
+                                <i class="fab fa-facebook-square text-2xl"></i>
+                            </a>
+                            <a href="#" class="text-blue-400 hover:text-blue-300" aria-label="Share on Twitter">
+                                <i class="fab fa-twitter text-2xl"></i>
+                            </a>
+                            <a href="#" class="text-blue-400 hover:text-blue-300" aria-label="Share on Instagram">
+                                <i class="fab fa-instagram text-2xl"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -244,63 +337,94 @@
     <section id="about-section" class="inactive-section py-12 bg-gray-900">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold text-center text-yellow-400 game-title mb-8">About Flappy Bird Online</h2>
+                <h2 class="text-4xl font-bold text-center text-blue-400 game-title mb-8">About Sky Glider Online</h2>
                 
-                <div class="bg-blue-900 bg-opacity-50 p-8 rounded-lg shadow-xl">
+                <div class="hero-gradient p-8 rounded-lg shadow-xl">
                     <div class="flex flex-col md:flex-row">
                         <div class="md:w-1/3 mb-6 md:mb-0">
-                            <div class="bg-gray-800 p-4 rounded-lg text-center">
-                                <i class="fas fa-user-circle text-6xl text-yellow-400 mb-4" aria-hidden="true"></i>
+                            <div class="bg-gray-800 p-6 rounded-lg text-center transform hover:scale-105 transition duration-300">
+                                <i class="fas fa-user-circle text-6xl text-blue-400 mb-4" aria-hidden="true"></i>
                                 <h3 class="text-xl font-bold text-white">Developer</h3>
                                 <p class="text-gray-300">Sarthak Sharma</p>
+                                <div class="mt-4 pt-4 border-t border-gray-700">
+                                    <div class="flex justify-center space-x-3">
+                                        <a href="#" class="text-blue-400 hover:text-blue-300" aria-label="GitHub">
+                                            <i class="fab fa-github text-xl"></i>
+                                        </a>
+                                        <a href="#" class="text-blue-400 hover:text-blue-300" aria-label="LinkedIn">
+                                            <i class="fab fa-linkedin text-xl"></i>
+                                        </a>
+                                        <a href="#" class="text-blue-400 hover:text-blue-300" aria-label="Twitter">
+                                            <i class="fab fa-twitter text-xl"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
                         <div class="md:w-2/3 md:pl-8">
-                            <h3 class="text-2xl font-bold text-yellow-400 mb-4">Our Mission</h3>
+                            <h3 class="text-2xl font-bold text-blue-400 mb-4">Our Mission</h3>
                             <p class="text-gray-300 mb-4">
-                                Welcome to our enhanced version of the classic bird-flapping arcade game! This project aims to preserve the 
-                                nostalgic gameplay that captivated millions while adding modern design elements and expanded content.
+                                Welcome to Sky Glider - our exciting take on the endless arcade game genre! This project aims to deliver 
+                                an accessible yet challenging gaming experience with modern design elements and expanded content.
                             </p>
                             <p class="text-gray-300 mb-6">
                                 Our goal is to provide endless entertainment through simple yet challenging gameplay that anyone can enjoy.
-                                We've added informative sections about the game's history and maintained the addictive nature that made
-                                the original so popular.
+                                We've created informative sections about arcade gaming history and maintained the addictive nature that makes
+                                casual games so popular.
                             </p>
                             
-                            <div class="bg-gray-800 p-4 rounded-lg mb-4">
-                                <h4 class="font-bold text-yellow-400 mb-2">Contact Information:</h4>
+                            <div class="bg-gray-800 p-5 rounded-lg mb-4 shadow-inner">
+                                <h4 class="font-bold text-blue-400 mb-2">Contact Information:</h4>
                                 <ul class="text-gray-300">
-                                    <li class="flex items-center mb-2">
-                                        <i class="fas fa-envelope mr-2 text-yellow-400" aria-hidden="true"></i>
+                                    <li class="flex items-center mb-3">
+                                        <i class="fas fa-envelope mr-3 text-blue-400" aria-hidden="true"></i>
                                         <span>sarthaks42388434@gmail.com</span>
                                     </li>
                                     <li class="flex items-center">
-                                        <i class="fas fa-map-marker-alt mr-2 text-yellow-400" aria-hidden="true"></i>
+                                        <i class="fas fa-map-marker-alt mr-3 text-blue-400" aria-hidden="true"></i>
                                         <span>Satna, Madhya Pradesh, India</span>
                                     </li>
                                 </ul>
                             </div>
                             
                             <p class="text-gray-400 text-sm">
-                                This is a fan recreation inspired by classic arcade games. Our version offers a unique take on the 
-                                bird-flapping gameplay mechanic that has become iconic in the casual gaming world.
+                                Sky Glider is an original creation inspired by classic arcade games. Our version offers a unique take on the 
+                                endless runner gameplay mechanic that has become popular in the casual gaming world.
                             </p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="mt-8 bg-blue-900 bg-opacity-50 p-6 rounded-lg">
-                    <h3 class="text-2xl font-bold text-yellow-400 mb-4">Game Development Journey</h3>
+                <div class="mt-8 bg-blue-900 bg-opacity-20 p-6 rounded-lg shadow-inner">
+                    <h3 class="text-2xl font-bold text-blue-400 mb-4">Game Development Journey</h3>
                     <p class="text-gray-300 mb-4">
-                        Creating this browser-based version of the classic arcade game involved several challenges and learning opportunities.
-                        We focused on maintaining the core gameplay mechanics while enhancing the visual appeal and adding educational content
-                        about the history and impact of this iconic game.
+                        Creating this browser-based Sky Glider game involved several challenges and learning opportunities.
+                        We focused on creating intuitive controls and satisfying physics while enhancing the visual appeal and adding educational content
+                        about the history and impact of arcade gaming.
                     </p>
                     <p class="text-gray-300">
                         The development process included optimizing the game for various devices, ensuring smooth performance across different
-                        browsers, and creating an intuitive user interface that appeals to both new players and nostalgic fans of the original.
+                        browsers, and creating an intuitive user interface that appeals to both casual gamers and those looking for a quick challenge.
                     </p>
+                </div>
+                
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="feature-card p-5 text-center">
+                        <i class="fas fa-mobile-alt text-4xl text-blue-400 mb-3"></i>
+                        <h4 class="text-lg font-bold text-white mb-2">Mobile Optimized</h4>
+                        <p class="text-gray-400">Fully responsive design that works seamlessly on smartphones and tablets</p>
+                    </div>
+                    <div class="feature-card p-5 text-center">
+                        <i class="fas fa-bolt text-4xl text-blue-400 mb-3"></i>
+                        <h4 class="text-lg font-bold text-white mb-2">Fast Performance</h4>
+                        <p class="text-gray-400">Optimized code ensures smooth gameplay even on older devices</p>
+                    </div>
+                    <div class="feature-card p-5 text-center">
+                        <i class="fas fa-code text-4xl text-blue-400 mb-3"></i>
+                        <h4 class="text-lg font-bold text-white mb-2">Clean Code</h4>
+                        <p class="text-gray-400">Built with modern web standards for reliability and maintenance</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -309,170 +433,413 @@
     <!-- Blog Section -->
     <section id="blog-section" class="inactive-section py-12">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-yellow-400 game-title mb-8">Arcade Gaming Blog</h2>
+            <h2 class="text-4xl font-bold text-center text-blue-400 game-title mb-8">Arcade Gaming Blog</h2>
             
             <div class="max-w-4xl mx-auto mb-8">
                 <div id="blog-list">
                     <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="history">
-                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">The History of Bird-Flapping Arcade Games</h3>
-                        <p class="text-gray-400 mb-4">Learn about the meteoric rise and cultural impact of one of the most addictive mobile games ever created.</p>
-                        <div class="flex items-center text-sm text-gray-500">
-                            <i class="far fa-clock mr-2" aria-hidden="true"></i>
-                            <span>10 min read</span>
-                        </div>
-                    </div>
-                    
-                    <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="impact">
-                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Cultural Impact of Casual Arcade Games</h3>
-                        <p class="text-gray-400 mb-4">How simple games changed mobile gaming and created a lasting legacy in gaming culture.</p>
+                        <h3 class="text-2xl font-bold text-blue-400 mb-2">The Evolution of Endless Runner Games</h3>
+                        <p class="text-gray-400 mb-4">Exploring the history and development of the popular endless runner genre from early arcade games to modern mobile hits.</p>
                         <div class="flex items-center text-sm text-gray-500">
                             <i class="far fa-clock mr-2" aria-hidden="true"></i>
                             <span>8 min read</span>
                         </div>
                     </div>
                     
-                    <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="clones">
-                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Similar Games and Inspirations</h3>
-                        <p class="text-gray-400 mb-4">Examining the wave of games inspired by the unique gameplay mechanics of bird-flapping arcade games.</p>
+                    <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="impact">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-2">The Psychology Behind Addictive Arcade Games</h3>
+                        <p class="text-gray-400 mb-4">Understanding why simple arcade games create such compelling experiences and keep players coming back for more.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="far fa-clock mr-2" aria-hidden="true"></i>
+                            <span>10 min read</span>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="design">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-2">Principles of Good Game Design for Casual Games</h3>
+                        <p class="text-gray-400 mb-4">Key design principles that make casual games accessible while maintaining the challenge that keeps players engaged.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="far fa-clock mr-2" aria-hidden="true"></i>
+                            <span>9 min read</span>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="strategies">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-2">Advanced Strategies for Sky Glider Masters</h3>
+                        <p class="text-gray-400 mb-4">Master these techniques to improve your gameplay and achieve record-breaking scores in Sky Glider.</p>
                         <div class="flex items-center text-sm text-gray-500">
                             <i class="far fa-clock mr-2" aria-hidden="true"></i>
                             <span>7 min read</span>
                         </div>
                     </div>
                     
-                    <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="strategies">
-                        <h3 class="text-2xl font-bold text-yellow-400 mb-2">Advanced Strategies for Higher Scores</h3>
-                        <p class="text-gray-400 mb-4">Master these techniques to improve your gameplay and achieve record-breaking scores.</p>
+                    <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="physics">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-2">The Physics of Sky Gliding Games</h3>
+                        <p class="text-gray-400 mb-4">How game developers create realistic gliding mechanics and satisfying physics in arcade games.</p>
                         <div class="flex items-center text-sm text-gray-500">
                             <i class="far fa-clock mr-2" aria-hidden="true"></i>
-                            <span>5 min read</span>
+                            <span>6 min read</span>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="mobile">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-2">The Rise of Mobile Gaming and Its Impact</h3>
+                        <p class="text-gray-400 mb-4">How smartphones revolutionized the gaming industry and made arcade-style games accessible to everyone.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="far fa-clock mr-2" aria-hidden="true"></i>
+                            <span>8 min read</span>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="indie">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-2">Indie Game Development Success Stories</h3>
+                        <p class="text-gray-400 mb-4">Inspiring stories of independent developers who created successful arcade games with minimal resources.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="far fa-clock mr-2" aria-hidden="true"></i>
+                            <span>9 min read</span>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-card p-6 mb-6 rounded-lg" data-blog-id="future">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-2">The Future of Browser-Based Gaming</h3>
+                        <p class="text-gray-400 mb-4">Exploring upcoming technologies and trends that will shape the next generation of online arcade games.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="far fa-clock mr-2" aria-hidden="true"></i>
+                            <span>7 min read</span>
                         </div>
                     </div>
                 </div>
                 
                 <div id="blog-content" class="hidden">
-                    <button id="back-to-blogs" class="mb-6 flex items-center text-yellow-400 hover:text-yellow-300">
+                    <button id="back-to-blogs" class="mb-6 flex items-center text-blue-400 hover:text-blue-300">
                         <i class="fas fa-arrow-left mr-2" aria-hidden="true"></i> Back to blogs
                     </button>
                     
                     <div id="history-content" class="blog-full-content hidden">
-                        <h3 class="text-3xl font-bold text-yellow-400 mb-4">The History of Bird-Flapping Arcade Games</h3>
-                        <p class="text-sm text-gray-400 mb-6">Published: February 10, 2023</p>
+                        <h3 class="text-3xl font-bold text-blue-400 mb-4">The Evolution of Endless Runner Games</h3>
+                        <p class="text-sm text-gray-400 mb-6">Published: June 12, 2023</p>
                         
                         <div class="prose prose-lg prose-invert max-w-none">
-                            <p>The bird-flapping arcade game phenomenon began with a simple mobile game developed by a Vietnamese video game artist and programmer. The game was released in May 2013 but gained tremendous popularity in early 2014.</p>
+                            <p>Endless runner games have become one of the most popular genres in the mobile and casual gaming world. These games, characterized by their simple yet addictive gameplay where players must navigate through a never-ending course while avoiding obstacles, have evolved significantly over the years.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Origin</h4>
-                            <p>The original game was created in just a few days. It was designed with simple mechanics intentionally – players control a bird that moves continuously to the right, and must navigate through gaps between pipes that have varying heights.</p>
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Early Beginnings</h4>
+                            <p>The origins of endless runner games can be traced back to classic arcade games of the 1980s. Games like Moon Patrol (1982) introduced side-scrolling gameplay where players controlled a vehicle moving continuously to the right while avoiding obstacles. While these weren't truly "endless," they established core mechanics that would later define the genre.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Unexpected Success</h4>
-                            <p>For months after its release, the game remained relatively obscure. Then, seemingly overnight in early 2014, it went viral. It became the most downloaded free game in the iOS App Store. At its peak, it was reportedly earning $50,000 per day from in-app advertisements.</p>
+                            <p>The 1990s saw games like Road Rash and Antarctic Adventure that further developed the concept of continuous forward movement while navigating obstacles. However, these games still had defined levels with endpoints rather than the infinite play that characterizes modern endless runners.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Controversy and Removal</h4>
-                            <p>With success came controversy. The game was criticized for its difficulty, addictive nature, and for its art style. The developer also became overwhelmed by the sudden fame and attention.</p>
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">The Digital Revolution</h4>
+                            <p>The true endless runner genre as we know it today began to take shape in the early 2000s with browser-based Flash games. B-Cubed (2001) and SFCave (2003) are often cited as early examples of the modern endless runner format, featuring simple controls and procedurally generated obstacles that continued indefinitely.</p>
                             
-                            <p>On February 8, 2014, the developer announced on Twitter that he would be removing the game from app stores. True to his word, on February 10, the game was removed from both the iOS App Store and Google Play Store, despite still being at the top of the charts.</p>
+                            <p>Canabalt, released in 2009, is widely credited as the game that popularized the endless runner genre for the modern era. Created by Adam Saltsman, this minimalist game featured a man running across rooftops in a dystopian cityscape. Its one-button control scheme and procedurally generated world made it perfectly suited for the emerging smartphone market.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Aftermath</h4>
-                            <p>After the game's removal, phones with the game installed were listed on eBay for thousands of dollars. The game's success and sudden removal also led to a flood of clones attempting to capitalize on its popularity.</p>
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Mobile Gaming Explosion</h4>
+                            <p>The launch of smartphones created the perfect platform for endless runners. Temple Run, released in 2011 by Imangi Studios, brought the genre into 3D and became a massive hit with over 100 million downloads. Its success spawned countless imitators and innovators.</p>
                             
-                            <p>Despite removing his most successful creation, the developer continued his game development career. In August 2014, he released a new game called Swing Copters, which featured similar gameplay mechanics but with vertical rather than horizontal scrolling.</p>
+                            <p>Subway Surfers (2012) further refined the format with colorful visuals and character customization, while games like Jetpack Joyride introduced more varied gameplay mechanics within the endless runner framework.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Legacy</h4>
-                            <p>Bird-flapping arcade games remain one of the most notable phenomena in mobile gaming history. They demonstrated how simple games could achieve massive success, influenced game design with challenging-yet-accessible gameplay, and sparked discussions about the pressures of sudden fame in the digital age.</p>
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Modern Innovations</h4>
+                            <p>In recent years, the endless runner genre has continued to evolve with new innovations. Alto's Adventure (2015) brought artistic visuals and a relaxing atmosphere to the genre, proving that endless runners could also be meditative experiences rather than just reflex challenges.</p>
                             
-                            <p>Today, the original game is no longer available for download from official app stores, but its legacy lives on through numerous recreations, tributes, and the lasting impact it had on mobile gaming culture.</p>
+                            <p>Crossy Road reimagined the endless runner in an isometric perspective, drawing inspiration from the classic arcade game Frogger while adding modern free-to-play mechanics and collectible characters.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">The Legacy Continues</h4>
+                            <p>Today's endless runners continue to innovate while maintaining the core appeal of the genre: simple controls, gradually increasing difficulty, and the addictive "just one more try" gameplay loop. Games like Sky Glider build on this rich heritage, offering accessible gameplay that anyone can enjoy while providing enough depth to keep players coming back.</p>
+                            
+                            <p>The evolution of endless runners reflects broader trends in gaming: the shift toward mobile platforms, the growing accessibility of games to non-traditional audiences, and the enduring appeal of simple yet challenging gameplay. As technology continues to advance, we can expect endless runners to evolve further while maintaining the approachable nature that has made them a staple of casual gaming.</p>
                         </div>
                     </div>
                     
                     <div id="impact-content" class="blog-full-content hidden">
-                        <h3 class="text-3xl font-bold text-yellow-400 mb-4">Cultural Impact of Casual Arcade Games</h3>
-                        <p class="text-sm text-gray-400 mb-6">Published: March 15, 2023</p>
+                        <h3 class="text-3xl font-bold text-blue-400 mb-4">The Psychology Behind Addictive Arcade Games</h3>
+                        <p class="text-sm text-gray-400 mb-6">Published: July 5, 2023</p>
                         
                         <div class="prose prose-lg prose-invert max-w-none">
-                            <p>Few mobile games have made as significant a cultural impact in such a short time as bird-flapping arcade games. Their brief but intense popularity in early 2014 left a lasting impression on gaming culture, game development, and even how we think about viral success.</p>
+                            <p>Arcade games like Sky Glider might seem simple on the surface, but they're actually masterful applications of psychological principles that keep players engaged and coming back for more. Understanding these mechanisms can help us appreciate why these seemingly straightforward games can be so compelling.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Gaming Difficulty Renaissance</h4>
-                            <p>These games helped popularize a return to punishingly difficult games. While games had been trending toward accessibility and reduced difficulty, the extreme challenge and the social media bragging rights that came with a high score helped usher in a new appreciation for difficult games.</p>
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">The Variable Reward System</h4>
+                            <p>One of the most powerful psychological mechanisms in arcade games is the variable reward schedule, first identified by psychologist B.F. Skinner. Skinner found that unpredictable rewards create a stronger response than predictable ones. Arcade games leverage this by creating slightly different experiences with each playthrough.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Clone Explosion</h4>
-                            <p>After the original game's removal, the app stores were flooded with clones. At one point, it was estimated that 1/3 of new iOS games were inspired by the bird-flapping mechanic. This "gold rush" mentality highlighted issues with app store curation and copyright in digital marketplaces.</p>
+                            <p>In games like Sky Glider, the procedurally generated obstacles create a different challenge each time. Players never know exactly when they'll encounter a particularly difficult sequence or achieve a new high score, creating an element of unpredictability that keeps the reward system engaging.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Minimalist Game Design</h4>
-                            <p>These games demonstrated that games didn't need cutting-edge graphics or complex mechanics to be wildly popular. Their success influenced many developers to focus on simple, addictive gameplay loops rather than visual complexity.</p>
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Flow State and the Zone</h4>
+                            <p>Psychologist Mihaly Csikszentmihalyi developed the concept of "flow" - a mental state where a person is fully immersed and focused on an activity, with energized concentration and enjoyment. Good arcade games are expertly designed to induce this flow state by balancing difficulty and skill.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Dark Side of Viral Success</h4>
-                            <p>The decision to remove the original game at the height of its popularity sparked conversations about the pressure and harassment that can come with sudden fame. This experience has become a cautionary tale about the potential downsides of viral success.</p>
+                            <p>The gradual increase in difficulty in games like Sky Glider creates what game designers call a "difficulty curve." As players improve, the game becomes more challenging, keeping them in that sweet spot between boredom and frustration. This calibrated challenge level helps players achieve flow, where they lose track of time and become fully absorbed in the experience.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Educational Impact</h4>
-                            <p>The simple nature of these games made them ideal teaching tools. Many coding classes and tutorials use bird-flapping game clones as projects for beginners, helping to introduce a new generation to game development.</p>
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">The Near-Miss Effect</h4>
+                            <p>Another powerful psychological trigger in arcade games is the "near-miss" effect. When players almost succeed but fall just short, it creates a powerful motivation to try again. Research in gambling psychology has shown that near-misses trigger many of the same reward circuits in the brain as actual wins.</p>
                             
-                            <p>Even years after their removal, these games continue to be referenced in gaming culture and serve as a fascinating case study in viral phenomena, game design, and the intersection of technology and culture.</p>
+                            <p>In Sky Glider, when a player crashes just before reaching a new high score, it creates the feeling that success was within reach - that with just a little more skill or a slightly different approach, they could have succeeded. This creates a compelling urge to immediately try again.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Immediate Feedback and Improvements</h4>
+                            <p>Arcade games provide instant feedback on performance. Every action has an immediate consequence, allowing players to quickly understand what works and what doesn't. This rapid feedback loop accelerates the learning process and gives players a sense of growing mastery.</p>
+                            
+                            <p>Additionally, the short play sessions of arcade games like Sky Glider create what psychologists call "cognitive closure" - the satisfaction of completing an experience. Even when players fail, each session has a clear beginning, middle, and end, making it easy to rationalize "just one more game" since each round takes only a minute or two.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Social Competition</h4>
+                            <p>Humans are inherently social and competitive. High score systems tap into our natural desire to measure ourselves against others. Even single-player arcade games become social experiences when players compare scores with friends or on leaderboards.</p>
+                            
+                            <p>This social component adds another layer of motivation – not just to improve personal bests, but to outperform others. The simple act of seeing a friend's score that's just slightly higher creates a powerful incentive to keep playing until you've surpassed it.</p>
+                            
+                            <p>Understanding these psychological principles doesn't diminish the enjoyment of arcade games – if anything, it enhances our appreciation for their elegant design. Games like Sky Glider aren't just simple diversions; they're carefully crafted experiences that tap into fundamental aspects of human psychology to create engaging, satisfying gameplay loops that keep us coming back for "just one more try."</p>
                         </div>
                     </div>
                     
-                    <div id="clones-content" class="blog-full-content hidden">
-                        <h3 class="text-3xl font-bold text-yellow-400 mb-4">Similar Games and Inspirations</h3>
-                        <p class="text-sm text-gray-400 mb-6">Published: April 22, 2023</p>
+                    <div id="design-content" class="blog-full-content hidden">
+                        <h3 class="text-3xl font-bold text-blue-400 mb-4">Principles of Good Game Design for Casual Games</h3>
+                        <p class="text-sm text-gray-400 mb-6">Published: July 22, 2023</p>
                         
                         <div class="prose prose-lg prose-invert max-w-none">
-                            <p>When the original bird-flapping game was removed from app stores in February 2014, it created a vacuum that developers rushed to fill. The result was an unprecedented flood of clones and games inspired by its mechanics.</p>
+                            <p>Casual games like Sky Glider may appear simple, but creating a game that's both accessible to newcomers and engaging enough to keep players returning requires careful design. The best casual games balance several key principles to create experiences that anyone can enjoy while still providing depth for dedicated players.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Clone Wars</h4>
-                            <p>At the peak of the post-removal frenzy, developers were submitting hundreds of clones to app stores daily. Many simply changed the graphics while keeping identical gameplay - birds became fish, planes, or even faces of celebrities, while pipes transformed into buildings, coral reefs, or other obstacles.</p>
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Intuitive Controls</h4>
+                            <p>Perhaps the most fundamental principle of casual game design is simplicity in controls. Great casual games can often be played with just one finger or button, removing the barrier to entry that complex control schemes create.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Notable Variations</h4>
-                            <p>Some developers took the basic concept but added creative twists:</p>
-                            <ul>
-                                <li><strong>Flappy Wings</strong> - One of the most popular direct clones</li>
-                                <li><strong>Flying Cyrus</strong> - Featured Miley Cyrus's face instead of a bird</li>
-                                <li><strong>Flappy Doge</strong> - Used the popular Doge meme as the main character</li>
-                                <li><strong>Splashy Fish</strong> - Underwater version with similar mechanics</li>
-                                <li><strong>Fall Out Bird</strong> - Official game from the band Fall Out Boy</li>
-                            </ul>
+                            <p>Sky Glider exemplifies this with its one-tap control system. Players don't need to learn button combinations or complex mechanics—they immediately understand that tapping makes the glider rise. This immediate understanding eliminates frustration and allows players to focus on the challenge rather than the interface.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Platform Expansion</h4>
-                            <p>The phenomenon wasn't limited to mobile. Developers created versions for virtually every platform: web browsers, smartwatches, e-readers, and even ATM machines and calculators. This demonstrated the elegant simplicity of the game's core mechanics.</p>
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Clear Feedback</h4>
+                            <p>Good casual games provide clear, immediate feedback for player actions. Visual and audio cues help players understand what's happening and how their inputs affect the game world.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Parodies and Tributes</h4>
-                            <p>Beyond direct clones, the original game inspired numerous parodies and tributes across media. It was referenced in TV shows, web comics, and other video games. The game's distinctive visual style and punishing difficulty became instantly recognizable cultural touchstones.</p>
+                            <p>This feedback creates what game designers call "game feel" or "juice" - the satisfying sensory experience that makes simple interactions enjoyable. Elements like particle effects when collecting points, screen shake on impact, or the subtle sound cues when navigating through obstacles all contribute to this feedback loop.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Legacy in Game Design</h4>
-                            <p>While the initial flood of clones has long since receded, the influence on game design continues. The one-touch control scheme and "easy to learn, difficult to master" philosophy inspired many successful mobile games that followed.</p>
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Progressive Difficulty</h4>
+                            <p>The best casual games start easy but gradually increase in challenge. This approach allows new players to grasp the basics while providing engagement for experienced players.</p>
                             
-                            <p>The bird-flapping game phenomenon remains a fascinating chapter in gaming history - a simple game that spawned thousands of imitators and permanently influenced how we think about mobile game design.</p>
+                            <p>In Sky Glider, the game begins with obstacles spaced far apart, giving players time to understand the physics and timing. As the score increases, obstacles appear more frequently and in more challenging formations. This progressive difficulty curve ensures that players of all skill levels find an appropriate challenge.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Short Sessions, Long Appeal</h4>
+                            <p>Casual games respect the player's time by offering complete experiences in short sessions. A typical round of Sky Glider might last only a minute or two, making it perfect for quick breaks or waiting situations.</p>
+                            
+                            <p>However, these short sessions are designed to be highly replayable. The combination of procedurally generated challenges, personal high scores to beat, and the gradual mastery of skills creates long-term appeal despite the brevity of individual play sessions.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Forgiving Yet Fair</h4>
+                            <p>Good casual games strike a balance between being forgiving enough for newcomers while maintaining consequences that make success meaningful. When players fail in a well-designed casual game, they understand why they failed and feel that with improved skill, they could succeed next time.</p>
+                            
+                            <p>Sky Glider demonstrates this by having clear collision boundaries and predictable physics. When players crash into an obstacle, they immediately understand what happened and how they might avoid it in the future.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Meaningful Progression</h4>
+                            <p>Even simple games benefit from some form of progression system that gives players goals beyond just high scores. This might include unlockable characters, visual themes, or achievements that acknowledge player milestones.</p>
+                            
+                            <p>These progression systems provide multiple paths to satisfaction. Some players might focus on achieving high scores, while others might work toward unlocking all the available content, ensuring that different types of players find value in the experience.</p>
+                            
+                            <p>By balancing these design principles, casual games like Sky Glider achieve that elusive quality of being "easy to learn, difficult to master." They welcome new players with open arms while providing enough depth and challenge to keep dedicated players engaged for the long term. This careful balancing act is what separates truly great casual games from the countless forgettable ones.</p>
                         </div>
                     </div>
                     
                     <div id="strategies-content" class="blog-full-content hidden">
-                        <h3 class="text-3xl font-bold text-yellow-400 mb-4">Advanced Strategies for Higher Scores</h3>
-                        <p class="text-sm text-gray-400 mb-6">Published: May 5, 2023</p>
+                        <h3 class="text-3xl font-bold text-blue-400 mb-4">Advanced Strategies for Sky Glider Masters</h3>
+                        <p class="text-sm text-gray-400 mb-6">Published: August 8, 2023</p>
                         
                         <div class="prose prose-lg prose-invert max-w-none">
-                            <p>While bird-flapping arcade games appear simple, achieving high scores requires skill, practice, and strategy. Here are some advanced techniques to help you master the game and impress your friends with record-breaking scores.</p>
+                            <p>While Sky Glider may seem straightforward at first glance, achieving truly impressive scores requires strategy, practice, and an understanding of the game's subtle mechanics. If you're looking to take your game to the next level, these advanced techniques can help you soar past your previous records.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Rhythm Method</h4>
-                            <p>Instead of reacting to each pipe individually, try to establish a rhythm with your taps. The game has a consistent physics system, so finding the right tapping cadence can help you maintain a steady flight path. Practice maintaining altitude with evenly spaced taps before attempting to navigate through pipes.</p>
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">The Rhythm Technique</h4>
+                            <p>Rather than reacting to each obstacle individually, top players develop a rhythmic tapping pattern that helps maintain a consistent flight path. The game has predictable physics, so finding the right cadence for your taps can help you achieve smoother control of your glider.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Minimal Tap Technique</h4>
-                            <p>Many players tap too frequently, causing erratic movement. The key is to use as few taps as possible while still navigating safely. Let gravity do some of the work for you. This technique requires patience and practice but can lead to much smoother gameplay.</p>
+                            <p>To practice this technique, start in the early stages of the game where obstacles are spaced further apart. Focus on making your glider follow a gentle wave pattern with evenly timed taps. Once you've established a comfortable rhythm, you'll be better prepared to make minor adjustments when facing more challenging obstacle arrangements.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Focus Point Strategy</h4>
-                            <p>Instead of watching the bird, try focusing your eyes on the upcoming gap between pipes. Your peripheral vision will track the bird's position, while your main focus prepares for the next obstacle. This technique is used by many top players to achieve scores over 100.</p>
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">The Minimal Input Approach</h4>
+                            <p>A common mistake of new players is overcontrolling the glider with too many inputs. Expert players understand that fewer, more precise taps result in smoother movement and better control.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">The Zen Approach</h4>
-                            <p>Mental state plays a huge role in performance. Many players tense up as their score increases, leading to mistakes. Practice deep breathing and maintaining a relaxed posture while playing. Some players report better results when they stop focusing on the score and enter a flow state.</p>
+                            <p>Try to use as few taps as possible while still navigating safely. Let gravity do some of the work for you, especially when descending. This approach requires practice and patience, but results in much more consistent gameplay once mastered.</p>
                             
-                            <h4 class="text-xl font-bold text-yellow-400 mt-6 mb-3">Practice Regimen</h4>
-                            <p>Like any skill, improvement comes with structured practice:</p>
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Forward Focus</h4>
+                            <p>Instead of watching the glider itself, train yourself to focus your eyes further ahead on the approaching obstacles. Your peripheral vision will keep track of your glider's position while your main focus prepares for upcoming challenges.</p>
+                            
+                            <p>This technique is similar to how experienced drivers look far down the road rather than just at the car in front of them. By focusing ahead, you give yourself more time to plan and react, turning the game from a series of panic reactions into a more strategic experience.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">The Middle Path Strategy</h4>
+                            <p>While it might seem counterintuitive, staying in the middle vertical area of the screen as much as possible often leads to better scores. This positioning gives you the maximum flexibility to quickly move either up or down when needed.</p>
+                            
+                            <p>When you stay too high or too low for extended periods, you limit your maneuvering options and can get trapped when obstacles appear in quick succession. The middle path strategy ensures you always have room to navigate in either direction.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Pattern Recognition</h4>
+                            <p>While obstacles in Sky Glider are procedurally generated, they typically follow certain patterns. By playing regularly, you'll begin to recognize these common configurations and develop optimal strategies for each.</p>
+                            
+                            <p>Some players even categorize obstacle patterns and practice specific approaches for each type. For example, you might develop one strategy for closely spaced vertical obstacles and another for alternating high-low patterns.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">The Mental Game</h4>
+                            <p>At high scores, maintaining focus and managing anxiety becomes as important as technical skill. Many players report making mistakes not because the obstacle was too difficult, but because they became nervous about their high score.</p>
+                            
+                            <p>Try to maintain a calm, focused state even as your score climbs. Some players find it helpful to hide the score display or consciously ignore it during play. Others use breathing techniques between particularly challenging sections to stay relaxed.</p>
+                            
+                            <p>Remember that mastering Sky Glider, like any skill, takes time and deliberate practice. Don't be discouraged by setbacks - each game is an opportunity to refine your technique and strategy. With persistence and application of these advanced strategies, you'll see your scores climb to new heights. Happy gliding!</p>
+                        </div>
+                    </div>
+                    
+                    <div id="physics-content" class="blog-full-content hidden">
+                        <h3 class="text-3xl font-bold text-blue-400 mb-4">The Physics of Sky Gliding Games</h3>
+                        <p class="text-sm text-gray-400 mb-6">Published: August 25, 2023</p>
+                        
+                        <div class="prose prose-lg prose-invert max-w-none">
+                            <p>One of the most satisfying aspects of games like Sky Glider is the way they simulate flight physics in a simplified yet intuitive way. While these games don't replicate real-world physics with perfect accuracy, they create systems that feel natural and responsive, giving players a sense of control while maintaining accessibility.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Simplified Gravity</h4>
+                            <p>At the heart of most gliding games is a simplified gravity system. In Sky Glider, this is represented by a constant downward acceleration that pulls the player toward the ground. This acceleration is typically much stronger than real-world gravity to create more dramatic gameplay and require more frequent player input.</p>
+                            
+                            <p>The basic formula implemented in most gliding games looks something like this: velocity += gravity, position += velocity. This simple equation, executed many times per second, creates the smooth falling motion that players experience.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Upward Thrust and Momentum</h4>
+                            <p>When the player taps the screen or presses the spacebar, the game applies an instant upward force to the glider, counteracting gravity. This isn't how real gliders work (which rely on air currents and aerodynamics), but it creates an intuitive control system that anyone can understand immediately.</p>
+                            
+                            <p>The best gliding games carefully calibrate this upward force to feel satisfying. If the force is too weak, the game feels sluggish and unresponsive. If it's too strong, the game becomes too easy and loses the delicate balance that makes it challenging.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Terminal Velocity</h4>
+                            <p>Well-designed games like Sky Glider also implement a terminal velocity - a maximum speed that the glider can fall. Without this cap, the glider would accelerate indefinitely, quickly becoming impossible to control. Terminal velocity ensures that players always have a chance to recover, even after falling for an extended period.</p>
+                            
+                            <p>This mechanic is implemented by simply clamping the downward velocity to a maximum value: if (velocity > maxVelocity) velocity = maxVelocity;</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Visual Feedback and Game Feel</h4>
+                            <p>The perception of good physics is enhanced by strong visual feedback. When the glider rises, subtle animations might show the character leaning back slightly. When falling, the character might lean forward. These visual cues reinforce the sense of weight and momentum.</p>
+                            
+                            <p>Additional effects like motion trails, subtle rotation of the glider based on velocity, and particle effects all contribute to what game designers call "game feel" - the tactile sensation of controlling a virtual object.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Collision Detection</h4>
+                            <p>Another crucial aspect of physics in gliding games is collision detection - determining when the player has hit an obstacle. The most basic approach uses rectangular hitboxes, but more sophisticated games use shape-based collision detection that more accurately matches the visual representation of the glider and obstacles.</p>
+                            
+                            <p>Many games actually implement slightly forgiving collision detection, making the hitboxes a bit smaller than the visible sprites. This "forgiveness buffer" prevents players from feeling cheated by collisions that look like near misses.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Finding the Sweet Spot</h4>
+                            <p>The real art of designing physics for games like Sky Glider isn't in perfect simulation but in finding the right balance between realism and fun. The physics need to be consistent enough that players can develop skill and strategy, but simplified enough that the game remains accessible and enjoyable.</p>
+                            
+                            <p>This balance is achieved through extensive playtesting and iteration. Developers adjust gravity values, tap force, terminal velocity, and other parameters until the game "feels right" - that magical quality that makes players want to keep trying even after failure.</p>
+                            
+                            <p>The next time you play Sky Glider, take a moment to appreciate the carefully designed physics system that makes the simple act of navigating through obstacles so satisfying. It's this attention to detail in the underlying mechanics that elevates a simple concept into an engaging gaming experience that keeps players coming back for more.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="mobile-content" class="blog-full-content hidden">
+                        <h3 class="text-3xl font-bold text-blue-400 mb-4">The Rise of Mobile Gaming and Its Impact</h3>
+                        <p class="text-sm text-gray-400 mb-6">Published: September 15, 2023</p>
+                        
+                        <div class="prose prose-lg prose-invert max-w-none">
+                            <p>In just over a decade, mobile gaming has transformed from a niche activity to the largest and most profitable segment of the global gaming market. This revolution has changed not just how we play games, but who plays them, how they're designed, and how they're monetized. The rise of games like Sky Glider exemplifies this transformation.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">The Smartphone Revolution</h4>
+                            <p>The mobile gaming explosion began in earnest with the launch of the iPhone in 2007 and the subsequent opening of the App Store in 2008. For the first time, consumers had powerful computing devices in their pockets with intuitive touch interfaces and a centralized marketplace for software.</p>
+                            
+                            <p>Early mobile games like Doodle Jump and Angry Birds demonstrated that simple, touch-based games could achieve massive popularity. These titles established design patterns that emphasized quick play sessions, simple controls, and high replayability – perfect for the on-the-go nature of mobile devices.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Democratization of Gaming</h4>
+                            <p>Perhaps the most significant impact of mobile gaming has been its role in democratizing video games. Before smartphones, gaming required dedicated hardware like consoles or gaming PCs – substantial investments that limited the audience. Mobile games removed this barrier, making gaming accessible to billions of people worldwide.</p>
+                            
+                            <p>This democratization expanded the gaming demographic dramatically. The average mobile gamer doesn't fit the traditional gamer stereotype – they're more likely to be older, more gender-balanced, and less experienced with traditional video games. This broader audience has encouraged developers to create more accessible experiences with universal appeal.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">The Evolution of Business Models</h4>
+                            <p>Mobile gaming pioneered new business models that have since influenced the entire industry. The initial "pay once" model quickly gave way to free-to-play games with in-app purchases, a model that now dominates mobile gaming.</p>
+                            
+                            <p>This shift has had profound implications for game design. Free-to-play games must be carefully crafted to attract a large user base while encouraging a percentage of players to spend money on optional purchases. This has led to sophisticated systems for player retention and monetization that continue to evolve.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Revival of Arcade-Style Gaming</h4>
+                            <p>Mobile gaming has revitalized the arcade game design philosophy. Classic arcade games were designed for short, intense play sessions with simple controls and gradually increasing difficulty – precisely the qualities that work well on mobile devices.</p>
+                            
+                            <p>Games like Sky Glider follow in this tradition, focusing on elegant simplicity, quick rounds, and the "just one more try" hook that characterized the best arcade games. This connection explains why so many mobile hits can trace their design lineage back to arcade classics.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Cross-Platform Evolution</h4>
+                            <p>The success of mobile gaming has influenced development across the industry. Web-based games like our browser version of Sky Glider adopt mobile-friendly design principles even when played on desktop computers. Major console franchises now frequently receive mobile spin-offs, and some mobile hits have expanded to consoles and PC.</p>
+                            
+                            <p>This cross-pollination between platforms continues to blur the lines between mobile and traditional gaming, with successful design patterns being adapted across the ecosystem.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">The Future Landscape</h4>
+                            <p>As mobile devices become more powerful, the distinction between mobile and console/PC gaming continues to narrow. Cloud gaming services now allow AAA console games to be played on phones, while mobile-first titles achieve production values that rival their console counterparts.</p>
+                            
+                            <p>Yet the core appeal of mobile gaming remains tied to its accessibility and pick-up-and-play nature. Games like Sky Glider represent the perfect balance – simple enough to play anywhere, anytime, but with enough depth to remain engaging over hundreds or thousands of play sessions.</p>
+                            
+                            <p>The mobile gaming revolution has forever changed the gaming landscape, expanding the audience, transforming business models, and revitalizing arcade-style game design. As we look to the future, mobile gaming's influence will likely continue to grow, bringing gaming experiences to ever more diverse audiences worldwide.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="indie-content" class="blog-full-content hidden">
+                        <h3 class="text-3xl font-bold text-blue-400 mb-4">Indie Game Development Success Stories</h3>
+                        <p class="text-sm text-gray-400 mb-6">Published: October 3, 2023</p>
+                        
+                        <div class="prose prose-lg prose-invert max-w-none">
+                            <p>The indie game development scene has produced some of gaming's most innovative and beloved titles, often created by tiny teams with minimal resources. These success stories not only inspire aspiring developers but also demonstrate how creative vision and passion can sometimes outshine massive budgets and large development teams.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">The One-Person Phenomenon</h4>
+                            <p>Some of the most remarkable indie success stories come from solo developers. Eric Barone spent four years developing Stardew Valley entirely by himself, handling everything from programming to art to music. Released in 2016, the game has sold over 10 million copies across multiple platforms.</p>
+                            
+                            <p>Similarly, Toby Fox created the RPG phenomenon Undertale largely alone, with the game becoming known for its innovative combat system and fourth-wall-breaking narrative. These examples show that with enough dedication and vision, even a single developer can create a game with massive impact.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Mobile Indie Breakthroughs</h4>
+                            <p>The mobile space has been particularly fertile ground for indie developers. In 2013, Dong Nguyen released a simple game with challenging gameplay and primitive graphics. Within weeks, it became a global phenomenon, reportedly earning up to $50,000 per day from advertising at its peak.</p>
+                            
+                            <p>Another notable success came from the three-person team at Hipster Whale, who created Crossy Road. Released in 2014, the game's combination of accessible gameplay, charming visuals, and fair monetization led to over 200 million downloads and substantial financial success despite being free to play.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">When Simplicity Shines</h4>
+                            <p>Many indie successes demonstrate that gameplay innovation often matters more than technical sophistication. Thomas Was Alone, developed by Mike Bithell, featured nothing more than colored rectangles as characters yet created an emotionally resonant experience through narration and level design.</p>
+                            
+                            <p>Similarly, the two-person team behind Hollow Knight created one of the most acclaimed Metroidvania games in recent years by focusing on atmosphere, tight controls, and world-building rather than cutting-edge graphics or technology.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Finding a Niche</h4>
+                            <p>Many successful indie developers have thrived by serving underserved niches in gaming. Lucas Pope's Papers, Please explored the moral complexities of immigration control – hardly a typical game subject – and earned critical acclaim and commercial success for its innovative approach.</p>
+                            
+                            <p>Likewise, Subset Games found success with FTL: Faster Than Light and Into the Breach by creating deep strategy experiences in compact, accessible packages when most strategy games were becoming increasingly complex and time-consuming.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Community Building</h4>
+                            <p>Modern indie success stories often involve strong community engagement. When Unknown Worlds released Subnautica through Early Access, they established a tight feedback loop with players, incorporating community suggestions while building anticipation for the full release.</p>
+                            
+                            <p>Similarly, Motion Twin's Dead Cells evolved significantly during its Early Access period based on player feedback, resulting in a more polished and player-friendly experience at launch that contributed to its strong reception.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Lessons for Aspiring Developers</h4>
+                            <p>These success stories offer valuable lessons for those looking to develop their own games:</p>
                             <ul>
-                                <li>Start with 10-minute daily sessions</li>
-                                <li>Focus on consistency rather than high scores initially</li>
-                                <li>Record your attempts to review mistakes</li>
-                                <li>Set incremental goals (score of 10, then 20, etc.)</li>
+                                <li>Focus on your strengths and unique perspective</li>
+                                <li>Prioritize engaging gameplay over flashy but superficial features</li>
+                                <li>Don't be afraid to serve a specific niche rather than trying to please everyone</li>
+                                <li>Involve your community and be responsive to feedback</li>
+                                <li>Polish a small experience to perfection rather than creating a sprawling but mediocre one</li>
                             </ul>
                             
-                            <p>Remember that even expert players rarely achieve perfect runs. The game is designed to be challenging, so be patient with yourself as you develop your skills. With these strategies and consistent practice, you'll see your scores improve dramatically over time.</p>
+                            <p>While not every indie game becomes a breakout hit, these stories demonstrate that the democratization of game development tools and digital distribution has created unprecedented opportunities for small teams and individual creators to make their mark on the gaming world.</p>
+                            
+                            <p>The next big indie success might come from anywhere – perhaps even from a simple browser game like Sky Glider that captures the perfect blend of accessibility and challenge that keeps players coming back for more.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="future-content" class="blog-full-content hidden">
+                        <h3 class="text-3xl font-bold text-blue-400 mb-4">The Future of Browser-Based Gaming</h3>
+                        <p class="text-sm text-gray-400 mb-6">Published: November 12, 2023</p>
+                        
+                        <div class="prose prose-lg prose-invert max-w-none">
+                            <p>Browser-based games like Sky Glider have been a staple of casual gaming for decades, offering accessible entertainment without downloads or installations. As we look to the future, emerging technologies and shifting consumer preferences are poised to transform browser gaming in exciting ways.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">WebGL and WebGPU: Bringing Console-Quality Graphics to Browsers</h4>
+                            <p>One of the most significant developments in browser gaming is the advancement of web graphics technologies. WebGL has already enabled impressive 3D experiences in browsers, but the newer WebGPU standard promises even greater performance and capabilities.</p>
+                            
+                            <p>These technologies allow developers to harness the power of modern GPUs directly from the browser, enabling visual fidelity that rivals downloadable games. As these standards gain wider support, we can expect browser games to feature increasingly sophisticated graphics, physics, and effects while maintaining their accessibility.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">WebAssembly: Native-Speed Performance</h4>
+                            <p>WebAssembly (Wasm) represents another leap forward for browser performance, allowing code written in languages like C++ and Rust to run at near-native speed in the browser. This technology bridges the performance gap between browser games and their native counterparts.</p>
+                            
+                            <p>For games like Sky Glider, WebAssembly could enable more sophisticated physics simulations, larger game worlds, and more complex AI behaviors without sacrificing the accessibility of browser delivery. Some developers are already using WebAssembly to port existing titles to the web with minimal performance loss.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Progressive Web Apps: The Best of Both Worlds</h4>
+                            <p>Progressive Web Apps (PWAs) blur the line between websites and native applications, offering offline functionality, home screen installation, and push notifications while still being delivered through the web.</p>
+                            
+                            <p>For browser games, the PWA model offers intriguing possibilities. Players could "install" a game like Sky Glider directly from the browser, then play it offline during a commute. Progress could sync automatically when connectivity is restored, creating a seamless experience across devices and contexts.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Cross-Platform Convergence</h4>
+                            <p>As web technologies become more powerful, the distinction between browser games, mobile games, and even desktop games continues to erode. Modern frameworks like Unity and Unreal now offer web export options, allowing developers to target multiple platforms from a single codebase.</p>
+                            
+                            <p>This convergence means browser games are increasingly becoming just one delivery method for a game that might also exist as a mobile app or desktop application. For players, this offers greater flexibility in how and where they play their favorite games.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Cloud Gaming Integration</h4>
+                            <p>Cloud gaming services like Google Stadia and NVIDIA GeForce Now have demonstrated that even the most demanding games can be delivered through a browser. As these technologies mature and become more integrated with standard web technologies, we may see hybrid approaches emerge.</p>
+                            
+                            <p>Imagine a simple game like Sky Glider that begins in the browser using local processing but can seamlessly scale up to more complex experiences by leveraging cloud computing when available. This scalability could allow browser games to adapt to the capabilities of the player's device without sacrificing accessibility.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Social and Multiplayer Evolution</h4>
+                            <p>WebRTC and similar technologies have made real-time communication between browsers more accessible than ever. Future browser games will likely feature more sophisticated multiplayer components, from simple score sharing to fully synchronized multiplayer experiences.</p>
+                            
+                            <p>Social features like spectator modes, in-game streaming, and deeper integration with social platforms will help browser games foster communities and extend their longevity.</p>
+                            
+                            <h4 class="text-xl font-bold text-blue-400 mt-6 mb-3">Accessibility and Inclusivity</h4>
+                            <p>The inherent accessibility of browser games positions them to lead the industry in inclusivity. As web standards continue to improve support for assistive technologies, browser games can more easily accommodate players with different abilities and needs.</p>
+                            
+                            <p>Future browser games might feature more customizable controls, adjustable difficulty levels, and compatibility with specialized input devices – all delivered without requiring complex installation or configuration.</p>
+                            
+                            <p>As these technologies mature and converge, browser-based games like Sky Glider will continue to evolve, offering increasingly sophisticated experiences while maintaining the instant accessibility that has always been their strength. The future of browser gaming looks bright indeed, with the gap between "casual" browser games and "serious" gaming experiences narrowing with each technological advancement.</p>
                         </div>
                     </div>
                 </div>
@@ -483,7 +850,7 @@
     <!-- FAQ Section -->
     <section id="faq-section" class="inactive-section py-12 bg-gray-900">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-yellow-400 game-title mb-8">Frequently Asked Questions</h2>
+            <h2 class="text-4xl font-bold text-center text-blue-400 game-title mb-8">Frequently Asked Questions</h2>
             
             <div class="max-w-3xl mx-auto">
                 <!-- FAQ Schema Markup -->
@@ -494,34 +861,34 @@
                   "mainEntity": [
                     {
                       "@type": "Question",
-                      "name": "How do I play Flappy Bird online?",
+                      "name": "How do I play Sky Glider online?",
                       "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "To play Flappy Bird online, simply click the screen or press the spacebar to make the bird fly upward. Navigate through the pipes without hitting them. Each pipe you pass gives you one point."
+                        "text": "To play Sky Glider online, simply click the screen or press the spacebar to make the glider fly upward. Navigate through the obstacles without hitting them. Each obstacle you pass gives you one point."
                       }
                     },
                     {
                       "@type": "Question",
-                      "name": "Is this the original Flappy Bird game?",
+                      "name": "Is Sky Glider free to play?",
                       "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "This is a fan recreation inspired by the classic arcade game. It maintains the core gameplay mechanics while adding modern design elements and additional content."
+                        "text": "Yes, Sky Glider is completely free to play in your web browser. There are no hidden fees or purchases required to enjoy the full game experience."
                       }
                     },
                     {
                       "@type": "Question",
-                      "name": "What's the highest possible score in Flappy Bird?",
+                      "name": "What's the highest possible score in Sky Glider?",
                       "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "There is no maximum score in Flappy Bird. The game continues indefinitely, becoming progressively more challenging. The world record is over 999 points, though most players consider anything above 50 to be an excellent score."
+                        "text": "There is no maximum score in Sky Glider. The game continues indefinitely, becoming progressively more challenging. The current record is over 350 points, though most players consider anything above 50 to be an excellent score."
                       }
                     },
                     {
                       "@type": "Question",
-                      "name": "Why is Flappy Bird so difficult?",
+                      "name": "Why is Sky Glider so challenging?",
                       "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Flappy Bird is challenging because it requires precise timing and has unforgiving collision detection. The bird's movement is affected by gravity, creating a physics-based challenge that requires practice to master."
+                        "text": "Sky Glider is challenging because it requires precise timing and has unforgiving collision detection. The glider's movement is affected by gravity, creating a physics-based challenge that requires practice to master."
                       }
                     },
                     {
@@ -529,7 +896,7 @@
                       "name": "Does this game work on mobile devices?",
                       "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Yes, this online version of Flappy Bird works on both desktop and mobile devices. On mobile, simply tap the screen to make the bird fly. The game is optimized for touch controls and responsive design."
+                        "text": "Yes, this online version of Sky Glider works on both desktop and mobile devices. On mobile, simply tap the screen to make the glider fly. The game is optimized for touch controls and responsive design."
                       }
                     },
                     {
@@ -537,7 +904,7 @@
                       "name": "Are there any strategies to get a higher score?",
                       "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Yes! Try to establish a rhythm with your taps, use minimal taps to maintain smoother flight, focus your eyes on the upcoming gaps rather than the bird, and practice regularly. Check our blog section for advanced strategies."
+                        "text": "Yes! Try to establish a rhythm with your taps, use minimal taps to maintain smoother flight, focus your eyes on the upcoming gaps rather than the glider, and practice regularly. Check our blog section for advanced strategies."
                       }
                     }
                   ]
@@ -547,61 +914,61 @@
                 <div class="space-y-4">
                     <div class="faq-item p-4 rounded-lg">
                         <div class="faq-question flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-yellow-400">How do I play Flappy Bird online?</h3>
-                            <i class="fas fa-chevron-down text-yellow-400" aria-hidden="true"></i>
+                            <h3 class="text-xl font-bold text-blue-400">How do I play Sky Glider online?</h3>
+                            <i class="fas fa-chevron-down text-blue-400" aria-hidden="true"></i>
                         </div>
                         <div class="faq-answer mt-2 text-gray-300">
-                            <p>To play Flappy Bird online, simply click the screen or press the spacebar to make the bird fly upward. Navigate through the pipes without hitting them. Each pipe you pass gives you one point.</p>
+                            <p>To play Sky Glider online, simply click the screen or press the spacebar to make the glider fly upward. Navigate through the obstacles without hitting them. Each obstacle you pass gives you one point.</p>
                         </div>
                     </div>
                     
                     <div class="faq-item p-4 rounded-lg">
                         <div class="faq-question flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-yellow-400">Is this the original Flappy Bird game?</h3>
-                            <i class="fas fa-chevron-down text-yellow-400" aria-hidden="true"></i>
+                            <h3 class="text-xl font-bold text-blue-400">Is Sky Glider free to play?</h3>
+                            <i class="fas fa-chevron-down text-blue-400" aria-hidden="true"></i>
                         </div>
                         <div class="faq-answer mt-2 text-gray-300">
-                            <p>This is a fan recreation inspired by the classic arcade game. It maintains the core gameplay mechanics while adding modern design elements and additional content.</p>
+                            <p>Yes, Sky Glider is completely free to play in your web browser. There are no hidden fees or purchases required to enjoy the full game experience.</p>
                         </div>
                     </div>
                     
                     <div class="faq-item p-4 rounded-lg">
                         <div class="faq-question flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-yellow-400">What's the highest possible score in Flappy Bird?</h3>
-                            <i class="fas fa-chevron-down text-yellow-400" aria-hidden="true"></i>
+                            <h3 class="text-xl font-bold text-blue-400">What's the highest possible score in Sky Glider?</h3>
+                            <i class="fas fa-chevron-down text-blue-400" aria-hidden="true"></i>
                         </div>
                         <div class="faq-answer mt-2 text-gray-300">
-                            <p>There is no maximum score in Flappy Bird. The game continues indefinitely, becoming progressively more challenging. The world record is over 999 points, though most players consider anything above 50 to be an excellent score.</p>
+                            <p>There is no maximum score in Sky Glider. The game continues indefinitely, becoming progressively more challenging. The current record is over 350 points, though most players consider anything above 50 to be an excellent score.</p>
                         </div>
                     </div>
                     
                     <div class="faq-item p-4 rounded-lg">
                         <div class="faq-question flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-yellow-400">Why is Flappy Bird so difficult?</h3>
-                            <i class="fas fa-chevron-down text-yellow-400" aria-hidden="true"></i>
+                            <h3 class="text-xl font-bold text-blue-400">Why is Sky Glider so challenging?</h3>
+                            <i class="fas fa-chevron-down text-blue-400" aria-hidden="true"></i>
                         </div>
                         <div class="faq-answer mt-2 text-gray-300">
-                            <p>Flappy Bird is challenging because it requires precise timing and has unforgiving collision detection. The bird's movement is affected by gravity, creating a physics-based challenge that requires practice to master.</p>
+                            <p>Sky Glider is challenging because it requires precise timing and has unforgiving collision detection. The glider's movement is affected by gravity, creating a physics-based challenge that requires practice to master.</p>
                         </div>
                     </div>
                     
                     <div class="faq-item p-4 rounded-lg">
                         <div class="faq-question flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-yellow-400">Does this game work on mobile devices?</h3>
-                            <i class="fas fa-chevron-down text-yellow-400" aria-hidden="true"></i>
+                            <h3 class="text-xl font-bold text-blue-400">Does this game work on mobile devices?</h3>
+                            <i class="fas fa-chevron-down text-blue-400" aria-hidden="true"></i>
                         </div>
                         <div class="faq-answer mt-2 text-gray-300">
-                            <p>Yes, this online version of Flappy Bird works on both desktop and mobile devices. On mobile, simply tap the screen to make the bird fly. The game is optimized for touch controls and responsive design.</p>
+                            <p>Yes, this online version of Sky Glider works on both desktop and mobile devices. On mobile, simply tap the screen to make the glider fly. The game is optimized for touch controls and responsive design.</p>
                         </div>
                     </div>
                     
                     <div class="faq-item p-4 rounded-lg">
                         <div class="faq-question flex justify-between items-center">
-                            <h3 class="text-xl font-bold text-yellow-400">Are there any strategies to get a higher score?</h3>
-                            <i class="fas fa-chevron-down text-yellow-400" aria-hidden="true"></i>
+                            <h3 class="text-xl font-bold text-blue-400">Are there any strategies to get a higher score?</h3>
+                            <i class="fas fa-chevron-down text-blue-400" aria-hidden="true"></i>
                         </div>
                         <div class="faq-answer mt-2 text-gray-300">
-                            <p>Yes! Try to establish a rhythm with your taps, use minimal taps to maintain smoother flight, focus your eyes on the upcoming gaps rather than the bird, and practice regularly. Check our blog section for advanced strategies.</p>
+                            <p>Yes! Try to establish a rhythm with your taps, use minimal taps to maintain smoother flight, focus your eyes on the upcoming gaps rather than the glider, and practice regularly. Check our blog section for advanced strategies.</p>
                         </div>
                     </div>
                 </div>
@@ -612,45 +979,58 @@
     <!-- Privacy Policy Section -->
     <section id="privacy-section" class="inactive-section py-12 bg-gray-900">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-yellow-400 game-title mb-8">Privacy Policy</h2>
+            <h2 class="text-4xl font-bold text-center text-blue-400 game-title mb-8">Privacy Policy</h2>
             
             <div class="policy-content">
-                <p class="mb-4">Last updated: May 15, 2023</p>
+                <p class="mb-4">Last updated: November 15, 2023</p>
                 
-                <h3 class="text-xl font-bold text-yellow-400 mb-4">1. Introduction</h3>
+                <h3 class="text-xl font-bold text-blue-400 mb-4">1. Introduction</h3>
                 <p class="mb-4">
-                    Welcome to our arcade game website. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or play our game.
+                    Welcome to our Sky Glider game website. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or play our game.
                     Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
                 </p>
                 
-                <h3 class="text-xl font-bold text-yellow-400 mb-4">2. Collection of Your Information</h3>
+                <h3 class="text-xl font-bold text-blue-400 mb-4">2. Collection of Your Information</h3>
                 <p class="mb-4">
                     We may collect information about you in a variety of ways. The information we may collect via the Site includes:
                 </p>
                 <ul class="list-disc pl-6 mb-4">
-                    <li>Personal Data: Personally identifiable information, such as your name, shipping address, email address, and telephone number, that you voluntarily give to us when you choose to participate in various activities related to the Site.</li>
+                    <li>Personal Data: Personally identifiable information, such as your name, email address, and telephone number, that you voluntarily give to us when you choose to participate in various activities related to the Site.</li>
                     <li>Derivative Data: Information our servers automatically collect when you access the Site, such as your IP address, your browser type, your operating system, your access times, and the pages you have viewed directly before and after accessing the Site.</li>
-                    <li>Financial Data: Financial information, such as data related to your payment method (e.g. valid credit card number, card brand, expiration date) that we may collect when you purchase, order, return, exchange, or request information about our services from the Site.</li>
                     <li>Mobile Device Data: Device information, such as your mobile device ID, model, and manufacturer, and information about the location of your device, if you access the Site from a mobile device.</li>
+                    <li>Game Data: Information related to your gameplay, such as scores, game progress, and preferences.</li>
                 </ul>
                 
-                <h3 class="text-xl font-bold text-yellow-400 mb-4">3. Use of Your Information</h3>
+                <h3 class="text-xl font-bold text-blue-400 mb-4">3. Use of Your Information</h3>
                 <p class="mb-4">Having accurate information about you permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the Site to:</p>
                 <ul class="list-disc pl-6 mb-4">
                     <li>Create and manage your account.</li>
                     <li>Compile anonymous statistical data and analysis for use internally or with third parties.</li>
-                    <li>Email you regarding your account or order.</li>
+                    <li>Email you regarding your account or updates to the game.</li>
                     <li>Enable user-to-user communications.</li>
                     <li>Increase the efficiency and operation of the Site.</li>
                     <li>Monitor and analyze usage and trends to improve your experience with the Site.</li>
                     <li>Notify you of updates to the Site.</li>
-                    <li>Prevent fraudulent transactions, monitor against theft, and protect against criminal activity.</li>
-                    <li>Process payments and refunds.</li>
+                    <li>Prevent fraudulent transactions and monitor against theft.</li>
                     <li>Request feedback and contact you about your use of the Site.</li>
                     <li>Resolve disputes and troubleshoot problems.</li>
                 </ul>
                 
-                <h3 class="text-xl font-bold text-yellow-400 mb-4">4. Contact Us</h3>
+                <h3 class="text-xl font-bold text-blue-400 mb-4">4. Disclosure of Your Information</h3>
+                <p class="mb-4">We may share information we have collected about you in certain situations. Your information may be disclosed as follows:</p>
+                <ul class="list-disc pl-6 mb-4">
+                    <li>By Law or to Protect Rights: If we believe the release of information about you is necessary to respond to legal process, to investigate or remedy potential violations of our policies, or to protect the rights, property, and safety of others, we may share your information as permitted or required by any applicable law, rule, or regulation.</li>
+                    <li>Third-Party Service Providers: We may share your information with third parties that perform services for us or on our behalf, including payment processing, data analysis, email delivery, hosting services, customer service, and marketing assistance.</li>
+                    <li>Marketing Communications: With your consent, or with an opportunity for you to withdraw consent, we may share your information with third parties for marketing purposes.</li>
+                    <li>Interactions with Other Users: If you interact with other users of the Site, those users may see your name, profile photo, and descriptions of your activity.</li>
+                </ul>
+                
+                <h3 class="text-xl font-bold text-blue-400 mb-4">5. Security of Your Information</h3>
+                <p class="mb-4">
+                    We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.
+                </p>
+                
+                <h3 class="text-xl font-bold text-blue-400 mb-4">6. Contact Us</h3>
                 <p class="mb-4">
                     If you have questions or comments about this Privacy Policy, please contact us at:
                 </p>
@@ -666,24 +1046,24 @@
     <!-- Terms and Conditions Section -->
     <section id="terms-section" class="inactive-section py-12">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-yellow-400 game-title mb-8">Terms and Conditions</h2>
+            <h2 class="text-4xl font-bold text-center text-blue-400 game-title mb-8">Terms and Conditions</h2>
             
             <div class="policy-content">
-                <p class="mb-4">Last updated: May 15, 2023</p>
+                <p class="mb-4">Last updated: November 15, 2023</p>
                 
-                <h3 class="text-xl font-bold text-yellow-400 mb-4">1. Agreement to Terms</h3>
+                <h3 class="text-xl font-bold text-blue-400 mb-4">1. Agreement to Terms</h3>
                 <p class="mb-4">
                     By accessing this website, you are agreeing to be bound by these Terms and Conditions of Use, all applicable laws and regulations,
                     and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you
                     are prohibited from using or accessing this site.
                 </p>
                 
-                <h3 class="text-xl font-bold text-yellow-400 mb-4">2. Intellectual Property</h3>
+                <h3 class="text-xl font-bold text-blue-400 mb-4">2. Intellectual Property</h3>
                 <p class="mb-4">
-                    The materials on this site, including but not limited to the logo, design, text, graphics, and code created specifically for this fan recreation are protected by applicable copyright and trademark law.
+                    The materials on this site, including but not limited to the logo, design, text, graphics, and code created specifically for Sky Glider are protected by applicable copyright and trademark law.
                 </p>
                 
-                <h3 class="text-xl font-bold text-yellow-400 mb-4">3. User License</h3>
+                <h3 class="text-xl font-bold text-blue-400 mb-4">3. User License</h3>
                 <p class="mb-4">
                     Permission is granted to temporarily access the materials on our website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
                 </p>
@@ -698,17 +1078,30 @@
                     This license shall automatically terminate if you violate any of these restrictions and may be terminated by us at any time.
                 </p>
                 
-                <h3 class="text-xl font-bold text-yellow-400 mb-4">4. Disclaimer</h3>
+                <h3 class="text-xl font-bold text-blue-400 mb-4">4. User Representations</h3>
+                <p class="mb-4">
+                    By using the Site, you represent and warrant that:
+                </p>
+                <ul class="list-disc pl-6 mb-4">
+                    <li>All registration information you submit will be true, accurate, current, and complete;</li>
+                    <li>You will maintain the accuracy of such information and promptly update such registration information as necessary;</li>
+                    <li>You have the legal capacity and you agree to comply with these Terms of Use;</li>
+                    <li>You are not a minor in the jurisdiction in which you reside, or if a minor, you have received parental permission to use the Site;</li>
+                    <li>You will not use the Site for any illegal or unauthorized purpose;</li>
+                    <li>Your use of the Site will not violate any applicable law or regulation.</li>
+                </ul>
+                
+                <h3 class="text-xl font-bold text-blue-400 mb-4">5. Disclaimer</h3>
                 <p class="mb-4">
                     The materials on our website are provided on an 'as is' basis. We make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
                 </p>
                 
-                <h3 class="text-xl font-bold text-yellow-400 mb-4">5. Limitations</h3>
+                <h3 class="text-xl font-bold text-blue-400 mb-4">6. Limitations</h3>
                 <p class="mb-4">
                     In no event shall we or our suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website, even if we or an authorized representative has been notified orally or in writing of the possibility of such damage.
                 </p>
                 
-                <h3 class="text-xl font-bold text-yellow-400 mb-4">6. Contact Us</h3>
+                <h3 class="text-xl font-bold text-blue-400 mb-4">7. Contact Us</h3>
                 <p class="mb-4">
                     If you have any questions about these Terms and Conditions, please contact us:
                 </p>
@@ -726,21 +1119,35 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-6 md:mb-0">
-                    <h2 class="text-2xl text-yellow-400 game-title">FlappyBird</h2>
+                    <h2 class="text-2xl text-blue-400 game-title">SkyGlider</h2>
                     <p class="text-sm text-gray-400">© 2023 All rights reserved.</p>
                 </div>
                 <div class="flex flex-wrap justify-center md:justify-end">
-                    <button data-target="game-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-yellow-400">Game</button>
-                    <button data-target="about-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-yellow-400">About</button>
-                    <button data-target="blog-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-yellow-400">Blog</button>
-                    <button data-target="faq-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-yellow-400">FAQ</button>
-                    <button data-target="privacy-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-yellow-400">Privacy Policy</button>
-                    <button data-target="terms-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-yellow-400">Terms</button>
+                    <button data-target="game-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-blue-400">Game</button>
+                    <button data-target="about-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-blue-400">About</button>
+                    <button data-target="blog-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-blue-400">Blog</button>
+                    <button data-target="faq-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-blue-400">FAQ</button>
+                    <button data-target="privacy-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-blue-400">Privacy Policy</button>
+                    <button data-target="terms-section" class="px-3 py-1 mx-1 text-sm text-gray-300 hover:text-blue-400">Terms</button>
                 </div>
             </div>
             <div class="mt-6 text-center">
+                <div class="flex justify-center space-x-4 mb-4">
+                    <a href="#" class="text-gray-400 hover:text-blue-400" aria-label="Facebook">
+                        <i class="fab fa-facebook-square text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400" aria-label="Twitter">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400" aria-label="Instagram">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                </div>
                 <p class="text-sm text-gray-400">
-                    Created by <strong>Sarthak Sharma</strong> | <a href="mailto:sarthaks42388434@gmail.com" class="text-yellow-400 hover:underline">sarthaks42388434@gmail.com</a> | Satna, Madhya Pradesh, India
+                    Created by <strong>Sarthak Sharma</strong> | <a href="mailto:sarthaks42388434@gmail.com" class="text-blue-400 hover:underline">sarthaks42388434@gmail.com</a> | Satna, Madhya Pradesh, India
                 </p>
             </div>
         </div>
@@ -811,7 +1218,7 @@
                 });
             });
             
-            // Flappy Bird Game
+            // Sky Glider Game
             const canvas = document.getElementById('game-canvas');
             const ctx = canvas.getContext('2d');
             const startMessage = document.getElementById('start-message');
@@ -821,55 +1228,54 @@
             const finalScoreElement = document.getElementById('final-score');
             
             // Game variables
-            let bird = {
+            let glider = {
                 x: 50,
                 y: canvas.height / 2,
                 width: 34,
                 height: 24,
                 gravity: 0.5,
                 velocity: 0,
-                jump: -10
+                lift: -10
             };
             
-            let pipes = [];
+            let obstacles = [];
             let score = 0;
             let gameStarted = false;
             let gameOver = false;
-            const pipeWidth = 52;
+            const obstacleWidth = 52;
             const gapHeight = 180;
-            const pipeColor = '#74BF2E';
+            const obstacleColor = '#3498db';
             const skyColor = '#70C5CE';
             const groundColor = '#DED895';
             const groundHeight = 112;
             
-            // Bird colors
-            const birdColors = {
-                body: '#FFFF00',
-                wing: '#FF6600',
-                eye: '#FFFFFF',
-                pupil: '#000000',
-                beak: '#FF6600'
+            // Glider colors
+            const gliderColors = {
+                body: '#f39c12',
+                wing: '#e74c3c',
+                tail: '#FFFFFF',
+                cockpit: '#34495e'
             };
             
             // Game initialization
             function init() {
-                bird.y = canvas.height / 2;
-                bird.velocity = 0;
-                pipes = [];
+                glider.y = canvas.height / 2;
+                glider.velocity = 0;
+                obstacles = [];
                 score = 0;
                 gameOver = false;
                 
-                // Add first pipe
-                addPipe();
+                // Add first obstacle
+                addObstacle();
             }
             
-            // Add new pipe
-            function addPipe() {
+            // Add new obstacle
+            function addObstacle() {
                 const minHeight = 50;
                 const maxHeight = canvas.height - groundHeight - gapHeight - minHeight;
                 const height = Math.floor(Math.random() * (maxHeight - minHeight + 1)) + minHeight;
                 
-                pipes.push({
+                obstacles.push({
                     x: canvas.width,
                     topHeight: height,
                     bottomY: height + gapHeight,
@@ -877,67 +1283,64 @@
                 });
             }
             
-            // Draw bird
-            function drawBird() {
+            // Draw glider
+            function drawGlider() {
                 ctx.save();
-                ctx.translate(bird.x + bird.width / 2, bird.y + bird.height / 2);
+                ctx.translate(glider.x + glider.width / 2, glider.y + glider.height / 2);
                 
-                // Rotate bird based on velocity
-                const rotation = Math.min(Math.max(bird.velocity / 10, -0.5), 0.5);
+                // Rotate glider based on velocity
+                const rotation = Math.min(Math.max(glider.velocity / 10, -0.5), 0.5);
                 ctx.rotate(rotation);
                 
-                // Draw bird body
-                ctx.fillStyle = birdColors.body;
+                // Draw glider body
+                ctx.fillStyle = gliderColors.body;
                 ctx.beginPath();
-                ctx.ellipse(0, 0, bird.width / 2, bird.height / 2, 0, 0, Math.PI * 2);
+                ctx.ellipse(0, 0, glider.width / 2, glider.height / 3, 0, 0, Math.PI * 2);
                 ctx.fill();
                 
-                // Draw wing
-                ctx.fillStyle = birdColors.wing;
+                // Draw glider wing
+                ctx.fillStyle = gliderColors.wing;
                 ctx.beginPath();
-                ctx.ellipse(-5, 5, 10, 6, 0, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Draw eye
-                ctx.fillStyle = birdColors.eye;
-                ctx.beginPath();
-                ctx.arc(8, -5, 5, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Draw pupil
-                ctx.fillStyle = birdColors.pupil;
-                ctx.beginPath();
-                ctx.arc(10, -5, 2, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Draw beak
-                ctx.fillStyle = birdColors.beak;
-                ctx.beginPath();
-                ctx.moveTo(15, 0);
-                ctx.lineTo(25, -3);
-                ctx.lineTo(25, 3);
+                ctx.moveTo(-10, -2);
+                ctx.lineTo(5, -2);
+                ctx.lineTo(0, -15);
                 ctx.closePath();
+                ctx.fill();
+                
+                // Draw glider tail
+                ctx.fillStyle = gliderColors.tail;
+                ctx.beginPath();
+                ctx.moveTo(-15, -1);
+                ctx.lineTo(-10, -1);
+                ctx.lineTo(-15, -8);
+                ctx.closePath();
+                ctx.fill();
+                
+                // Draw glider cockpit
+                ctx.fillStyle = gliderColors.cockpit;
+                ctx.beginPath();
+                ctx.arc(8, 0, 3, 0, Math.PI * 2);
                 ctx.fill();
                 
                 ctx.restore();
             }
             
-            // Draw pipes
-            function drawPipes() {
-                pipes.forEach(pipe => {
-                    // Top pipe
-                    ctx.fillStyle = pipeColor;
-                    ctx.fillRect(pipe.x, 0, pipeWidth, pipe.topHeight);
+            // Draw obstacles
+            function drawObstacles() {
+                obstacles.forEach(obstacle => {
+                    // Top obstacle
+                    ctx.fillStyle = obstacleColor;
+                    ctx.fillRect(obstacle.x, 0, obstacleWidth, obstacle.topHeight);
                     
-                    // Bottom pipe
-                    ctx.fillRect(pipe.x, pipe.bottomY, pipeWidth, canvas.height - pipe.bottomY - groundHeight);
+                    // Bottom obstacle
+                    ctx.fillRect(obstacle.x, obstacle.bottomY, obstacleWidth, canvas.height - obstacle.bottomY - groundHeight);
                     
-                    // Pipe caps (top)
-                    ctx.fillStyle = '#528D1E';
-                    ctx.fillRect(pipe.x - 2, pipe.topHeight - 10, pipeWidth + 4, 10);
+                    // Obstacle caps (top)
+                    ctx.fillStyle = '#2980b9';
+                    ctx.fillRect(obstacle.x - 2, obstacle.topHeight - 10, obstacleWidth + 4, 10);
                     
-                    // Pipe caps (bottom)
-                    ctx.fillRect(pipe.x - 2, pipe.bottomY, pipeWidth + 4, 10);
+                    // Obstacle caps (bottom)
+                    ctx.fillRect(obstacle.x - 2, obstacle.bottomY, obstacleWidth + 4, 10);
                 });
             }
             
@@ -955,7 +1358,12 @@
             
             // Draw sky
             function drawSky() {
-                ctx.fillStyle = skyColor;
+                // Create sky gradient
+                const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height - groundHeight);
+                skyGradient.addColorStop(0, '#1a75ff');
+                skyGradient.addColorStop(1, '#70C5CE');
+                
+                ctx.fillStyle = skyGradient;
                 ctx.fillRect(0, 0, canvas.width, canvas.height - groundHeight);
                 
                 // Clouds
@@ -971,12 +1379,25 @@
                 ctx.arc(270, 110, 20, 0, Math.PI * 2);
                 ctx.arc(290, 125, 10, 0, Math.PI * 2);
                 ctx.fill();
+                
+                // Distant mountains
+                ctx.fillStyle = '#2c3e50';
+                ctx.beginPath();
+                ctx.moveTo(0, canvas.height - groundHeight - 40);
+                ctx.lineTo(60, canvas.height - groundHeight - 120);
+                ctx.lineTo(150, canvas.height - groundHeight - 50);
+                ctx.lineTo(220, canvas.height - groundHeight - 100);
+                ctx.lineTo(320, canvas.height - groundHeight - 70);
+                ctx.lineTo(320, canvas.height - groundHeight);
+                ctx.lineTo(0, canvas.height - groundHeight);
+                ctx.closePath();
+                ctx.fill();
             }
             
             // Draw score
             function drawScore() {
                 ctx.fillStyle = 'white';
-                ctx.font = '30px "Press Start 2P"';
+                ctx.font = '30px "Exo 2"';
                 ctx.textAlign = 'center';
                 ctx.fillText(score.toString(), canvas.width / 2, 50);
             }
@@ -985,50 +1406,50 @@
             function update() {
                 if (!gameStarted || gameOver) return;
                 
-                // Update bird position
-                bird.velocity += bird.gravity;
-                bird.y += bird.velocity;
+                // Update glider position
+                glider.velocity += glider.gravity;
+                glider.y += glider.velocity;
                 
                 // Check for collisions with ground
-                if (bird.y + bird.height > canvas.height - groundHeight) {
-                    bird.y = canvas.height - groundHeight - bird.height;
+                if (glider.y + glider.height > canvas.height - groundHeight) {
+                    glider.y = canvas.height - groundHeight - glider.height;
                     endGame();
                 }
                 
                 // Check for collision with ceiling
-                if (bird.y < 0) {
-                    bird.y = 0;
-                    bird.velocity = 0;
+                if (glider.y < 0) {
+                    glider.y = 0;
+                    glider.velocity = 0;
                 }
                 
-                // Update pipes
-                pipes.forEach((pipe, index) => {
-                    pipe.x -= 2;
+                // Update obstacles
+                obstacles.forEach((obstacle, index) => {
+                    obstacle.x -= 2;
                     
-                    // Check for collisions with pipes
+                    // Check for collisions with obstacles
                     if (
-                        bird.x + bird.width > pipe.x &&
-                        bird.x < pipe.x + pipeWidth &&
-                        (bird.y < pipe.topHeight || bird.y + bird.height > pipe.bottomY)
+                        glider.x + glider.width > obstacle.x &&
+                        glider.x < obstacle.x + obstacleWidth &&
+                        (glider.y < obstacle.topHeight || glider.y + glider.height > obstacle.bottomY)
                     ) {
                         endGame();
                     }
                     
                     // Check for score
-                    if (!pipe.counted && pipe.x + pipeWidth < bird.x) {
+                    if (!obstacle.counted && obstacle.x + obstacleWidth < glider.x) {
                         score++;
-                        pipe.counted = true;
+                        obstacle.counted = true;
                     }
                     
-                    // Remove pipes that are off screen
-                    if (pipe.x + pipeWidth < 0) {
-                        pipes.splice(index, 1);
+                    // Remove obstacles that are off screen
+                    if (obstacle.x + obstacleWidth < 0) {
+                        obstacles.splice(index, 1);
                     }
                 });
                 
-                // Add new pipe when needed
-                if (pipes.length === 0 || pipes[pipes.length - 1].x < canvas.width - 200) {
-                    addPipe();
+                // Add new obstacle when needed
+                if (obstacles.length === 0 || obstacles[obstacles.length - 1].x < canvas.width - 200) {
+                    addObstacle();
                 }
             }
             
@@ -1046,9 +1467,9 @@
                 
                 // Draw background
                 drawSky();
-                drawPipes();
+                drawObstacles();
                 drawGround();
-                drawBird();
+                drawGlider();
                 
                 if (gameStarted) {
                     drawScore();
@@ -1063,7 +1484,7 @@
             }
             
             // Event listeners
-            function jump() {
+            function lift() {
                 if (gameOver) return;
                 
                 if (!gameStarted) {
@@ -1071,14 +1492,14 @@
                     startMessage.classList.add('hidden');
                     init();
                 } else {
-                    bird.velocity = bird.jump;
+                    glider.velocity = glider.lift;
                 }
             }
             
-            canvas.addEventListener('click', jump);
+            canvas.addEventListener('click', lift);
             document.addEventListener('keydown', function(e) {
                 if (e.code === 'Space') {
-                    jump();
+                    lift();
                     e.preventDefault();
                 }
             });
