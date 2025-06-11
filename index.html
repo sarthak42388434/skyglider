@@ -1,1811 +1,1546 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Play Sky Glider - a fun online arcade game with articles, achievements, and more.">
-    <meta name="google-adsense-account" content="ca-pub-1155904007929319">
-    <meta name="google-site-verification" content="t6czsEAivctYtHdTsyiY-E2ETHljeyxObumlQToXqRs" />
-
-    <title>Sky Glider - Free Online Arcade Game</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1155904007929319"
-     crossorigin="anonymous"></script>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L3ZDPCNLG2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-L3ZDPCNLG2');
-</script>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #4c6ef5;
-            --primary-dark: #3b5bdb;
-            --secondary: #38b2ac;
-            --dark: #1a202c;
-            --light: #f7fafc;
-            --danger: #e53e3e;
-            --success: #38a169;
-            --warning: #ed8936;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
-            color: var(--dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        .game-title, .section-title {
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        /* Game Canvas */
-        #game-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            height: 500px;
-            margin: 0 auto;
-            overflow: hidden;
-            background: linear-gradient(180deg, #87CEEB 0%, #1E90FF 100%);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        #game-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-        
-        .game-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            z-index: 2;
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-        
-        /* Game Controls */
-        .game-controls {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 2;
-        }
-        
-        .control-btn {
-            background-color: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            margin-left: 5px;
-            cursor: pointer;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .control-btn:hover {
-            background-color: rgba(255, 255, 255, 0.4);
-        }
-        
-        /* Game Interface */
-        .game-interface {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 2;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-        
-        .score-display {
-            font-size: 24px;
-            font-weight: bold;
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        /* Sound Settings Panel */
-        #sound-settings {
-            position: absolute;
-            top: 60px;
-            right: 10px;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            z-index: 3;
-            width: 250px;
-        }
-        
-        .settings-title {
-            color: var(--dark);
-            font-weight: bold;
-            margin-bottom: 10px;
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .volume-control {
-            margin-bottom: 10px;
-        }
-        
-        .volume-label {
-            display: flex;
-            justify-content: space-between;
-            color: var(--dark);
-            margin-bottom: 5px;
-        }
-        
-        .slider {
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: #ddd;
-            outline: none;
-            -webkit-appearance: none;
-        }
-        
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--primary);
-            cursor: pointer;
-        }
-        
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
-        
-        /* Modal */
-        .modal {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-        }
-        
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            max-width: 800px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        
-        .close-modal {
-            float: right;
-            font-size: 24px;
-            cursor: pointer;
-            color: #666;
-        }
-        
-        /* Fix for mobile */
-        @media (max-width: 768px) {
-            #game-container {
-                height: 350px;
-            }
-            
-            .modal-content {
-                width: 95%;
-                padding: 20px;
-            }
-        }
-        
-        /* Article styling */
-        .article-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .article-content h2 {
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .article-content h3 {
-            color: var(--dark);
-            margin: 20px 0 10px;
-        }
-        
-        .article-content p {
-            margin-bottom: 15px;
-        }
-        
-        /* Navigation */
-        .nav-item {
-            position: relative;
-        }
-        
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            border-radius: 4px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            min-width: 200px;
-            display: none;
-            z-index: 10;
-        }
-        
-        .nav-item:hover .dropdown-menu {
-            display: block;
-        }
-        
-        @media (max-width: 768px) {
-            .dropdown-menu {
-                position: static;
-                box-shadow: none;
-                min-width: auto;
-                display: none;
-            }
-            
-            .nav-item.active .dropdown-menu {
-                display: block;
-            }
-        }
-        
-        /* Achievements */
-        .achievement {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .achievement-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        
-        .achievement-details h4 {
-            margin: 0;
-            font-weight: 600;
-        }
-        
-        .achievement-details p {
-            margin: 5px 0 0;
-            color: #666;
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header class="bg-white shadow-md">
-        <div class="container mx-auto px-4">
-            <nav class="flex items-center justify-between py-4">
-                <div class="flex items-center">
-                    <a href="#" class="text-2xl font-bold text-blue-600 game-title">Sky Glider</a>
-                </div>
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex space-x-6">
-                    <a href="#game" class="hover:text-blue-600 transition">Play Game</a>
-                    <div class="nav-item">
-                        <a href="#articles" class="hover:text-blue-600 transition">Articles</a>
-                        <div class="dropdown-menu p-2">
-                            <a href="#article1" class="block py-2 px-3 hover:bg-blue-100 rounded">Evolution of Endless Runners</a>
-                            <a href="#article2" class="block py-2 px-3 hover:bg-blue-100 rounded">Psychology of Arcade Games</a>
-                            <a href="#article3" class="block py-2 px-3 hover:bg-blue-100 rounded">Game Design Principles</a>
-                            <a href="#articles" class="block py-2 px-3 hover:bg-blue-100 rounded">View All Articles</a>
-                        </div>
-                    </div>
-                    <a href="#achievements" class="hover:text-blue-600 transition">Achievements</a>
-                    <a href="#leaderboard" class="hover:text-blue-600 transition">Leaderboard</a>
-                    <div class="nav-item">
-                        <a href="#" class="hover:text-blue-600 transition">About</a>
-                        <div class="dropdown-menu p-2">
-                            <a href="#about" class="block py-2 px-3 hover:bg-blue-100 rounded">About Us</a>
-                            <a href="#privacy" class="block py-2 px-3 hover:bg-blue-100 rounded">Privacy Policy</a>
-                            <a href="#terms" class="block py-2 px-3 hover:bg-blue-100 rounded">Terms of Use</a>
-                            <a href="#contact" class="block py-2 px-3 hover:bg-blue-100 rounded">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Mobile Navigation Toggle -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </nav>
-            
-            <!-- Mobile Navigation Menu -->
-            <div id="mobile-menu" class="hidden md:hidden pb-4">
-                <a href="#game" class="block py-2 hover:text-blue-600">Play Game</a>
-                <div class="nav-item">
-                    <a href="#articles" class="block py-2 hover:text-blue-600 mobile-dropdown">
-                        Articles <i class="fas fa-chevron-down ml-1"></i>
-                    </a>
-                    <div class="dropdown-menu px-4 py-2">
-                        <a href="#article1" class="block py-2 hover:text-blue-600">Evolution of Endless Runners</a>
-                        <a href="#article2" class="block py-2 hover:text-blue-600">Psychology of Arcade Games</a>
-                        <a href="#article3" class="block py-2 hover:text-blue-600">Game Design Principles</a>
-                        <a href="#articles" class="block py-2 hover:text-blue-600">View All Articles</a>
-                    </div>
-                </div>
-                <a href="#achievements" class="block py-2 hover:text-blue-600">Achievements</a>
-                <a href="#leaderboard" class="block py-2 hover:text-blue-600">Leaderboard</a>
-                <div class="nav-item">
-                    <a href="#" class="block py-2 hover:text-blue-600 mobile-dropdown">
-                        About <i class="fas fa-chevron-down ml-1"></i>
-                    </a>
-                    <div class="dropdown-menu px-4 py-2">
-                        <a href="#about" class="block py-2 hover:text-blue-600">About Us</a>
-                        <a href="#privacy" class="block py-2 hover:text-blue-600">Privacy Policy</a>
-                        <a href="#terms" class="block py-2 hover:text-blue-600">Terms of Use</a>
-                        <a href="#contact" class="block py-2 hover:text-blue-600">Contact Us</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-500 to-purple-600 py-16 text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 game-title">Sky Glider</h1>
-            <p class="text-xl mb-8">Experience the thrill of gliding through the sky in our free online arcade game!</p>
-            <a href="#game" class="bg-white text-blue-600 font-bold py-3 px-8 rounded-full hover:bg-blue-100 transition duration-300 inline-block">Play Now</a>
-        </div>
-    </section>
-
-    <!-- Game Section -->
-    <section id="game" class="py-16 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 section-title">Play Sky Glider</h2>
-            
-            <div id="game-container" class="cursor-pointer">
-                <!-- Game Interface -->
-                <div class="game-interface">
-                    <div class="score-display">Score: <span id="score">0</span></div>
-                </div>
-                
-                <!-- Game Controls -->
-                <div class="game-controls">
-                    <button id="pause-btn" class="control-btn"><i class="fas fa-pause"></i></button>
-                    <button id="sound-btn" class="control-btn"><i class="fas fa-volume-up"></i></button>
-                    <button id="settings-btn" class="control-btn"><i class="fas fa-cog"></i></button>
-                </div>
-                
-                <!-- Sound Settings Panel -->
-                <div id="sound-settings" class="hidden">
-                    <h3 class="settings-title">Sound Settings</h3>
-                    <div class="volume-control">
-                        <div class="volume-label">
-                            <span>Music</span>
-                            <span id="music-percentage">50%</span>
-                        </div>
-                        <input type="range" min="0" max="100" value="50" class="slider" id="music-volume">
-                    </div>
-                    <div class="volume-control">
-                        <div class="volume-label">
-                            <span>Sound FX</span>
-                            <span id="sfx-percentage">70%</span>
-                        </div>
-                        <input type="range" min="0" max="100" value="70" class="slider" id="sfx-volume">
-                    </div>
-                </div>
-                
-                <!-- Game Canvas -->
-                <canvas id="game-canvas"></canvas>
-                
-                <!-- Game Start Overlay -->
-                <div id="start-overlay" class="game-overlay">
-                    <h2 class="text-3xl mb-4">Sky Glider</h2>
-                    <p class="mb-6">Click or Press Spacebar to Start</p>
-                    <div class="animate-bounce">
-                        <i class="fas fa-arrow-down text-2xl"></i>
-                    </div>
-                </div>
-                
-                <!-- Game Paused Overlay -->
-                <div id="pause-overlay" class="game-overlay hidden">
-                    <h2 class="text-3xl mb-4">Game Paused</h2>
-                    <p class="mb-6">Click or Press Spacebar to Resume</p>
-                </div>
-                
-                <!-- Game Over Overlay -->
-                <div id="gameover-overlay" class="game-overlay hidden">
-                    <h2 class="text-3xl mb-4">Game Over</h2>
-                    <p class="text-xl mb-2">Score: <span id="final-score">0</span></p>
-                    <div id="new-highscore" class="mb-4 hidden">
-                        <p class="text-yellow-300 text-xl font-bold mb-2">New High Score!</p>
-                        <div class="mb-4">
-                            <input type="text" id="player-name" placeholder="Enter your name" class="px-3 py-2 rounded text-black">
-                            <button id="save-score" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded ml-2">Save</button>
-                        </div>
-                    </div>
-                    <button id="restart-btn" class="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-full mb-4">Play Again</button>
-                    <button id="share-btn" class="bg-green-500 hover:bg-green-600 px-6 py-2 rounded-full">Share Score</button>
-                </div>
-            </div>
-            
-            <div class="max-w-2xl mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-bold mb-4">How to Play Sky Glider:</h3>
-                <ul class="list-disc pl-6 space-y-2">
-                    <li>Click the screen or press the spacebar to make the glider soar upward</li>
-                    <li>Navigate carefully through the obstacles without hitting them</li>
-                    <li>Each obstacle you successfully pass gives you one point</li>
-                    <li>Challenge yourself to beat your high score with each attempt</li>
-                    <li>The game gets progressively more challenging as you advance</li>
-                    <li>Use the pause button to take a break anytime</li>
-                    <li>Toggle music and sound effects with the control buttons</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Achievements Section -->
-    <section id="achievements" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 section-title">Achievements</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="achievement">
-                    <div class="achievement-icon">
-                        <i class="fas fa-feather"></i>
-                    </div>
-                    <div class="achievement-details">
-                        <h4>Beginner Glider</h4>
-                        <p>Score 10+ points</p>
-                        <small>Take your first steps in the sky</small>
-                    </div>
-                </div>
-                
-                <div class="achievement">
-                    <div class="achievement-icon">
-                        <i class="fas fa-compass"></i>
-                    </div>
-                    <div class="achievement-details">
-                        <h4>Sky Navigator</h4>
-                        <p>Score 25+ points</p>
-                        <small>Mastering the air currents</small>
-                    </div>
-                </div>
-                
-                <div class="achievement">
-                    <div class="achievement-icon">
-                        <i class="fas fa-paper-plane"></i>
-                    </div>
-                    <div class="achievement-details">
-                        <h4>Expert Pilot</h4>
-                        <p>Score 50+ points</p>
-                        <small>Show remarkable flying skills</small>
-                    </div>
-                </div>
-                
-                <div class="achievement">
-                    <div class="achievement-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <div class="achievement-details">
-                        <h4>Sky Master</h4>
-                        <p>Score 100+ points</p>
-                        <small>Become a legend of the skies</small>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-12 text-center">
-                <h3 class="text-2xl font-bold mb-4">Why Players Love Sky Glider</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-                    <div class="p-6 bg-gray-50 rounded-lg">
-                        <i class="fas fa-gamepad text-blue-500 text-3xl mb-4"></i>
-                        <h4 class="font-bold mb-2">Simple Yet Challenging</h4>
-                        <p>Easy to learn but difficult to master</p>
-                    </div>
-                    
-                    <div class="p-6 bg-gray-50 rounded-lg">
-                        <i class="fas fa-clock text-blue-500 text-3xl mb-4"></i>
-                        <h4 class="font-bold mb-2">Quick Play Sessions</h4>
-                        <p>Perfect for short breaks</p>
-                    </div>
-                    
-                    <div class="p-6 bg-gray-50 rounded-lg">
-                        <i class="fas fa-redo text-blue-500 text-3xl mb-4"></i>
-                        <h4 class="font-bold mb-2">Addictive Gameplay</h4>
-                        <p>The "just one more try" factor</p>
-                    </div>
-                    
-                    <div class="p-6 bg-gray-50 rounded-lg">
-                        <i class="fas fa-users text-blue-500 text-3xl mb-4"></i>
-                        <h4 class="font-bold mb-2">For Everyone</h4>
-                        <p>Accessible for all ages</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Leaderboard Section -->
-    <section id="leaderboard" class="py-16 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 section-title">Leaderboard</h2>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-bold mb-4">Top Players</h3>
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center border-b pb-2">
-                            <span class="font-medium">1. JetGlider92</span>
-                            <span class="text-blue-600 font-bold">183</span>
-                        </div>
-                        <div class="flex justify-between items-center border-b pb-2">
-                            <span class="font-medium">2. SkyMaster</span>
-                            <span class="text-blue-600 font-bold">147</span>
-                        </div>
-                        <div class="flex justify-between items-center border-b pb-2">
-                            <span class="font-medium">3. CloudRider</span>
-                            <span class="text-blue-600 font-bold">132</span>
-                        </div>
-                        <div class="flex justify-between items-center border-b pb-2">
-                            <span class="font-medium">4. AirGlide55</span>
-                            <span class="text-blue-600 font-bold">128</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">5. WindSurfer</span>
-                            <span class="text-blue-600 font-bold">119</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-bold mb-4">Your Personal Best</h3>
-                    <div class="text-center py-4">
-                        <span class="block text-5xl font-bold text-blue-600 mb-2" id="personal-best">0</span>
-                        <span class="text-gray-600">Try to beat your record!</span>
-                    </div>
-                    <div class="mt-4">
-                        <h4 class="font-medium mb-2">Your Recent Scores</h4>
-                        <div class="space-y-2" id="recent-scores">
-                            <div class="flex justify-between items-center text-sm text-gray-600">
-                                <span>No recent scores</span>
-                                <span>-</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-bold mb-4">Weekly Challenge</h3>
-                    <p class="mb-4">Can you reach the target score before the week ends?</p>
-                    <div class="mb-6">
-                        <span class="block text-lg font-medium mb-2">Current Challenge: Reach 50 points</span>
-                        <div class="relative pt-1">
-                            <div class="flex mb-2 items-center justify-between">
-                                <div>
-                                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200">
-                                        Progress
-                                    </span>
-                                </div>
-                                <div class="text-right">
-                                    <span class="text-xs font-semibold inline-block text-blue-600">
-                                        0/50 points
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200">
-                                <div style="width:0%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-600">Challenge ends in: 6 days, 23 hours</p>
-                    </div>
-                    <div class="text-center">
-                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Accept Challenge</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-12 text-center">
-                <h3 class="text-2xl font-bold mb-4">Challenge Your Friends!</h3>
-                <p class="max-w-2xl mx-auto mb-6">Share your high scores on social media and challenge your friends. Sky Glider is perfect for friendly competitions and seeing who has the best reflexes.</p>
-                <div class="flex justify-center space-x-4">
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full">
-                        <i class="fab fa-facebook-f mr-2"></i> Share on Facebook
-                    </button>
-                    <button class="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded-full">
-                        <i class="fab fa-twitter mr-2"></i> Share on Twitter
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Articles Section -->
-    <section id="articles" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 section-title">Game Articles</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Article 1 -->
-                <div id="article1" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">The Evolution of Endless Runner Games</h3>
-                        <p class="text-gray-600 mb-4">Explore the fascinating history and evolution of endless runner games from their humble beginnings to modern mobile hits.</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article1-content">Read More</button>
-                    </div>
-                </div>
-                
-                <!-- Article 2 -->
-                <div id="article2" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">The Psychology Behind Addictive Arcade Games</h3>
-                        <p class="text-gray-600 mb-4">Understand the psychological principles that make arcade games so engaging and why we can't stop playing "just one more round."</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article2-content">Read More</button>
-                    </div>
-                </div>
-                
-                <!-- Article 3 -->
-                <div id="article3" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">Principles of Good Game Design for Casual Games</h3>
-                        <p class="text-gray-600 mb-4">Learn the essential design principles that make casual games like Sky Glider both accessible and challenging for players of all ages.</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article3-content">Read More</button>
-                    </div>
-                </div>
-                
-                <!-- Article 4 -->
-                <div id="article4" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">Advanced Strategies for Sky Glider Masters</h3>
-                        <p class="text-gray-600 mb-4">Take your Sky Glider skills to the next level with these expert tips, strategies, and techniques for achieving top scores.</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article4-content">Read More</button>
-                    </div>
-                </div>
-                
-                <!-- Article 5 -->
-                <div id="article5" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">The Physics of Sky Gliding Games</h3>
-                        <p class="text-gray-600 mb-4">Discover the fascinating physics principles behind sky gliding games and how developers create realistic yet fun flight mechanics.</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article5-content">Read More</button>
-                    </div>
-                </div>
-                
-                <!-- Article 6 -->
-                <div id="article6" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">The History of Arcade Gaming</h3>
-                        <p class="text-gray-600 mb-4">Journey through the rich history of arcade gaming from the classic cabinets of the 1970s to the modern digital arcades of today.</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article6-content">Read More</button>
-                    </div>
-                </div>
-                
-                <!-- Article 7 -->
-                <div id="article7" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">The Art and Science of Game Level Design</h3>
-                        <p class="text-gray-600 mb-4">Explore how game designers craft engaging levels that challenge players while keeping them motivated to continue playing.</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article7-content">Read More</button>
-                    </div>
-                </div>
-                
-                <!-- Article 8 -->
-                <div id="article8" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">The Impact of Music in Video Games</h3>
-                        <p class="text-gray-600 mb-4">Understand how music and sound design contribute to the overall gaming experience and why they're crucial for player immersion.</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article8-content">Read More</button>
-                    </div>
-                </div>
-                
-                <!-- Article 9 -->
-                <div id="article9" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">Mobile Gaming: Past, Present, and Future</h3>
-                        <p class="text-gray-600 mb-4">Explore the evolution of mobile gaming, current trends, and what the future might hold for games like Sky Glider.</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article9-content">Read More</button>
-                    </div>
-                </div>
-                
-                <!-- Article 10 -->
-                <div id="article10" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">Game Accessibility: Making Games for Everyone</h3>
-                        <p class="text-gray-600 mb-4">Learn about the importance of accessibility in game design and how developers can create games that everyone can enjoy.</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article10-content">Read More</button>
-                    </div>
-                </div>
-                
-                <!-- Article 11 -->
-                <div id="article11" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">The Rise of HTML5 Browser Games</h3>
-                        <p class="text-gray-600 mb-4">Discover how HTML5 technology revolutionized browser-based gaming and enabled experiences like Sky Glider without plugins.</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article11-content">Read More</button>
-                    </div>
-                </div>
-                
-                <!-- Article 12 -->
-                <div id="article12" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">Gamification: Beyond Entertainment</h3>
-                        <p class="text-gray-600 mb-4">Explore how game mechanics are being used in non-gaming contexts to increase engagement and motivation in various fields.</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article12-content">Read More</button>
-                    </div>
-                </div>
-                
-                <!-- Article 13 -->
-                <div id="article13" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">The Power of Game Communities</h3>
-                        <p class="text-gray-600 mb-4">Learn how online gaming communities form around popular games and the positive impact they can have on player experience.</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article13-content">Read More</button>
-                    </div>
-                </div>
-                
-                <!-- Article 14 -->
-                <div id="article14" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">Game Development for Beginners</h3>
-                        <p class="text-gray-600 mb-4">Get started with game development with this beginner-friendly guide covering essential concepts and tools for creating your first game.</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article14-content">Read More</button>
-                    </div>
-                </div>
-                
-                <!-- Article 15 -->
-                <div id="article15" class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-3">The Benefits of Gaming for Cognitive Skills</h3>
-                        <p class="text-gray-600 mb-4">Explore the scientific research on how games like Sky Glider can improve reaction time, focus, and other cognitive abilities.</p>
-                        <button class="read-more-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" data-article="article15-content">Read More</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Us Section -->
-    <section id="about" class="py-16 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 section-title">About Us</h2>
-            
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-white rounded-lg shadow-md p-8 mb-8">
-                    <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
-                    <p class="mb-4">At Sky Glider, our mission is to create entertaining, accessible games that bring joy to players of all ages around the world. We believe that great games don't need to be complicated or expensive – they just need to be fun!</p>
-                    <p>We're passionate about creating games that anyone can pick up and enjoy, whether you have 5 minutes or 5 hours to play. Our focus is on polished, engaging experiences with that perfect "just one more try" factor that keeps players coming back.</p>
-                </div>
-                
-                <div class="bg-white rounded-lg shadow-md p-8">
-                    <h3 class="text-2xl font-bold mb-4">Our Game Development Journey</h3>
-                    <p class="mb-4">Sky Glider began as a passion project by a small team of indie developers who wanted to create a modern browser-based game that captured the addictive simplicity of classic arcade titles while offering a fresh experience.</p>
-                    <p class="mb-4">We focused on creating smooth, responsive controls and a difficulty curve that provides just the right amount of challenge. After months of development and playtesting, we're proud to share Sky Glider with the world!</p>
-                    <p>Our team continues to work on updates and improvements based on player feedback. We're committed to making Sky Glider the best game it can be, with new features, challenges, and content planned for the future.</p>
-                </div>
-                
-                <div class="bg-white rounded-lg shadow-md p-8 mt-8">
-                    <h3 class="text-2xl font-bold mb-4">Technical Features</h3>
-                    <ul class="list-disc pl-6 space-y-2">
-                        <li>Fully responsive design that works seamlessly on smartphones and tablets</li>
-                        <li>Built with modern web technologies for maximum compatibility across devices</li>
-                        <li>Optimized code ensures smooth gameplay even on older devices</li>
-                        <li>Local storage integration for saving your progress and achievements</li>
-                        <li>Clean, minimalist design focused on gameplay experience</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Us Section -->
-    <section id="contact" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 section-title">Contact Us</h2>
-            
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-gray-100 rounded-lg shadow-md p-8 mb-8">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h3 class="text-xl font-bold mb-4">Get In Touch</h3>
-                            <p class="mb-6">Have questions, feedback, or suggestions for Sky Glider? We'd love to hear from you! Choose any of the contact methods below, and our team will get back to you as soon as possible.</p>
-                            
-                            <div class="space-y-4">
-                                <div class="flex items-start">
-                                    <i class="fas fa-envelope text-blue-600 mt-1 mr-3"></i>
-                                    <div>
-                                        <h4 class="font-bold">Email</h4>
-                                        <p>sarthaks42388434@gmail.com</p>
-                                        <p class="text-sm text-gray-600">Response time: 24-48 hours</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-start">
-                                    <i class="fas fa-comment-alt text-blue-600 mt-1 mr-3"></i>
-                                    <div>
-                                        <h4 class="font-bold">Support Portal</h4>
-                                        <p>Email for support</p>
-                                        <p class="text-sm text-gray-600">For technical issues and bug reports</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-start">
-                                    <i class="fas fa-map-marker-alt text-blue-600 mt-1 mr-3"></i>
-                                    <div>
-                                        <h4 class="font-bold">Address</h4>
-                                        <p>Satna, Madhya Pradesh, India</p>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h3 class="text-xl font-bold mb-4">Send Us a Message</h3>
-                            <form class="space-y-4">
-                                <div>
-                                    <label for="name" class="block mb-1 font-medium">Name</label>
-                                    <input type="text" id="name" class="w-full px-3 py-2 border rounded-md" placeholder="Your name">
-                                </div>
-                                
-                                <div>
-                                    <label for="email" class="block mb-1 font-medium">Email</label>
-                                    <input type="email" id="email" class="w-full px-3 py-2 border rounded-md" placeholder="Your email">
-                                </div>
-                                
-                                <div>
-                                    <label for="subject" class="block mb-1 font-medium">Subject</label>
-                                    <select id="subject" class="w-full px-3 py-2 border rounded-md">
-                                        <option value="">Select a subject</option>
-                                        <option value="feedback">Game Feedback</option>
-                                        <option value="bug">Report a Bug</option>
-                                        <option value="suggestion">Feature Suggestion</option>
-                                        <option value="support">Support Request</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                
-                                <div>
-                                    <label for="message" class="block mb-1 font-medium">Message</label>
-                                    <textarea id="message" rows="4" class="w-full px-3 py-2 border rounded-md" placeholder="Type your message here..."></textarea>
-                                </div>
-                                
-                                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md font-medium">Send Message</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-gray-100 rounded-lg shadow-md p-8">
-                    <h3 class="text-xl font-bold mb-6">Connect With Us</h3>
-                    <div class="flex justify-center space-x-6">
-                        <a href="#" class="text-gray-600 hover:text-blue-600 transition">
-                            <i class="fab fa-facebook-f text-2xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-600 hover:text-blue-400 transition">
-                            <i class="fab fa-twitter text-2xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-600 hover:text-pink-600 transition">
-                            <i class="fab fa-instagram text-2xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-600 hover:text-red-600 transition">
-                            <i class="fab fa-youtube text-2xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-600 hover:text-blue-800 transition">
-                            <i class="fab fa-discord text-2xl"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-<!-- sarthak -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1155904007929319"
-     data-ad-slot="5471861057"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 py-10">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4 text-white">Sky Glider</h3>
-                    <p class="mb-4">Experience the thrill of gliding through the sky in our free online arcade game! Navigate through obstacles and challenge yourself to beat your high score.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-xl font-bold mb-4 text-white">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#game" class="hover:text-white transition">Play Game</a></li>
-                        <li><a href="#achievements" class="hover:text-white transition">Achievements</a></li>
-                        <li><a href="#leaderboard" class="hover:text-white transition">Leaderboard</a></li>
-                        <li><a href="#articles" class="hover:text-white transition">Articles</a></li>
-                        <li><a href="#about" class="hover:text-white transition">About Us</a></li>
-                        <li><a href="#contact" class="hover:text-white transition">Contact Us</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-xl font-bold mb-4 text-white">Legal</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#privacy" class="hover:text-white transition">Privacy Policy</a></li>
-                        <li><a href="#terms" class="hover:text-white transition">Terms of Use</a></li>
-                        <li><a href="#" class="hover:text-white transition">Cookie Policy</a></li>
-                        <li><a href="#" class="hover:text-white transition">GDPR Compliance</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-xl font-bold mb-4 text-white">Newsletter</h3>
-                    <p class="mb-4">Subscribe for updates, game tips, and news.</p>
-                    <form class="flex">
-                        <input type="email" placeholder="Your email" class="px-3 py-2 w-full rounded-l text-gray-800">
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-700 mt-8 pt-6 text-sm text-center">
-                <p>&copy; 2023 Sky Glider Game. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Privacy Policy Modal -->
-    <div id="privacy" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-modal" data-modal="privacy">&times;</span>
-            <h2 class="text-3xl font-bold mb-6">Privacy Policy</h2>
-            
-            <div class="article-content">
-                <p>Last Updated: July 15, 2023</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">1. Introduction</h3>
-                <p>Welcome to Sky Glider! This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and play our game. Please read this Privacy Policy carefully. By accessing or using Sky Glider, you agree to the collection and use of information in accordance with this policy.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">2. Information We Collect</h3>
-                <p>We collect several types of information from and about users of our game:</p>
-                <ul class="list-disc pl-8 mt-3 mb-4">
-                    <li><strong>Personal Data</strong>: When you choose to save high scores or contact us, we may collect personal information such as your name or username and email address.</li>
-                    <li><strong>Usage Data</strong>: We automatically collect information about your interaction with our game, including your game scores, achievements, gameplay patterns, browser type, access times, and pages viewed.</li>
-                    <li><strong>Device Information</strong>: We may collect information about the device you use to access our game, including hardware model, operating system, unique device identifiers, and mobile network information.</li>
-                </ul>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">3. How We Use Your Information</h3>
-                <p>We use the information we collect to:</p>
-                <ul class="list-disc pl-8 mt-3 mb-4">
-                    <li>Provide, maintain, and improve our game</li>
-                    <li>Save and display your game scores and achievements</li>
-                    <li>Process and respond to your inquiries and requests</li>
-                    <li>Monitor and analyze usage patterns and trends</li>
-                    <li>Develop new features and functionality</li>
-                    <li>Protect against, identify, and prevent fraud and other unlawful activity</li>
-                </ul>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">4. Cookies and Similar Technologies</h3>
-                <p>We use cookies and similar tracking technologies to track activity on our game and hold certain information. Cookies are files with a small amount of data which may include an anonymous unique identifier. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">5. Data Security</h3>
-                <p>We implement appropriate technical and organizational measures to protect the security of your personal information. However, please be aware that no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee the absolute security of your data.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">6. Third-Party Services</h3>
-                <p>Our game may contain links to third-party websites or services that are not owned or controlled by us. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party websites or services.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">7. Children's Privacy</h3>
-                <p>Our game is suitable for players of all ages, including children. We do not knowingly collect personally identifiable information from children under 13 without verifiable parental consent. If we learn that we have collected personal information from a child under 13, we will promptly delete that information.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">8. Changes to This Privacy Policy</h3>
-                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. You are advised to review this Privacy Policy periodically for any changes.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">9. Contact Us</h3>
-                <p>If you have any questions about this Privacy Policy, please contact us at privacy@skyglider.com.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Terms of Use Modal -->
-    <div id="terms" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-modal" data-modal="terms">&times;</span>
-            <h2 class="text-3xl font-bold mb-6">Terms of Use</h2>
-            
-            <div class="article-content">
-                <p>Last Updated: July 15, 2023</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">1. Acceptance of Terms</h3>
-                <p>By accessing or using the Sky Glider game, you agree to be bound by these Terms of Use and all applicable laws and regulations. If you do not agree with any part of these terms, please do not use our game.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">2. Game License</h3>
-                <p>Sky Glider grants you a limited, non-exclusive, non-transferable, revocable license to access and use the game for personal, non-commercial purposes. This license does not include any resale or commercial use of the game or its contents.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">3. User Conduct</h3>
-                <p>When using Sky Glider, you agree not to:</p>
-                <ul class="list-disc pl-8 mt-3 mb-4">
-                    <li>Use the game for any illegal purpose or in violation of any local, state, national, or international law</li>
-                    <li>Harass, abuse, or harm another person through the game</li>
-                    <li>Impersonate another user or person</li>
-                    <li>Use any automated system to access the game</li>
-                    <li>Attempt to interfere with, compromise the system integrity or security, or decipher any transmissions to or from the servers running the game</li>
-                    <li>Take any action that imposes an unreasonable or disproportionately large load on our infrastructure</li>
-                    <li>Submit false or misleading information</li>
-                </ul>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">4. Intellectual Property</h3>
-                <p>The game and its entire contents, features, and functionality (including but not limited to all information, software, text, displays, images, video, and audio, and the design, selection, and arrangement thereof) are owned by Sky Glider, its licensors, or other providers of such material and are protected by copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">5. User-Generated Content</h3>
-                <p>By providing information to, communicating with, and/or placing material on the game, including but not limited to usernames for high scores, you grant us the right to use, reproduce, display, perform, adapt, modify, distribute, and promote the material in any form, anywhere, and for any purpose.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">6. Disclaimer of Warranties</h3>
-                <p>THE GAME IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS. SKY GLIDER MAKES NO WARRANTIES, EXPRESSED OR IMPLIED, AND HEREBY DISCLAIMS ALL WARRANTIES, INCLUDING WITHOUT LIMITATION, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, OR COURSE OF PERFORMANCE.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">7. Limitation of Liability</h3>
-                <p>IN NO EVENT SHALL SKY GLIDER BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE GAME.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">8. Termination</h3>
-                <p>We may terminate or suspend your access to the game immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach these Terms of Use.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">9. Changes to Terms</h3>
-                <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. It is your responsibility to check these Terms periodically for changes.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">10. Contact Us</h3>
-                <p>If you have any questions about these Terms, please contact us at terms@skyglider.com.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Article Content Modals -->
-    <!-- Article 1 Content -->
-    <div id="article1-content" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-modal" data-modal="article1-content">&times;</span>
-            <h2 class="text-3xl font-bold mb-6">The Evolution of Endless Runner Games</h2>
-            
-            <div class="article-content">
-                <p>Endless runner games have become one of the most popular genres in mobile and casual gaming, but their roots stretch back further than many players realize. From primitive arcade games to modern mobile hits, the evolution of endless runners demonstrates how simple gameplay concepts can evolve into rich, engaging experiences that captivate millions of players worldwide.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">The Early Days: Arcade Foundations</h3>
-                <p>While not technically "endless runners" as we know them today, early arcade games like Moon Patrol (1982) and Scramble (1981) laid important groundwork for the genre. These side-scrolling games featured continuously generated terrain and obstacles that players had to navigate while maintaining forward momentum. The core appeal was similar to modern endless runners—testing player reflexes and challenging them to beat their previous high scores.</p>
-                
-                <p>The 1980s game B.C.'s Quest for Tires, released for platforms like the Commodore 64, could be considered one of the earliest true precursors to endless runners. Players controlled a caveman on a stone unicycle, jumping over obstacles in a side-scrolling environment. The game's focus on timing jumps while moving at a constant speed established a formula that would later become central to the endless runner genre.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">The 3D Evolution: Into the New Dimension</h3>
-                <p>The genre took a significant leap forward in 1998 with Crash Bandicoot: Warped for the PlayStation, which included several "chase" sequences where players ran toward the camera while avoiding obstacles. These segments weren't the main focus of the game, but they presaged the behind-the-back perspective that would later become popular in 3D endless runners.</p>
-                
-                <p>Temple Run, released in 2011 by Imangi Studios, represented the true emergence of the 3D endless runner. The game's behind-the-back perspective, swipe controls for jumping and turning, and truly endless procedurally generated levels created an addictive formula that was perfectly suited to mobile devices. Temple Run's massive success—over 170 million downloads—established endless runners as a dominant mobile genre and inspired countless imitators.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">The 2D Renaissance: Back to Basics</h3>
-                <p>While 3D endless runners were gaining popularity, a parallel evolution was happening in the 2D space. Canabalt, created by Adam Saltsman in 2009, is widely credited as the game that defined the modern 2D endless runner. With its minimalist black-and-white aesthetic and one-button control scheme (just tap to jump), Canabalt stripped the endless runner down to its bare essentials and proved that simplicity could be incredibly engaging.</p>
-                
-                <p>Following Canabalt's success, other developers expanded on the 2D formula. Jetpack Joyride (2011) added vertical movement and diverse power-ups. Bit.Trip Runner (2010) incorporated rhythm elements, requiring players to time their actions to music. Games like Alto's Adventure (2015) brought beautiful artistic aesthetics to the genre, proving that endless runners could be visually stunning experiences as well as compelling gameplay challenges.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Modern Innovations: Beyond Running</h3>
-                <p>Today's endless runners continue to evolve and experiment with the formula. Games like Subway Surfers incorporated lane-switching mechanics, character upgrades, and social features. Sky Glider represents another innovation in the genre, focusing on the unique mechanics of gliding rather than running, while maintaining the core appeal of dodging obstacles and achieving ever-higher scores.</p>
-                
-                <p>Modern endless runners have also incorporated elements from other genres. Role-playing elements like character progression, metanarrative elements that give context to endless running, and even competitive multiplayer modes have all found their way into contemporary titles.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">The Psychological Appeal: Why We Keep Running</h3>
-                <p>The enduring popularity of endless runners can be attributed to several key factors. First, they deliver gameplay in short, satisfying sessions that fit perfectly into modern lifestyles. The one-more-try appeal is powerful—when each run lasts only minutes or even seconds, it's easy to convince yourself to try again.</p>
-                
-                <p>Second, endless runners provide clear feedback and measureable progress. Your score is a direct reflection of your skill, and improving that score gives players a sense of accomplishment. Many games enhance this with missions, achievements, and character upgrades that provide multiple paths for progression.</p>
-                
-                <p>Finally, the procedurally generated nature of endless runners ensures that no two runs are identical, creating a sense of unpredictability that keeps players engaged through hundreds or thousands of attempts.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">The Future of Endless Runners</h3>
-                <p>As we look to the future, endless runners will likely continue to evolve in exciting ways. The integration of augmented reality could transform these games into physical experiences where players navigate virtual obstacles in real-world environments. VR endless runners could create even more immersive experiences, though they would need to solve the challenges of prolonged movement in virtual space.</p>
-                
-                <p>Cloud gaming and cross-platform progression will allow players to continue their endless journey across multiple devices seamlessly. And as AI technology advances, we may see endless runners with truly adaptive difficulty that responds not just to player performance but to player emotions and engagement levels.</p>
-                
-                <p>Whatever form they take, endless runners will likely remain a staple of casual gaming for years to come. Their perfect balance of accessibility and challenge, combined with the core human drive to continually improve and compete against ourselves, ensures that we'll keep running, gliding, and jumping our way through virtual worlds for the foreseeable future.</p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Article 2 Content -->
-    <div id="article2-content" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-modal" data-modal="article2-content">&times;</span>
-            <h2 class="text-3xl font-bold mb-6">The Psychology Behind Addictive Arcade Games</h2>
-            
-            <div class="article-content">
-                <p>Have you ever found yourself saying "just one more game" only to look up and realize an hour has passed? Games like Sky Glider are designed to create this exact experience—the perfect balance of challenge, reward, and accessibility that keeps players coming back for "just one more try." But what's happening in our brains when we play these addictive arcade games? Let's explore the fascinating psychological principles that make simple games so engaging.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">The Variable Reward System</h3>
-                <p>Perhaps the most powerful psychological mechanism in addictive games is the variable reward system, a concept famously demonstrated by psychologist B.F. Skinner. Skinner found that animals responded most intensely to unpredictable rewards rather than consistent ones. This same principle applies to arcade games, where each playthrough offers slightly different challenges and opportunities.</p>
-                
-                <p>In games like Sky Glider, the varying patterns of obstacles and the unpredictability of when you might achieve your next high score creates a powerful dopamine response in the brain. Dopamine, often called the "feel-good neurotransmitter," is released not just when we receive rewards, but when we anticipate them. The possibility that the next game might be the one where you break your record keeps that dopamine flowing and players engaged.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">The Flow State</h3>
-                <p>Psychologist Mihaly Csikszentmihalyi identified a mental state called "flow" where people become completely immersed in an activity, experiencing intense focus, enjoyment, and loss of self-consciousness. Well-designed arcade games are masters at inducing this flow state by balancing challenge and skill level.</p>
-                
-                <p>If a game is too easy, players become bored. If it's too difficult, they become frustrated. But in the "flow channel"—where the challenge progressively increases to match the player's growing skill—time seems to melt away. The gradually increasing difficulty curve in games like Sky Glider is specifically designed to keep players in this flow state, where they're constantly challenged but not overwhelmed.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">The Near-Miss Effect</h3>
-                <p>Researchers studying gambling psychology discovered the powerful effect of "near-misses" on player engagement. A near-miss—like almost clearing an obstacle but failing at the last moment—triggers brain activity similar to actual wins and intensifies the desire to try again. This effect is particularly strong in arcade games where players feel that success was just within reach.</p>
-                
-                <p>When you narrowly fail to navigate between obstacles in Sky Glider, your brain registers that you were close to success, creating the conviction that with just a little adjustment, you'll succeed next time. This cognitive bias keeps players returning for another attempt, certain that victory is just around the corner.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Loss Aversion and the Sunk Cost Fallacy</h3>
-                <p>Humans have a psychological tendency to feel losses more intensely than equivalent gains—a principle known as loss aversion. In arcade games, the "loss" of ending a play session before achieving a new high score can feel like leaving something valuable behind.</p>
-                
-                <p>This connects to the sunk cost fallacy, where we continue investing in something partially because of how much we've already invested. If you've spent 30 minutes trying to beat your high score, walking away can feel like wasting that invested time. The only way to "validate" that time spent is to achieve your goal, which keeps players coming back for "just one more game."</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Immediate Feedback and Clear Goals</h3>
-                <p>Arcade games provide instant feedback on performance—your score increases with each obstacle cleared, and the game ends immediately when you make a mistake. This clear connection between actions and outcomes creates a perfect learning environment where players can quickly understand what works and what doesn't.</p>
-                
-                <p>Combined with straightforward goals (get a higher score than before), this immediate feedback loop creates a satisfying sense of progress and improvement. Players always know exactly how well they're doing and what they're aiming for, removing the ambiguity that might cause disengagement in more complex games.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Achievement and Mastery</h3>
-                <p>Humans have a fundamental drive to develop mastery over their environment. Arcade games tap into this drive by offering clear paths for skill development and measurable improvement. The visible progress as your high score increases provides concrete evidence of your growing mastery, satisfying this deep psychological need.</p>
-                
-                <p>Games like Sky Glider often implement achievement systems that recognize and reward different aspects of mastery—reaching certain scores, performing specific feats, or developing particular skills. These achievements serve as milestones on the journey to mastery, providing additional motivation beyond the core gameplay.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Social Competition and Validation</h3>
-                <p>The addition of leaderboards and social sharing features in arcade games adds another powerful psychological motivator: social comparison. Seeing friends' scores or where you rank globally triggers our natural competitive instincts and desire for social validation.</p>
-                
-                <p>This social element transforms the solitary experience of playing an arcade game into a form of asynchronous competition, where beating a friend's high score can feel as rewarding as any in-game achievement. The ability to share scores on social media also offers an opportunity for recognition and praise from peers, activating reward centers in the brain.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">The Perfect Balance</h3>
-                <p>The most addictive arcade games, including Sky Glider, combine all these psychological principles in perfect balance. They create experiences that are challenging but achievable, unpredictable but learnable, and individual but social. They respect the player's time with short play sessions while still offering depth through mastery and achievement.</p>
-                
-                <p>Understanding these psychological mechanisms doesn't diminish the enjoyment of arcade games—if anything, it helps us appreciate the elegant design that creates such engaging experiences. So the next time you find yourself saying "just one more game," you'll know exactly why it's so hard to put down!</p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Article 3 Content -->
-    <div id="article3-content" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-modal" data-modal="article3-content">&times;</span>
-            <h2 class="text-3xl font-bold mb-6">Principles of Good Game Design for Casual Games</h2>
-            
-            <div class="article-content">
-                <p>Creating a successful casual game like Sky Glider isn't just about flashy graphics or novel concepts—it's about implementing solid game design principles that create an engaging, balanced, and rewarding experience for players. Whether you're a game developer looking to create the next hit or just a curious player wondering what makes certain games more enjoyable than others, understanding these principles can provide valuable insights into the craft of game design.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Immediate Accessibility</h3>
-                <p>Perhaps the most fundamental principle of casual game design is immediate accessibility. Unlike complex strategy games or RPGs that might require tutorials and learning periods, casual games should be playable within seconds of opening the app.</p>
-                
-                <p>This means intuitive controls that can be quickly grasped, clear visual communication of game mechanics, and a learning curve that starts with basic challenges before introducing complexity. In Sky Glider, the one-tap/one-click control scheme means players can literally start playing with zero instruction, learning the physics and timing through direct experience rather than explanation.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Progressive Difficulty</h3>
-                <p>A well-designed casual game matches its difficulty progression to the player's developing skills—a concept game designers call "scaffolding." Initial challenges should be easy enough that almost anyone can succeed, creating confidence and engagement. As players continue, the difficulty increases gradually enough that they're always being challenged but rarely feel overwhelmed.</p>
-                
-                <p>This is typically accomplished through procedural generation algorithms that subtly increase game speed, reduce timing windows, or add obstacle complexity as the player advances. The ideal difficulty curve creates frequent moments where players feel they're improving and overcoming challenges that seemed impossible just minutes before.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Forgiving Failure</h3>
-                <p>In casual games, failure should feel like an invitation to try again rather than a punishment. This means keeping failure states brief, making restart options prominent and immediate, and ensuring players never lose too much progress when they fail.</p>
-                
-                <p>Sky Glider exemplifies this principle by making game-over states brief and allowing players to quickly start a new attempt with minimal friction. The game also saves high scores and achievements automatically, ensuring that progress toward long-term goals persists even when individual play sessions end in failure.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Clear Feedback Loops</h3>
-                <p>Players need to understand exactly what's happening in response to their actions. This means providing clear visual and audio feedback for every significant game event—successful moves, near misses, power-up activations, and of course, failures.</p>
-                
-                <p>Good feedback design uses multiple sensory channels: visual effects like flashes or particle systems, audio cues like distinctive sound effects, and even haptic feedback on mobile devices. The timing of this feedback is crucial—it should be immediate enough to create a clear connection between the player's action and the game's response.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Meaningful Progression Systems</h3>
-                <p>While the core gameplay loop must be inherently enjoyable, casual games benefit greatly from layered progression systems that give players multiple goals to pursue. These might include:</p>
-                <ul class="list-disc pl-8 mt-3 mb-4">
-                    <li>High score improvement</li>
-                    <li>Achievement unlocks for specific accomplishments</li>
-                    <li>Character customization or upgrades</li>
-                    <li>Daily challenges or missions</li>
-                    <li>Collection systems for virtual items</li>
-                </ul>
-                
-                <p>The best progression systems in casual games offer both short-term goals that can be achieved in a single session and long-term goals that require sustained play over days or weeks. This creates both immediate satisfaction and reasons to return to the game regularly.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Risk and Reward Balancing</h3>
-                <p>Great casual games often incorporate risk/reward decisions that add strategic depth without overwhelming complexity. For example, in an endless runner game, players might have to decide whether to take a riskier path that offers more points or power-ups.</p>
-                
-                <p>These decisions should be intuitive enough that players can make them in split seconds, but meaningful enough that they create genuine tension and excitement. The consequences of risky choices should be balanced—the potential rewards should justify the increased chance of failure, without making safe paths feel pointless.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Satisfying Game Feel</h3>
-                <p>Game feel—the moment-to-moment sensory experience of playing—is particularly important in casual games where the core mechanics are relatively simple. This includes elements like:</p>
-                <ul class="list-disc pl-8 mt-3 mb-4">
-                    <li><strong>Responsive controls</strong> with appropriate acceleration and deceleration</li>
-                    <li><strong>Pleasing animations</strong> that communicate game state while adding visual interest</li>
-                    <li><strong>Juicy feedback</strong> like screen shake, flash effects, and particle systems</li>
-                    <li><strong>Satisfying sound design</strong> with audio cues that reinforce achievements</li>
-                </ul>
-                
-                <p>These elements combine to make even simple actions feel significant and rewarding. In Sky Glider, the smooth animation of the glider rising when the player taps, combined with appropriate sound effects and visual feedback, creates a satisfying sense of control even though the interaction is just a single tap.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Session Length Flexibility</h3>
-                <p>Casual games should respect the player's time by allowing meaningful play sessions of varying lengths. A good casual game can offer satisfaction in a 30-second play session during a brief break, while also rewarding longer sessions with deeper progression or strategic opportunities.</p>
-                
-                <p>This principle is particularly important for mobile games, where players might engage with the game in many different contexts—waiting for a bus, during a lunch break, or for longer periods at home. The game should feel rewarding regardless of session length, with natural break points that allow players to stop without feeling like they're losing progress.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Visual Clarity</h3>
-                <p>While casual games can certainly be visually striking, gameplay-relevant elements must always be instantly recognizable and distinguishable. Players should never fail because they couldn't visually parse what was happening on screen.</p>
-                
-                <p>This means creating clear visual hierarchies, using consistent color coding, ensuring sufficient contrast between interactive elements and backgrounds, and avoiding visual clutter that might obscure important game elements. In fast-paced games like Sky Glider, this visual clarity becomes even more crucial as players have split seconds to recognize and respond to obstacles.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Social Integration</h3>
-                <p>While not all players are interested in social features, thoughtfully integrated social elements can significantly extend a casual game's lifespan. These might include leaderboards to compare scores with friends, the ability to share achievements or high scores on social media, or even asynchronous competitive elements.</p>
-                
-                <p>The key with social features is making them genuinely enriching to the experience rather than intrusive. They should feel like natural extensions of the gameplay rather than bolted-on marketing tools, and they should never force players into social interactions they're not comfortable with.</p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-3">Conclusion: The Art of Simplicity</h3>
-                <p>The most enduring principle in casual game design might be described as "simple to learn, difficult to master." The best casual games strip away unnecessary complexity to focus on a core gameplay loop that is immediately enjoyable but contains enough depth to reward extended play and skill development.</p>
-                
-                <p>Designers of casual games are practitioners of elegant minimalism—knowing exactly which elements to include for maximum engagement, and which to exclude to maintain accessibility. By applying the principles outlined above, they create experiences that can be enjoyed by almost anyone, regardless of gaming experience or available time, while still providing the depth and satisfaction that keeps players coming back for "just one more game."</p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Remaining article content modals would follow the same pattern -->
-
-    <!-- JavaScript -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flappy Bird Game - Sarthak Sharma</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
     <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuButton.addEventListener('click', function() {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Mobile dropdown toggle
-        const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
-        
-        mobileDropdowns.forEach(dropdown => {
-            dropdown.addEventListener('click', function(e) {
-                e.preventDefault();
-                const parent = this.closest('.nav-item');
-                parent.classList.toggle('active');
-            });
-        });
-        
-        // Modal functionality
-        const modalButtons = document.querySelectorAll('.read-more-btn');
-        const closeModalButtons = document.querySelectorAll('.close-modal');
-        const modals = document.querySelectorAll('.modal');
-        
-        modalButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const modalId = this.getAttribute('data-article');
-                const modal = document.getElementById(modalId);
-                modal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-        
-        closeModalButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const modalId = this.getAttribute('data-modal');
-                const modal = document.getElementById(modalId);
-                modal.classList.add('hidden');
-                document.body.style.overflow = '';
-            });
-        });
-        
-        // Close modal if clicking outside content
-        modals.forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.classList.add('hidden');
-                    document.body.style.overflow = '';
-                }
-            });
-        });
-        
-        // Game functionality
-        const gameContainer = document.getElementById('game-container');
-        const gameCanvas = document.getElementById('game-canvas');
-        const ctx = gameCanvas.getContext('2d');
-        const score = document.getElementById('score');
-        const finalScore = document.getElementById('final-score');
-        const startOverlay = document.getElementById('start-overlay');
-        const pauseOverlay = document.getElementById('pause-overlay');
-        const gameoverOverlay = document.getElementById('gameover-overlay');
-        const pauseBtn = document.getElementById('pause-btn');
-        const soundBtn = document.getElementById('sound-btn');
-        const settingsBtn = document.getElementById('settings-btn');
-        const soundSettings = document.getElementById('sound-settings');
-        const musicSlider = document.getElementById('music-volume');
-        const sfxSlider = document.getElementById('sfx-volume');
-        const musicPercentage = document.getElementById('music-percentage');
-        const sfxPercentage = document.getElementById('sfx-percentage');
-        const restartBtn = document.getElementById('restart-btn');
-        const shareBtn = document.getElementById('share-btn');
-        const newHighscore = document.getElementById('new-highscore');
-        const playerName = document.getElementById('player-name');
-        const saveScore = document.getElementById('save-score');
-        const personalBestDisplay = document.getElementById('personal-best');
-        const recentScores = document.getElementById('recent-scores');
-        
-        // Game state
-        let gameState = {
-            status: 'start', // start, playing, paused, gameover
-            score: 0,
-            highScore: 0,
-            recentScores: [],
-            glider: {
-                x: 100,
-                y: 250,
-                width: 40,
-                height: 20,
-                velocity: 0,
-                gravity: 0.5,
-                lift: -10
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#4F46E5", secondary: "#10B981" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
             },
-            obstacles: [],
-            nextObstacleIn: 100,
-            speed: 5,
-            gameTime: 0
-        };
-        
-        // Resize canvas to fit container
-        function resizeCanvas() {
-            gameCanvas.width = gameContainer.clientWidth;
-            gameCanvas.height = gameContainer.clientHeight;
-        }
-        
-        // Initialize game
-        function initGame() {
-            resizeCanvas();
-            
-            // Load saved data
-            if (localStorage.getItem('skyGliderHighScore')) {
-                gameState.highScore = parseInt(localStorage.getItem('skyGliderHighScore'));
-                personalBestDisplay.textContent = gameState.highScore;
-            }
-            
-            if (localStorage.getItem('skyGliderRecentScores')) {
-                gameState.recentScores = JSON.parse(localStorage.getItem('skyGliderRecentScores'));
-                updateRecentScores();
-            }
-            
-            // Event listeners
-            window.addEventListener('resize', resizeCanvas);
-            
-            gameContainer.addEventListener('click', function() {
-                handleUserInput();
-            });
-            
-            window.addEventListener('keydown', function(e) {
-                if (e.code === 'Space') {
-                    handleUserInput();
-                    e.preventDefault(); // Prevent page scrolling on spacebar
-                }
-            });
-            
-            pauseBtn.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent triggering the container click
-                togglePause();
-            });
-            
-            soundBtn.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent triggering the container click
-                toggleSound();
-            });
-            
-            settingsBtn.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent triggering the container click
-                toggleSettings();
-            });
-            
-            musicSlider.addEventListener('input', function() {
-                updateMusicVolume(this.value);
-            });
-            
-            sfxSlider.addEventListener('input', function() {
-                updateSfxVolume(this.value);
-            });
-            
-            soundSettings.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent triggering the container click
-            });
-            
-            restartBtn.addEventListener('click', function() {
-                restartGame();
-            });
-            
-            shareBtn.addEventListener('click', function() {
-                shareScore();
-            });
-            
-            saveScore.addEventListener('click', function() {
-                saveHighScore();
-            });
-            
-            // Start game loop
-            requestAnimationFrame(gameLoop);
-        }
-        
-        function handleUserInput() {
-            switch(gameState.status) {
-                case 'start':
-                    startGame();
-                    break;
-                case 'playing':
-                    // Make the glider soar upward
-                    gameState.glider.velocity = gameState.glider.lift;
-                    // Play sound effect (placeholder)
-                    console.log('Soar sound effect');
-                    break;
-                case 'paused':
-                    resumeGame();
-                    break;
-                case 'gameover':
-                    restartGame();
-                    break;
-            }
-        }
-        
-        function startGame() {
-            gameState.status = 'playing';
-            gameState.score = 0;
-            gameState.obstacles = [];
-            gameState.speed = 5;
-            gameState.glider.y = 250;
-            gameState.glider.velocity = 0;
-            gameState.gameTime = 0;
-            
-            startOverlay.classList.add('hidden');
-            pauseOverlay.classList.add('hidden');
-            gameoverOverlay.classList.add('hidden');
-            
-            console.log('Game started');
-        }
-        
-        function pauseGame() {
-            if (gameState.status === 'playing') {
-                gameState.status = 'paused';
-                pauseOverlay.classList.remove('hidden');
-                pauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-                console.log('Game paused');
-            }
-        }
-        
-        function resumeGame() {
-            if (gameState.status === 'paused') {
-                gameState.status = 'playing';
-                pauseOverlay.classList.add('hidden');
-                pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                console.log('Game resumed');
-            }
-        }
-        
-        function togglePause() {
-            if (gameState.status === 'playing') {
-                pauseGame();
-            } else if (gameState.status === 'paused') {
-                resumeGame();
-            }
-        }
-        
-        function toggleSound() {
-            // Toggle mute state
-            const isMuted = soundBtn.innerHTML.includes('mute');
-            if (isMuted) {
-                soundBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-                console.log('Sound unmuted');
-            } else {
-                soundBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                console.log('Sound muted');
-            }
-        }
-        
-        function toggleSettings() {
-            soundSettings.classList.toggle('hidden');
-        }
-        
-        function updateMusicVolume(value) {
-            musicPercentage.textContent = value + '%';
-            console.log('Music volume: ' + value + '%');
-        }
-        
-        function updateSfxVolume(value) {
-            sfxPercentage.textContent = value + '%';
-            console.log('SFX volume: ' + value + '%');
-        }
-        
-        function gameOver() {
-            gameState.status = 'gameover';
-            gameoverOverlay.classList.remove('hidden');
-            finalScore.textContent = gameState.score;
-            
-            // Check for high score
-            if (gameState.score > gameState.highScore) {
-                gameState.highScore = gameState.score;
-                localStorage.setItem('skyGliderHighScore', gameState.score);
-                personalBestDisplay.textContent = gameState.highScore;
-                newHighscore.classList.remove('hidden');
-            } else {
-                newHighscore.classList.add('hidden');
-            }
-            
-            // Add to recent scores
-            gameState.recentScores.unshift(gameState.score);
-            if (gameState.recentScores.length > 5) {
-                gameState.recentScores.pop();
-            }
-            localStorage.setItem('skyGliderRecentScores', JSON.stringify(gameState.recentScores));
-            updateRecentScores();
-            
-            console.log('Game over');
-        }
-        
-        function restartGame() {
-            startGame();
-        }
-        
-        function saveHighScore() {
-            const name = playerName.value.trim() || 'Anonymous';
-            console.log(`High score saved: ${gameState.score} by ${name}`);
-            newHighscore.classList.add('hidden');
-        }
-        
-        function shareScore() {
-            console.log(`Sharing score: ${gameState.score}`);
-            alert(`Thanks for sharing your score of ${gameState.score}!`);
-        }
-        
-        function updateRecentScores() {
-            if (gameState.recentScores.length === 0) {
-                recentScores.innerHTML = `
-                    <div class="flex justify-between items-center text-sm text-gray-600">
-                        <span>No recent scores</span>
-                        <span>-</span>
-                    </div>
-                `;
-                return;
-            }
-            
-            recentScores.innerHTML = '';
-            gameState.recentScores.forEach((score, index) => {
-                const scoreItem = document.createElement('div');
-                scoreItem.className = 'flex justify-between items-center text-sm';
-                scoreItem.innerHTML = `
-                    <span>Game ${index + 1}</span>
-                    <span>${score} points</span>
-                `;
-                recentScores.appendChild(scoreItem);
-            });
-        }
-        
-        // Game logic
-        function update() {
-            if (gameState.status !== 'playing') return;
-            
-            gameState.gameTime++;
-            
-            // Update glider position
-            gameState.glider.velocity += gameState.glider.gravity;
-            gameState.glider.y += gameState.glider.velocity;
-            
-            // Constrain glider to canvas
-            if (gameState.glider.y < 0) {
-                gameState.glider.y = 0;
-                gameState.glider.velocity = 0;
-            }
-            
-            if (gameState.glider.y > gameCanvas.height - gameState.glider.height) {
-                gameOver();
-                return;
-            }
-            
-            // Create new obstacles
-            gameState.nextObstacleIn--;
-            if (gameState.nextObstacleIn <= 0) {
-                const gapHeight = 150;
-                const gapPosition = Math.random() * (gameCanvas.height - gapHeight - 100) + 50;
-                
-                gameState.obstacles.push({
-                    x: gameCanvas.width,
-                    topHeight: gapPosition,
-                    bottomY: gapPosition + gapHeight,
-                    bottomHeight: gameCanvas.height - (gapPosition + gapHeight),
-                    width: 60,
-                    passed: false
-                });
-                
-                // Adjust difficulty over time
-                const minObstacleInterval = 60; // Minimum frames between obstacles
-                const maxObstacleInterval = 120; // Starting frames between obstacles
-                const difficultyFactor = Math.min(1, gameState.gameTime / 3000); // Gradually increases to 1 over time
-                
-                gameState.nextObstacleIn = Math.floor(maxObstacleInterval - ((maxObstacleInterval - minObstacleInterval) * difficultyFactor));
-                gameState.speed = 5 + (3 * difficultyFactor); // Speed increases from 5 to 8
-            }
-            
-            // Update obstacles
-            for (let i = gameState.obstacles.length - 1; i >= 0; i--) {
-                const obstacle = gameState.obstacles[i];
-                obstacle.x -= gameState.speed;
-                
-                // Remove off-screen obstacles
-                if (obstacle.x + obstacle.width < 0) {
-                    gameState.obstacles.splice(i, 1);
-                    continue;
-                }
-                
-                // Check if passed obstacle
-                if (!obstacle.passed && obstacle.x + obstacle.width < gameState.glider.x) {
-                    gameState.score++;
-                    score.textContent = gameState.score;
-                    obstacle.passed = true;
-                }
-                
-                // Collision detection
-                if (collision(gameState.glider, obstacle)) {
-                    gameOver();
-                    return;
-                }
-            }
-        }
-        
-        function collision(glider, obstacle) {
-            // Check if glider is within the obstacle's x-range
-            if (glider.x + glider.width > obstacle.x && glider.x < obstacle.x + obstacle.width) {
-                // Check if glider hits the top pipe
-                if (glider.y < obstacle.topHeight) {
-                    return true;
-                }
-                // Check if glider hits the bottom pipe
-                if (glider.y + glider.height > obstacle.bottomY) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        
-        function draw() {
-            // Clear canvas
-            ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-            
-            // Draw background (gradient sky)
-            const gradient = ctx.createLinearGradient(0, 0, 0, gameCanvas.height);
-            gradient.addColorStop(0, '#87CEEB'); // Sky blue
-            gradient.addColorStop(1, '#1E90FF'); // Dodger blue
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
-            
-            // Draw some clouds
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-            for (let i = 0; i < 5; i++) {
-                // Use gameTime for movement but at different rates
-                const x = (((gameState.gameTime * (0.5 + (i * 0.1))) % (gameCanvas.width + 200)) - 100);
-                const y = 50 + (i * 70);
-                const width = 80 + (i * 20);
-                const height = 40 + (i * 10);
-                
-                ctx.beginPath();
-                ctx.ellipse(x, y, width/2, height/2, 0, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.ellipse(x + width/3, y - height/4, width/3, height/2, 0, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.ellipse(x - width/4, y - height/6, width/3, height/3, 0, 0, Math.PI * 2);
-                ctx.fill();
-            }
-            
-            // Draw obstacles
-            ctx.fillStyle = '#2E8B57'; // Sea green
-            gameState.obstacles.forEach(obstacle => {
-                // Top obstacle
-                ctx.fillRect(obstacle.x, 0, obstacle.width, obstacle.topHeight);
-                
-                // Bottom obstacle
-                ctx.fillRect(obstacle.x, obstacle.bottomY, obstacle.width, obstacle.bottomHeight);
-                
-                // Caps
-                ctx.fillStyle = '#228B22'; // Forest green
-                ctx.fillRect(obstacle.x - 5, obstacle.topHeight - 15, obstacle.width + 10, 15);
-                ctx.fillRect(obstacle.x - 5, obstacle.bottomY, obstacle.width + 10, 15);
-                ctx.fillStyle = '#2E8B57';
-            });
-            
-            // Draw glider
-            ctx.fillStyle = '#FF6347'; // Tomato red
-            ctx.beginPath();
-            ctx.moveTo(gameState.glider.x, gameState.glider.y + gameState.glider.height/2); // Nose
-            ctx.lineTo(gameState.glider.x + gameState.glider.width, gameState.glider.y); // Top wing
-            ctx.lineTo(gameState.glider.x + gameState.glider.width/2, gameState.glider.y + 5); // Middle top
-            ctx.lineTo(gameState.glider.x + gameState.glider.width, gameState.glider.y + gameState.glider.height); // Bottom wing
-            ctx.closePath();
-            ctx.fill();
-            
-            // Trail effect
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.moveTo(gameState.glider.x - 10, gameState.glider.y + gameState.glider.height/2);
-            ctx.lineTo(gameState.glider.x, gameState.glider.y + gameState.glider.height/2);
-            ctx.stroke();
-        }
-        
-        function gameLoop() {
-            update();
-            draw();
-            requestAnimationFrame(gameLoop);
-        }
-        
-        // Initialize the game when page loads
-        window.onload = initGame;
+          },
+        },
+      };
     </script>
-</body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      font-family: 'Poppins', sans-serif;
+      }
+      .game-canvas {
+      border: 2px solid #ddd;
+      background-color: #f0f9ff;
+      }
+      .bird {
+      width: 34px;
+      height: 24px;
+      position: absolute;
+      background-size: cover;
+      }
+      .pipe {
+      position: absolute;
+      width: 52px;
+      background-color: #10B981;
+      border: 2px solid #065f46;
+      }
+      .ground {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 20px;
+      background-color: #92400e;
+      }
+      input:focus, button:focus {
+      outline: none;
+      }
+      .blog-card:hover {
+      transform: translateY(-5px);
+      }
+      .blog-card {
+      transition: transform 0.3s ease;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+      <div
+        class="container mx-auto px-4 py-3 flex items-center justify-between"
+      >
+        <a href="#" class="flex items-center space-x-2">
+          <div
+            class="w-10 h-10 flex items-center justify-center bg-primary rounded-full"
+          >
+            <i class="ri-gamepad-line text-white ri-lg"></i>
+          </div>
+          <span class="text-xl font-['Pacifico'] text-gray-800"
+            >Flappy Bird Game</span
+          >
+        </a>
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="#" class="text-primary font-medium">Home</a>
+          <a href="#game" class="text-gray-700 hover:text-primary transition"
+            >Play Game</a
+          >
+          <a href="#blog" class="text-gray-700 hover:text-primary transition"
+            >Blog</a
+          >
+          <a href="#about" class="text-gray-700 hover:text-primary transition"
+            >About Developer</a
+          >
+          <a href="#contact" class="text-gray-700 hover:text-primary transition"
+            >Contact</a
+          >
+        </nav>
+        <div class="flex items-center space-x-4">
+          <a
+            href="#"
+            class="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-primary transition"
+          >
+            <i class="ri-twitter-line ri-lg"></i>
+          </a>
+          <a
+            href="#"
+            class="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-primary transition"
+          >
+            <i class="ri-github-line ri-lg"></i>
+          </a>
+          <a
+            href="#"
+            class="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-primary transition"
+          >
+            <i class="ri-linkedin-line ri-lg"></i>
+          </a>
+          <button class="md:hidden w-10 h-10 flex items-center justify-center">
+            <i class="ri-menu-line ri-lg"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+    <!-- Hero Section -->
+    <section
+      class="relative overflow-hidden"
+      style="background-image: url('https://readdy.ai/api/search-image?query=A%20vibrant%20gaming%20background%20with%20a%20blue%20sky%2C%20green%20pipes%2C%20and%20a%20cartoon%20landscape.%20The%20image%20should%20have%20a%20clean%20left%20side%20for%20text%20placement%2C%20with%20game%20elements%20concentrated%20on%20the%20right%20side.%20The%20style%20should%20be%20bright%2C%20cheerful%2C%20and%20suitable%20for%20a%20Flappy%20Bird%20game%20website.%20The%20transition%20from%20left%20to%20right%20should%20be%20natural%20and%20gradual.&width=1920&height=800&seq=1&orientation=landscape'); background-size: cover; background-position: center;"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-white/90 to-white/30"
+      ></div>
+      <div class="container mx-auto px-4 py-20 relative z-10">
+        <div class="w-full max-w-2xl">
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Experience the Classic Flappy Bird Challenge
+          </h1>
+          <p class="text-lg text-gray-700 mb-8">
+            Test your reflexes and patience with the addictive gameplay that
+            took the world by storm. Navigate through pipes, set new high
+            scores, and challenge your friends!
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="#game"
+              class="px-8 py-3 bg-primary text-white font-medium rounded-button shadow-lg hover:bg-primary/90 transition whitespace-nowrap"
+              >Play Now</a
+            >
+            <a
+              href="#about"
+              class="px-8 py-3 bg-white text-primary border border-primary font-medium rounded-button hover:bg-gray-50 transition whitespace-nowrap"
+              >About Developer</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Game Section -->
+    <section id="game" class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Play Flappy Bird
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Press spacebar or tap to make the bird fly. Avoid the pipes and try
+            to get the highest score possible!
+          </p>
+        </div>
+        <div class="max-w-3xl mx-auto">
+          <div
+            class="relative game-canvas h-96 rounded-lg overflow-hidden mb-6"
+          >
+            <div id="game-container" class="relative w-full h-full">
+              <div class="bird" id="bird"></div>
+              <div class="ground"></div>
+              <div class="flex items-center justify-center h-full">
+                <div class="text-center">
+                  <h3 class="text-2xl font-bold text-gray-800 mb-4">
+                    Game Paused
+                  </h3>
+                  <button
+                    id="start-button"
+                    class="px-6 py-2 bg-primary text-white font-medium rounded-button shadow hover:bg-primary/90 transition whitespace-nowrap"
+                  >
+                    Start Game
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap justify-between items-center mb-8">
+            <div class="flex items-center space-x-6 mb-4 md:mb-0">
+              <div class="text-center">
+                <p class="text-sm text-gray-500">Current Score</p>
+                <p id="current-score" class="text-2xl font-bold text-gray-900">
+                  0
+                </p>
+              </div>
+              <div class="text-center">
+                <p class="text-sm text-gray-500">High Score</p>
+                <p id="high-score" class="text-2xl font-bold text-primary">0</p>
+              </div>
+            </div>
+            <div class="flex space-x-3">
+              <button
+                id="pause-button"
+                class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition"
+                disabled
+              >
+                <i class="ri-pause-line ri-lg text-gray-700"></i>
+              </button>
+              <button
+                id="restart-button"
+                class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition"
+                disabled
+              >
+                <i class="ri-restart-line ri-lg text-gray-700"></i>
+              </button>
+              <button
+                id="share-button"
+                class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition"
+              >
+                <i class="ri-share-line ri-lg text-gray-700"></i>
+              </button>
+            </div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-3">
+              Game Controls
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md mr-3"
+                >
+                  <i class="ri-space-line ri-lg text-gray-700"></i>
+                </div>
+                <p class="text-gray-700">
+                  Press <span class="font-medium">Spacebar</span> to flap
+                </p>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md mr-3"
+                >
+                  <i class="ri-mouse-line ri-lg text-gray-700"></i>
+                </div>
+                <p class="text-gray-700">
+                  <span class="font-medium">Click/Tap</span> to flap
+                </p>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md mr-3"
+                >
+                  <i class="ri-pause-line ri-lg text-gray-700"></i>
+                </div>
+                <p class="text-gray-700">
+                  Press <span class="font-medium">P</span> to pause
+                </p>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md mr-3"
+                >
+                  <i class="ri-restart-line ri-lg text-gray-700"></i>
+                </div>
+                <p class="text-gray-700">
+                  Press <span class="font-medium">R</span> to restart
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Developer Section -->
+    <section id="about" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-1">
+              <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div
+                  class="h-48 bg-gradient-to-r from-primary to-secondary flex items-center justify-center"
+                >
+                  <div
+                    class="w-24 h-24 rounded-full bg-white flex items-center justify-center"
+                  >
+                    <i class="ri-user-line ri-2x text-primary"></i>
+                  </div>
+                </div>
+                <div class="p-6">
+                  <h3 class="text-xl font-bold text-gray-900 mb-2">
+                    Sarthak Sharma
+                  </h3>
+                  <p class="text-gray-600 mb-4">Game Developer & Designer</p>
+                  <div class="space-y-3 mb-6">
+                    <div class="flex items-center">
+                      <div
+                        class="w-8 h-8 flex items-center justify-center text-primary"
+                      >
+                        <i class="ri-mail-line ri-lg"></i>
+                      </div>
+                      <span class="text-gray-700 text-sm ml-2"
+                        >sarthaks42388434@gmail.com</span
+                      >
+                    </div>
+                    <div class="flex items-center">
+                      <div
+                        class="w-8 h-8 flex items-center justify-center text-primary"
+                      >
+                        <i class="ri-map-pin-line ri-lg"></i>
+                      </div>
+                      <span class="text-gray-700 text-sm ml-2"
+                        >Satna, Madhya Pradesh, India</span
+                      >
+                    </div>
+                  </div>
+                  <div class="flex space-x-2">
+                    <a
+                      href="#"
+                      class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary hover:text-white transition"
+                    >
+                      <i class="ri-twitter-line"></i>
+                    </a>
+                    <a
+                      href="#"
+                      class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary hover:text-white transition"
+                    >
+                      <i class="ri-github-line"></i>
+                    </a>
+                    <a
+                      href="#"
+                      class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary hover:text-white transition"
+                    >
+                      <i class="ri-linkedin-line"></i>
+                    </a>
+                    <a
+                      href="#"
+                      class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary hover:text-white transition"
+                    >
+                      <i class="ri-instagram-line"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="md:col-span-2">
+              <div class="bg-white rounded-lg shadow-sm p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">
+                  About the Developer
+                </h2>
+                <p class="text-gray-700 mb-4">
+                  Hello! I'm Sarthak Sharma, a passionate game developer and
+                  designer based in Satna, Madhya Pradesh, India. With a deep
+                  love for creating interactive experiences, I've dedicated my
+                  career to crafting engaging games that bring joy to players
+                  worldwide.
+                </p>
+                <p class="text-gray-700 mb-4">
+                  This Flappy Bird recreation is one of my projects aimed at
+                  preserving classic gaming experiences while adding my own
+                  creative touch. I believe in the power of simple yet
+                  challenging gameplay that keeps players coming back for more.
+                </p>
+                <p class="text-gray-700 mb-6">
+                  When I'm not coding or designing games, you can find me
+                  exploring new technologies, contributing to open-source
+                  projects, and sharing my knowledge through my blog posts.
+                </p>
+                <h3 class="text-lg font-medium text-gray-900 mb-3">
+                  Skills & Expertise
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+                  <div class="bg-gray-50 rounded p-3 text-center">
+                    <p class="text-gray-800 font-medium">Game Development</p>
+                  </div>
+                  <div class="bg-gray-50 rounded p-3 text-center">
+                    <p class="text-gray-800 font-medium">JavaScript</p>
+                  </div>
+                  <div class="bg-gray-50 rounded p-3 text-center">
+                    <p class="text-gray-800 font-medium">HTML5 Canvas</p>
+                  </div>
+                  <div class="bg-gray-50 rounded p-3 text-center">
+                    <p class="text-gray-800 font-medium">UI/UX Design</p>
+                  </div>
+                  <div class="bg-gray-50 rounded p-3 text-center">
+                    <p class="text-gray-800 font-medium">Web Development</p>
+                  </div>
+                  <div class="bg-gray-50 rounded p-3 text-center">
+                    <p class="text-gray-800 font-medium">Responsive Design</p>
+                  </div>
+                </div>
+                <a
+                  href="#contact"
+                  class="inline-block px-6 py-3 bg-primary text-white font-medium rounded-button hover:bg-primary/90 transition whitespace-nowrap"
+                  >Get in Touch</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Blog Section -->
+    <section id="blog" class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Latest from the Blog
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Explore articles about game development, design tips, and the world
+            of casual gaming.
+          </p>
+        </div>
+        <div class="mb-8">
+          <div class="flex flex-wrap items-center justify-between">
+            <div class="mb-4 md:mb-0">
+              <div class="inline-flex rounded-full bg-gray-100 p-1">
+                <button
+                  class="px-4 py-2 rounded-full bg-primary text-white whitespace-nowrap"
+                >
+                  All Posts
+                </button>
+                <button
+                  class="px-4 py-2 rounded-full text-gray-700 hover:bg-gray-200 transition whitespace-nowrap"
+                >
+                  Game Dev
+                </button>
+                <button
+                  class="px-4 py-2 rounded-full text-gray-700 hover:bg-gray-200 transition whitespace-nowrap"
+                >
+                  Design
+                </button>
+                <button
+                  class="px-4 py-2 rounded-full text-gray-700 hover:bg-gray-200 transition whitespace-nowrap"
+                >
+                  Tutorials
+                </button>
+              </div>
+            </div>
+            <div class="relative">
+              <input
+                type="text"
+                placeholder="Search blog posts..."
+                class="pl-10 pr-4 py-2 w-full md:w-64 bg-gray-100 rounded-full text-gray-700 text-sm focus:bg-white focus:ring-2 focus:ring-primary/20 transition border-none"
+              />
+              <div
+                class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-500"
+              >
+                <i class="ri-search-line"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Blog Post 1 -->
+          <div class="blog-card bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="relative h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20high-resolution%20image%20showing%20game%20development%20environment%20with%20code%20editor%20open%20displaying%20JavaScript%20code%20for%20a%20simple%202D%20game.%20The%20workspace%20should%20be%20clean%20and%20modern%20with%20multiple%20monitors.%20The%20image%20should%20be%20well-lit%20with%20natural%20lighting%20and%20have%20a%20professional%20appearance.&width=600&height=400&seq=2&orientation=landscape"
+                alt="The Evolution of Casual Gaming"
+                class="w-full h-full object-cover object-top"
+              />
+              <div class="absolute top-3 left-3">
+                <span
+                  class="inline-block bg-primary/90 text-white text-xs font-medium px-2 py-1 rounded"
+                  >Game Dev</span
+                >
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                The Evolution of Casual Gaming
+              </h3>
+              <div class="flex items-center text-gray-500 text-sm mb-3">
+                <span>June 11, 2025</span>
+                <span class="mx-2">•</span>
+                <span>5 min read</span>
+              </div>
+              <p class="text-gray-600 mb-4">
+                Explore how casual games like Flappy Bird have transformed the
+                gaming industry and created new opportunities for indie
+                developers...
+              </p>
+              <div class="flex justify-between items-center">
+                <a href="#" class="text-primary font-medium hover:underline"
+                  >Read More</a
+                >
+                <div class="flex space-x-2">
+                  <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
+                  >
+                    <i class="ri-heart-line"></i>
+                  </button>
+                  <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
+                  >
+                    <i class="ri-share-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Blog Post 2 -->
+          <div class="blog-card bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="relative h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20high-resolution%20image%20showing%20HTML5%20Canvas%20development%20with%20game%20physics%20being%20implemented.%20The%20screen%20should%20show%20code%20and%20a%20simple%20game%20prototype%20with%20gravity%20effects.%20The%20workspace%20should%20be%20modern%20with%20good%20lighting%20and%20professional%20appearance.&width=600&height=400&seq=3&orientation=landscape"
+                alt="Mastering HTML5 Canvas for Game Development"
+                class="w-full h-full object-cover object-top"
+              />
+              <div class="absolute top-3 left-3">
+                <span
+                  class="inline-block bg-secondary/90 text-white text-xs font-medium px-2 py-1 rounded"
+                  >Tutorial</span
+                >
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Mastering HTML5 Canvas for Game Development
+              </h3>
+              <div class="flex items-center text-gray-500 text-sm mb-3">
+                <span>June 9, 2025</span>
+                <span class="mx-2">•</span>
+                <span>8 min read</span>
+              </div>
+              <p class="text-gray-600 mb-4">
+                Learn how to leverage the power of HTML5 Canvas to create
+                smooth, responsive browser-based games with optimal
+                performance...
+              </p>
+              <div class="flex justify-between items-center">
+                <a href="#" class="text-primary font-medium hover:underline"
+                  >Read More</a
+                >
+                <div class="flex space-x-2">
+                  <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
+                  >
+                    <i class="ri-heart-line"></i>
+                  </button>
+                  <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
+                  >
+                    <i class="ri-share-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Blog Post 3 -->
+          <div class="blog-card bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="relative h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20high-resolution%20image%20showing%20game%20monetization%20strategies%20with%20charts%20and%20graphs%20on%20a%20computer%20screen.%20The%20workspace%20should%20include%20mobile%20devices%20showing%20in-app%20purchases.%20The%20image%20should%20be%20professional%20with%20clean%2C%20modern%20aesthetics%20and%20good%20lighting.&width=600&height=400&seq=4&orientation=landscape"
+                alt="Monetization Strategies for Indie Game Developers"
+                class="w-full h-full object-cover object-top"
+              />
+              <div class="absolute top-3 left-3">
+                <span
+                  class="inline-block bg-orange-500/90 text-white text-xs font-medium px-2 py-1 rounded"
+                  >Business</span
+                >
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Monetization Strategies for Indie Game Developers
+              </h3>
+              <div class="flex items-center text-gray-500 text-sm mb-3">
+                <span>June 7, 2025</span>
+                <span class="mx-2">•</span>
+                <span>6 min read</span>
+              </div>
+              <p class="text-gray-600 mb-4">
+                Discover effective ways to generate revenue from your indie
+                games without compromising player experience or game
+                integrity...
+              </p>
+              <div class="flex justify-between items-center">
+                <a href="#" class="text-primary font-medium hover:underline"
+                  >Read More</a
+                >
+                <div class="flex space-x-2">
+                  <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
+                  >
+                    <i class="ri-heart-line"></i>
+                  </button>
+                  <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
+                  >
+                    <i class="ri-share-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Blog Post 4 -->
+          <div class="blog-card bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="relative h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20high-resolution%20image%20showing%20game%20physics%20implementation%20with%20diagrams%20of%20collision%20detection%20and%20gravity%20effects.%20The%20workspace%20should%20include%20code%20editor%20and%20a%20simple%20game%20prototype.%20Professional%20lighting%20and%20modern%20setup%20with%20clean%20aesthetics.&width=600&height=400&seq=5&orientation=landscape"
+                alt="Implementing Physics in Browser Games"
+                class="w-full h-full object-cover object-top"
+              />
+              <div class="absolute top-3 left-3">
+                <span
+                  class="inline-block bg-secondary/90 text-white text-xs font-medium px-2 py-1 rounded"
+                  >Tutorial</span
+                >
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Implementing Physics in Browser Games
+              </h3>
+              <div class="flex items-center text-gray-500 text-sm mb-3">
+                <span>June 5, 2025</span>
+                <span class="mx-2">•</span>
+                <span>7 min read</span>
+              </div>
+              <p class="text-gray-600 mb-4">
+                A deep dive into creating realistic physics for browser-based
+                games, including gravity, collision detection, and response
+                systems...
+              </p>
+              <div class="flex justify-between items-center">
+                <a href="#" class="text-primary font-medium hover:underline"
+                  >Read More</a
+                >
+                <div class="flex space-x-2">
+                  <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
+                  >
+                    <i class="ri-heart-line"></i>
+                  </button>
+                  <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
+                  >
+                    <i class="ri-share-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Blog Post 5 -->
+          <div class="blog-card bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="relative h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20high-resolution%20image%20showing%20game%20UI%2FUX%20design%20process%20with%20wireframes%20and%20mockups%20for%20mobile%20games.%20The%20workspace%20should%20include%20design%20software%2C%20color%20palettes%2C%20and%20prototype%20screens.%20Professional%20lighting%20with%20modern%20aesthetics.&width=600&height=400&seq=6&orientation=landscape"
+                alt="UI/UX Best Practices for Mobile Games"
+                class="w-full h-full object-cover object-top"
+              />
+              <div class="absolute top-3 left-3">
+                <span
+                  class="inline-block bg-purple-500/90 text-white text-xs font-medium px-2 py-1 rounded"
+                  >Design</span
+                >
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                UI/UX Best Practices for Mobile Games
+              </h3>
+              <div class="flex items-center text-gray-500 text-sm mb-3">
+                <span>June 3, 2025</span>
+                <span class="mx-2">•</span>
+                <span>6 min read</span>
+              </div>
+              <p class="text-gray-600 mb-4">
+                Explore essential design principles that make mobile games more
+                intuitive, engaging, and accessible to players of all skill
+                levels...
+              </p>
+              <div class="flex justify-between items-center">
+                <a href="#" class="text-primary font-medium hover:underline"
+                  >Read More</a
+                >
+                <div class="flex space-x-2">
+                  <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
+                  >
+                    <i class="ri-heart-line"></i>
+                  </button>
+                  <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
+                  >
+                    <i class="ri-share-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Blog Post 6 -->
+          <div class="blog-card bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="relative h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20high-resolution%20image%20showing%20cross-platform%20game%20development%20with%20multiple%20devices%20%28mobile%20phones%2C%20tablets%2C%20laptops%29%20running%20the%20same%20game.%20The%20workspace%20should%20include%20code%20and%20development%20tools.%20Professional%20lighting%20with%20modern%20aesthetics.&width=600&height=400&seq=7&orientation=landscape"
+                alt="Cross-Platform Game Development Guide"
+                class="w-full h-full object-cover object-top"
+              />
+              <div class="absolute top-3 left-3">
+                <span
+                  class="inline-block bg-primary/90 text-white text-xs font-medium px-2 py-1 rounded"
+                  >Game Dev</span
+                >
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Cross-Platform Game Development Guide
+              </h3>
+              <div class="flex items-center text-gray-500 text-sm mb-3">
+                <span>June 1, 2025</span>
+                <span class="mx-2">•</span>
+                <span>9 min read</span>
+              </div>
+              <p class="text-gray-600 mb-4">
+                Learn strategies for developing games that work seamlessly
+                across multiple platforms, from mobile devices to desktop
+                browsers...
+              </p>
+              <div class="flex justify-between items-center">
+                <a href="#" class="text-primary font-medium hover:underline"
+                  >Read More</a
+                >
+                <div class="flex space-x-2">
+                  <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
+                  >
+                    <i class="ri-heart-line"></i>
+                  </button>
+                  <button
+                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
+                  >
+                    <i class="ri-share-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-12 flex justify-center">
+          <nav class="inline-flex rounded-md shadow-sm">
+            <a
+              href="#"
+              class="w-10 h-10 flex items-center justify-center rounded-l-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50"
+            >
+              <i class="ri-arrow-left-s-line"></i>
+            </a>
+            <a
+              href="#"
+              class="w-10 h-10 flex items-center justify-center border-t border-b border-gray-300 bg-primary text-white"
+              >1</a
+            >
+            <a
+              href="#"
+              class="w-10 h-10 flex items-center justify-center border-t border-b border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+              >2</a
+            >
+            <a
+              href="#"
+              class="w-10 h-10 flex items-center justify-center border-t border-b border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+              >3</a
+            >
+            <a
+              href="#"
+              class="w-10 h-10 flex items-center justify-center border-t border-b border-r border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+              >4</a
+            >
+            <a
+              href="#"
+              class="w-10 h-10 flex items-center justify-center rounded-r-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50"
+            >
+              <i class="ri-arrow-right-s-line"></i>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Get in Touch</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+              Have questions about the game or interested in collaboration? Feel
+              free to reach out!
+            </p>
+          </div>
+          <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-5">
+              <div
+                class="md:col-span-2 bg-gradient-to-br from-primary to-secondary p-8 text-white"
+              >
+                <h3 class="text-xl font-bold mb-6">Contact Information</h3>
+                <div class="space-y-6 mb-8">
+                  <div class="flex items-start">
+                    <div
+                      class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 mr-4 mt-1"
+                    >
+                      <i class="ri-mail-line text-white"></i>
+                    </div>
+                    <div>
+                      <p class="font-medium mb-1">Email</p>
+                      <p class="text-white/80">sarthaks42388434@gmail.com</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <div
+                      class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 mr-4 mt-1"
+                    >
+                      <i class="ri-map-pin-line text-white"></i>
+                    </div>
+                    <div>
+                      <p class="font-medium mb-1">Location</p>
+                      <p class="text-white/80">Satna, Madhya Pradesh, India</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <div
+                      class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 mr-4 mt-1"
+                    >
+                      <i class="ri-time-line text-white"></i>
+                    </div>
+                    <div>
+                      <p class="font-medium mb-1">Working Hours</p>
+                      <p class="text-white/80">
+                        Monday - Friday, 9AM - 6PM IST
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex space-x-3 mt-8">
+                  <a
+                    href="#"
+                    class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 transition"
+                  >
+                    <i class="ri-twitter-line"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 transition"
+                  >
+                    <i class="ri-github-line"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 transition"
+                  >
+                    <i class="ri-linkedin-line"></i>
+                  </a>
+                  <a
+                    href="#"
+                    class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 transition"
+                  >
+                    <i class="ri-instagram-line"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="md:col-span-3 p-8">
+                <form>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                      <label
+                        for="name"
+                        class="block text-sm font-medium text-gray-700 mb-2"
+                        >Your Name</label
+                      >
+                      <input
+                        type="text"
+                        id="name"
+                        class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                        placeholder="John Doe"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        for="email"
+                        class="block text-sm font-medium text-gray-700 mb-2"
+                        >Email Address</label
+                      >
+                      <input
+                        type="email"
+                        id="email"
+                        class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                        placeholder="john@example.com"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-6">
+                    <label
+                      for="subject"
+                      class="block text-sm font-medium text-gray-700 mb-2"
+                      >Subject</label
+                    >
+                    <input
+                      type="text"
+                      id="subject"
+                      class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                      placeholder="How can I help you?"
+                    />
+                  </div>
+                  <div class="mb-6">
+                    <label
+                      for="message"
+                      class="block text-sm font-medium text-gray-700 mb-2"
+                      >Message</label
+                    >
+                    <textarea
+                      id="message"
+                      rows="5"
+                      class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                      placeholder="Your message here..."
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    class="px-6 py-3 bg-primary text-white font-medium rounded-button hover:bg-primary/90 transition whitespace-nowrap"
+                  >
+                    Send Message
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div
+          class="max-w-4xl mx-auto bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-8 md:p-12"
+        >
+          <div class="text-center mb-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              Subscribe to Our Newsletter
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+              Stay updated with the latest game updates, tutorials, and
+              exclusive content delivered straight to your inbox.
+            </p>
+          </div>
+          <form class="max-w-xl mx-auto">
+            <div class="flex flex-col md:flex-row gap-4">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                class="flex-1 px-4 py-3 border border-gray-300 rounded-button focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+              />
+              <button
+                type="submit"
+                class="px-6 py-3 bg-primary text-white font-medium rounded-button hover:bg-primary/90 transition whitespace-nowrap"
+              >
+                Subscribe
+              </button>
+            </div>
+            <p class="text-gray-500 text-sm mt-3 text-center">
+              We respect your privacy. Unsubscribe at any time.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+          <div>
+            <div class="flex items-center space-x-2 mb-6">
+              <div
+                class="w-10 h-10 flex items-center justify-center bg-primary rounded-full"
+              >
+                <i class="ri-gamepad-line text-white ri-lg"></i>
+              </div>
+              <span class="text-xl font-['Pacifico'] text-white"
+                >Flappy Bird Game</span
+              >
+            </div>
+            <p class="text-gray-400 mb-6">
+              A modern recreation of the classic Flappy Bird game, designed and
+              developed by Sarthak Sharma.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-primary hover:text-white transition"
+              >
+                <i class="ri-twitter-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-primary hover:text-white transition"
+              >
+                <i class="ri-github-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-primary hover:text-white transition"
+              >
+                <i class="ri-linkedin-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-primary hover:text-white transition"
+              >
+                <i class="ri-instagram-line"></i>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#game"
+                  class="text-gray-400 hover:text-white transition"
+                  >Play Game</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#blog"
+                  class="text-gray-400 hover:text-white transition"
+                  >Blog</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#about"
+                  class="text-gray-400 hover:text-white transition"
+                  >About Developer</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="text-gray-400 hover:text-white transition"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold mb-6">Resources</h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Game Development Tutorials</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >HTML5 Canvas Documentation</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >JavaScript Game Frameworks</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Game Design Resources</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Developer Community</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold mb-6">Contact</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1"
+                >
+                  <i class="ri-mail-line"></i>
+                </div>
+                <span class="text-gray-400">sarthaks42388434@gmail.com</span>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1"
+                >
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span class="text-gray-400">Satna, Madhya Pradesh, India</span>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1"
+                >
+                  <i class="ri-time-line"></i>
+                </div>
+                <span class="text-gray-400"
+                  >Monday - Friday, 9AM - 6PM IST</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-gray-800 pt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-500 mb-4 md:mb-0">
+              © 2025 Flappy Bird Game. All rights reserved. Designed by Sarthak
+              Sharma.
+            </p>
+            <div class="flex space-x-6">
+              <a href="#" class="text-gray-500 hover:text-white transition"
+                >Privacy Policy</a
+              >
+              <a href="#" class="text-gray-500 hover:text-white transition"
+                >Terms of Service</a
+              >
+              <a href="#" class="text-gray-500 hover:text-white transition"
+                >Cookie Policy</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Back to top button -->
+    <button
+      id="back-to-top"
+      class="fixed bottom-6 right-6 w-12 h-12 bg-primary rounded-full text-white shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300"
+    >
+      <i class="ri-arrow-up-line ri-lg"></i>
+    </button>
+    <!-- Game Logic Script -->
+    <script id="game-logic">
+      document.addEventListener("DOMContentLoaded", function () {
+        // Game variables
+        const gameContainer = document.getElementById("game-container");
+        const bird = document.getElementById("bird");
+        const startButton = document.getElementById("start-button");
+        const pauseButton = document.getElementById("pause-button");
+        const restartButton = document.getElementById("restart-button");
+        const shareButton = document.getElementById("share-button");
+        const currentScoreElement = document.getElementById("current-score");
+        const highScoreElement = document.getElementById("high-score");
+        let gameRunning = false;
+        let gamePaused = false;
+        let birdY = 150;
+        let birdVelocity = 0;
+        let gravity = 0.6;
+        let score = 0;
+        let highScore = localStorage.getItem("flappyBirdHighScore") || 0;
+        let pipes = [];
+        let gameLoop;
+        let pipeInterval;
+        const GAME_WIDTH = gameContainer.clientWidth;
+        const GAME_HEIGHT = gameContainer.clientHeight;
+        const BIRD_WIDTH = 34;
+        const BIRD_HEIGHT = 24;
+        const PIPE_WIDTH = 52;
+        const PIPE_GAP = 150;
+        const GROUND_HEIGHT = 20;
+        // Initialize bird position
+        bird.style.position = "absolute";
+        bird.style.width = BIRD_WIDTH + "px";
+        bird.style.height = BIRD_HEIGHT + "px";
+        bird.style.left = "50px";
+        bird.style.transition = "transform 0.1s";
+        // Set initial high score
+        highScoreElement.textContent = highScore;
+        // Set bird appearance
+        bird.style.backgroundImage =
+          'url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 24"><path fill="%23FFC107" d="M34,12c0,6.6-7.6,12-17,12S0,18.6,0,12S7.6,0,17,0S34,5.4,34,12z"/><circle fill="%23FFFFFF" cx="25" cy="9" r="4"/><circle fill="%23000000" cx="25" cy="9" r="2"/><path fill="%23FF6F00" d="M8,12c0,1.1-0.9,2-2,2s-2-0.9-2-2s0.9-2,2-2S8,10.9,8,12z"/></svg>\')';
+        // Game functions
+        function startGame() {
+          if (gameRunning) return;
+
+          // Reset game state
+          gameRunning = true;
+          gamePaused = false;
+          birdY = GAME_HEIGHT / 3;
+          birdVelocity = 0;
+          score = 0;
+          pipes = [];
+          currentScoreElement.textContent = score;
+
+          // Clear existing pipes
+          const existingPipes = gameContainer.querySelectorAll(".pipe");
+          existingPipes.forEach((pipe) => pipe.remove());
+
+          // Reset bird position
+          bird.style.top = birdY + "px";
+          bird.style.transform = "rotate(0deg)";
+
+          // Enable game controls
+          pauseButton.disabled = false;
+          restartButton.disabled = false;
+
+          // Hide start message if exists
+          const startMessage = gameContainer.querySelector(".text-center");
+          if (startMessage) {
+            startMessage.style.display = "none";
+          }
+
+          // Start game loops
+          clearInterval(gameLoop);
+          clearInterval(pipeInterval);
+          gameLoop = setInterval(updateGame, 16); // ~60fps
+          pipeInterval = setInterval(createPipe, 1500);
+
+          // Create initial pipe
+          createPipe();
+        }
+        function updateGame() {
+          if (gamePaused) return;
+
+          // Update bird position
+          birdVelocity += gravity;
+          birdY += birdVelocity;
+
+          // Apply position and rotation
+          bird.style.top = birdY + "px";
+          const rotation = Math.min(Math.max(-30, birdVelocity * 3), 90);
+          bird.style.transform = `rotate(${rotation}deg)`;
+
+          // Define bird hitbox
+          const birdRect = {
+            top: birdY,
+            bottom: birdY + BIRD_HEIGHT,
+            left: 50,
+            right: 50 + BIRD_WIDTH,
+          };
+
+          // Ground collision
+          if (birdY > GAME_HEIGHT - GROUND_HEIGHT - BIRD_HEIGHT) {
+            birdY = GAME_HEIGHT - GROUND_HEIGHT - BIRD_HEIGHT;
+            endGame();
+            return;
+          }
+
+          // Ceiling collision
+          if (birdY < 0) {
+            birdY = 0;
+            birdVelocity = 2;
+          }
+          // Update pipes
+          for (let i = pipes.length - 1; i >= 0; i--) {
+            const pipe = pipes[i];
+            pipe.x -= 3; // Slightly faster pipe movement
+
+            // Update pipe positions
+            pipe.topElement.style.left = pipe.x + "px";
+            pipe.bottomElement.style.left = pipe.x + "px";
+
+            // Check for collision
+            if (
+              birdRect.right > pipe.x &&
+              birdRect.left < pipe.x + PIPE_WIDTH &&
+              (birdRect.top < pipe.topHeight ||
+                birdRect.bottom > pipe.topHeight + PIPE_GAP)
+            ) {
+              endGame();
+              return;
+            }
+
+            // Score point when passing pipe
+            if (!pipe.passed && pipe.x + PIPE_WIDTH < birdRect.left) {
+              pipe.passed = true;
+              score++;
+              currentScoreElement.textContent = score;
+
+              // Play score sound or add visual feedback here
+            }
+
+            // Remove off-screen pipes
+            if (pipe.x < -PIPE_WIDTH) {
+              pipe.topElement.remove();
+              pipe.bottomElement.remove();
+              pipes.splice(i, 1);
+            }
+          }
+        }
+        function createPipe() {
+          if (!gameRunning || gamePaused) return;
+
+          // Calculate pipe dimensions
+          const minHeight = 50; // Minimum pipe height
+          const maxHeight = GAME_HEIGHT - PIPE_GAP - minHeight - GROUND_HEIGHT;
+          const topHeight =
+            Math.floor(Math.random() * (maxHeight - minHeight)) + minHeight;
+
+          // Create top pipe
+          const topPipe = document.createElement("div");
+          topPipe.className = "pipe";
+          topPipe.style.position = "absolute";
+          topPipe.style.width = PIPE_WIDTH + "px";
+          topPipe.style.height = topHeight + "px";
+          topPipe.style.top = "0";
+          topPipe.style.backgroundColor = "#10B981";
+          topPipe.style.border = "2px solid #065f46";
+          topPipe.style.borderRadius = "0 0 4px 4px";
+
+          // Create bottom pipe
+          const bottomPipe = document.createElement("div");
+          bottomPipe.className = "pipe";
+          bottomPipe.style.position = "absolute";
+          bottomPipe.style.width = PIPE_WIDTH + "px";
+          bottomPipe.style.height =
+            GAME_HEIGHT - topHeight - PIPE_GAP - GROUND_HEIGHT + "px";
+          bottomPipe.style.bottom = GROUND_HEIGHT + "px";
+          bottomPipe.style.backgroundColor = "#10B981";
+          bottomPipe.style.border = "2px solid #065f46";
+          bottomPipe.style.borderRadius = "4px 4px 0 0";
+
+          // Add pipes to container
+          gameContainer.appendChild(topPipe);
+          gameContainer.appendChild(bottomPipe);
+
+          // Create pipe object
+          const pipe = {
+            x: GAME_WIDTH,
+            topHeight: topHeight,
+            topElement: topPipe,
+            bottomElement: bottomPipe,
+            passed: false,
+          };
+
+          // Add to pipes array
+          pipes.push(pipe);
+
+          // Set initial positions
+          topPipe.style.left = GAME_WIDTH + "px";
+          bottomPipe.style.left = GAME_WIDTH + "px";
+        }
+        function flapBird() {
+          if (!gameRunning || gamePaused) return;
+          birdVelocity = -8.5;
+
+          // Add flap animation
+          bird.style.transform = "rotate(-20deg)";
+        }
+        function pauseGame() {
+          if (!gameRunning) return;
+          gamePaused = !gamePaused;
+          pauseButton.innerHTML = gamePaused
+            ? '<i class="ri-play-line ri-lg text-gray-700"></i>'
+            : '<i class="ri-pause-line ri-lg text-gray-700"></i>';
+        }
+        function endGame() {
+          gameRunning = false;
+
+          // Clear intervals
+          clearInterval(gameLoop);
+          clearInterval(pipeInterval);
+
+          // Update high score
+          if (score > highScore) {
+            highScore = score;
+            highScoreElement.textContent = highScore;
+            localStorage.setItem("flappyBirdHighScore", highScore);
+          }
+
+          // Reset button states
+          pauseButton.disabled = true;
+          restartButton.disabled = false;
+          pauseButton.innerHTML = '<i class="ri-pause-line ri-lg text-gray-700"></i>';
+
+          // Show game over message
+          const gameOverMessage = document.createElement("div");
+          gameOverMessage.className =
+            "text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/90 p-6 rounded-lg shadow-lg";
+          gameOverMessage.innerHTML = `
+              <h3 class="text-2xl font-bold text-gray-800 mb-4">Game Over!</h3>
+              <p class="text-gray-600 mb-4">Score: ${score}</p>
+              <button onclick="startGame()" class="px-6 py-2 bg-primary text-white font-medium rounded-button shadow hover:bg-primary/90 transition whitespace-nowrap">Play Again</button>
+          `;
+          gameContainer.appendChild(gameOverMessage);
+
+          // Add falling animation to bird
+          bird.style.transform = "rotate(90deg)";
+        }
+        function shareScore() {
+          if (navigator.share) {
+            navigator.share({
+              title: "Flappy Bird Game",
+              text: `I scored ${score} points in Flappy Bird! Can you beat my score?`,
+              url: window.location.href,
+            });
+          } else {
+            alert(`I scored ${score} points in Flappy Bird! Can you beat my score?`);
+          }
+        }
+        // Event listeners
+        startButton.addEventListener("click", startGame);
+        pauseButton.addEventListener("click", pauseGame);
+        restartButton.addEventListener("click", startGame);
+        shareButton.addEventListener("click", shareScore);
+        gameContainer.addEventListener("click", flapBird);
+        document.addEventListener("keydown", function (e) {
+          if (e.code === "Space") {
+            flapBird();
+          } else if (e.code === "KeyP") {
+            pauseGame();
+          } else if (e.code === "KeyR") {
+            startGame();
+          }
+        });
+        // Make bird look in movement direction
+        setInterval(() => {
+          if (gameRunning && !gamePaused) {
+            const rotation = birdVelocity * 2;
+            bird.style.transform = `rotate(${rotation}deg)`;
+          }
+        }, 50);
+      });
+    </script>
+    <!-- UI Interaction Script -->
+    <script id="ui-interaction">
+      document.addEventListener("DOMContentLoaded", function () {
+        // Back to top button
+        const backToTopButton = document.getElementById("back-to-top");
+        window.addEventListener("scroll", function () {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.remove("opacity-0", "invisible");
+            backToTopButton.classList.add("opacity-100", "visible");
+          } else {
+            backToTopButton.classList.remove("opacity-100", "visible");
+            backToTopButton.classList.add("opacity-0", "invisible");
+          }
+        });
+        backToTopButton.addEventListener("click", function () {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            if (targetId === "#") return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({
+                behavior: "smooth",
+              });
+            }
+          });
+        });
+        // Mobile menu toggle (simplified version)
+        const mobileMenuButton = document.querySelector("button.md\\:hidden");
+        if (mobileMenuButton) {
+          mobileMenuButton.addEventListener("click", function () {
+            alert("Mobile menu would toggle here in a complete implementation");
+          });
+        }
+        // Add loading animation to blog images
+        document.querySelectorAll(".blog-card img").forEach((img) => {
+          img.classList.add("transition-opacity", "duration-500", "opacity-0");
+          img.onload = function () {
+            img.classList.remove("opacity-0");
+            img.classList.add("opacity-100");
+          };
+        });
+        // Form validation for contact form
+        const contactForm = document.querySelector("#contact form");
+        if (contactForm) {
+          contactForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const nameInput = document.getElementById("name");
+            const emailInput = document.getElementById("email");
+            const messageInput = document.getElementById("message");
+            let isValid = true;
+            if (!nameInput.value.trim()) {
+              nameInput.classList.add("border-red-500");
+              isValid = false;
+            } else {
+              nameInput.classList.remove("border-red-500");
+            }
+            if (!emailInput.value.trim() || !emailInput.value.includes("@")) {
+              emailInput.classList.add("border-red-500");
+              isValid = false;
+            } else {
+              emailInput.classList.remove("border-red-500");
+            }
+            if (!messageInput.value.trim()) {
+              messageInput.classList.add("border-red-500");
+              isValid = false;
+            } else {
+              messageInput.classList.remove("border-red-500");
+            }
+            if (isValid) {
+              alert("Thank you for your message! We will get back to you soon.");
+              contactForm.reset();
+            } else {
+              alert("Please fill in all required fields correctly.");
+            }
+          });
+        }
+        // Newsletter form
+        const newsletterForm = document.querySelector("section:nth-of-type(5) form");
+        if (newsletterForm) {
+          newsletterForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const emailInput = this.querySelector('input[type="email"]');
+            if (!emailInput.value.trim() || !emailInput.value.includes("@")) {
+              emailInput.classList.add("border-red-500");
+              alert("Please enter a valid email address.");
+            } else {
+              emailInput.classList.remove("border-red-500");
+              alert("Thank you for subscribing to our newsletter!");
+              newsletterForm.reset();
+            }
+          });
+        }
+      });
+    </script>
+  </body>
 </html>
