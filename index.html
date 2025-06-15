@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flappy Bird Game - Sarthak Sharma</title>
-    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <title>SkyDash Wings - Professional Game Development by Sarthak Sharma</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
@@ -38,164 +38,165 @@
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
     />
     <style>
-      :where([class^="ri-"])::before { content: "\f3c2"; }
       body {
-      font-family: 'Poppins', sans-serif;
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.6;
       }
       .game-canvas {
-      border: 2px solid #ddd;
-      background-color: #f0f9ff;
+        border: 2px solid #ddd;
+        background-color: #f0f9ff;
       }
       .bird {
-      width: 34px;
-      height: 24px;
-      position: absolute;
-      background-size: cover;
+        width: 34px;
+        height: 24px;
+        position: absolute;
+        background-size: cover;
       }
       .pipe {
-      position: absolute;
-      width: 52px;
-      background-color: #10B981;
-      border: 2px solid #065f46;
+        position: absolute;
+        width: 52px;
+        background-color: #10B981;
+        border: 2px solid #065f46;
       }
       .ground {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 20px;
-      background-color: #92400e;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 20px;
+        background-color: #92400e;
       }
       input:focus, button:focus {
-      outline: none;
+        outline: none;
       }
       .blog-card:hover {
-      transform: translateY(-5px);
+        transform: translateY(-5px);
       }
       .blog-card {
-      transition: transform 0.3s ease;
+        transition: transform 0.3s ease;
+      }
+      .game-over-message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.95);
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        text-align: center;
+        backdrop-filter: blur(5px);
+      }
+      .extra-content {
+        display: none;
+      }
+      .extra-content.show {
+        display: inline;
+      }
+      .section-spacing {
+        margin-bottom: 2rem;
+      }
+      .legal-content {
+        max-height: none;
+        overflow: visible;
+      }
+      .blog-post-full {
+        margin-bottom: 3rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      @media print {
+        .no-print {
+          display: none !important;
+        }
+        body {
+          overflow: visible !important;
+        }
+        .game-canvas {
+          height: 300px !important;
+        }
       }
     </style>
   </head>
   <body class="bg-gray-50">
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-      <div
-        class="container mx-auto px-4 py-3 flex items-center justify-between"
-      >
-        <a href="#" class="flex items-center space-x-2">
-          <div
-            class="w-10 h-10 flex items-center justify-center bg-primary rounded-full"
-          >
-            <i class="ri-gamepad-line text-white ri-lg"></i>
+    <header class="bg-white shadow-sm sticky top-0 z-50 no-print">
+      <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="#home" class="flex items-center space-x-2">
+          <div class="w-10 h-10 flex items-center justify-center bg-primary rounded-full">
+            <i class="fas fa-feather text-white"></i>
           </div>
-          <span class="text-xl font-['Pacifico'] text-gray-800"
-            >Flappy Bird Game</span
-          >
+          <span class="text-xl font-['Pacifico'] text-gray-800">SkyDash Wings</span>
         </a>
         <nav class="hidden md:flex items-center space-x-8">
-          <a href="#" class="text-primary font-medium">Home</a>
-          <a href="#game" class="text-gray-700 hover:text-primary transition"
-            >Play Game</a
-          >
-          <a href="#blog" class="text-gray-700 hover:text-primary transition"
-            >Blog</a
-          >
-          <a href="#about" class="text-gray-700 hover:text-primary transition"
-            >About Developer</a
-          >
-          <a href="#contact" class="text-gray-700 hover:text-primary transition"
-            >Contact</a
-          >
+          <a href="#home" class="text-primary font-medium">Home</a>
+          <a href="#game" class="text-gray-700 hover:text-primary transition">Play Game</a>
+          <a href="#blog" class="text-gray-700 hover:text-primary transition">Blog</a>
+          <a href="#about" class="text-gray-700 hover:text-primary transition">About Developer</a>
+          <a href="#legal" class="text-gray-700 hover:text-primary transition">Legal</a>
+          <a href="#contact" class="text-gray-700 hover:text-primary transition">Contact</a>
         </nav>
         <div class="flex items-center space-x-4">
-          <a
-            href="#"
-            class="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-primary transition"
-          >
-            <i class="ri-twitter-line ri-lg"></i>
+          <a href="https://twitter.com/sarthaksharma" target="_blank" class="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-primary transition">
+            <i class="fab fa-twitter"></i>
           </a>
-          <a
-            href="#"
-            class="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-primary transition"
-          >
-            <i class="ri-github-line ri-lg"></i>
+          <a href="https://github.com/sarthaksharma" target="_blank" class="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-primary transition">
+            <i class="fab fa-github"></i>
           </a>
-          <a
-            href="#"
-            class="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-primary transition"
-          >
-            <i class="ri-linkedin-line ri-lg"></i>
+          <a href="https://linkedin.com/in/sarthaksharma" target="_blank" class="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-primary transition">
+            <i class="fab fa-linkedin"></i>
           </a>
           <button class="md:hidden w-10 h-10 flex items-center justify-center">
-            <i class="ri-menu-line ri-lg"></i>
+            <i class="fas fa-bars"></i>
           </button>
         </div>
       </div>
     </header>
+
     <!-- Hero Section -->
-    <section
-      class="relative overflow-hidden"
-      style="background-image: url('https://readdy.ai/api/search-image?query=A%20vibrant%20gaming%20background%20with%20a%20blue%20sky%2C%20green%20pipes%2C%20and%20a%20cartoon%20landscape.%20The%20image%20should%20have%20a%20clean%20left%20side%20for%20text%20placement%2C%20with%20game%20elements%20concentrated%20on%20the%20right%20side.%20The%20style%20should%20be%20bright%2C%20cheerful%2C%20and%20suitable%20for%20a%20Flappy%20Bird%20game%20website.%20The%20transition%20from%20left%20to%20right%20should%20be%20natural%20and%20gradual.&width=1920&height=800&seq=1&orientation=landscape'); background-size: cover; background-position: center;"
-    >
-      <div
-        class="absolute inset-0 bg-gradient-to-r from-white/90 to-white/30"
-      ></div>
+    <section id="home" class="relative overflow-hidden section-spacing" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+      <div class="absolute inset-0 bg-gradient-to-r from-white/90 to-white/30"></div>
       <div class="container mx-auto px-4 py-20 relative z-10">
         <div class="w-full max-w-2xl">
           <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Experience the Classic Flappy Bird Challenge
+            Master the Skies with SkyDash Wings
           </h1>
           <p class="text-lg text-gray-700 mb-8">
-            Test your reflexes and patience with the addictive gameplay that
-            took the world by storm. Navigate through pipes, set new high
-            scores, and challenge your friends!
+            Experience the ultimate aerial challenge with SkyDash Wings - a modern take on classic arcade gaming. Navigate through endless obstacles, collect power-ups, and soar to new heights in this addictive sky-bound adventure!
           </p>
           <div class="flex flex-wrap gap-4">
-            <a
-              href="#game"
-              class="px-8 py-3 bg-primary text-white font-medium rounded-button shadow-lg hover:bg-primary/90 transition whitespace-nowrap"
-              >Play Now</a
-            >
-            <a
-              href="#about"
-              class="px-8 py-3 bg-white text-primary border border-primary font-medium rounded-button hover:bg-gray-50 transition whitespace-nowrap"
-              >About Developer</a
-            >
+            <a href="#game" class="px-8 py-3 bg-primary text-white font-medium rounded-button shadow-lg hover:bg-primary/90 transition whitespace-nowrap">
+              Start Flying
+            </a>
+            <a href="#about" class="px-8 py-3 bg-white text-primary border border-primary font-medium rounded-button hover:bg-gray-50 transition whitespace-nowrap">
+              Meet the Developer
+            </a>
           </div>
         </div>
       </div>
     </section>
+
     <!-- Game Section -->
-    <section id="game" class="py-16 bg-white">
+    <section id="game" class="py-16 bg-white section-spacing">
       <div class="container mx-auto px-4">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">
-            Play Flappy Bird
-          </h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Play SkyDash Wings</h2>
           <p class="text-gray-600 max-w-2xl mx-auto">
-            Press spacebar or tap to make the bird fly. Avoid the pipes and try
-            to get the highest score possible!
+            Press spacebar or tap to make your bird soar through the sky. Avoid obstacles and try to achieve the highest score possible!
           </p>
         </div>
         <div class="max-w-3xl mx-auto">
-          <div
-            class="relative game-canvas h-96 rounded-lg overflow-hidden mb-6"
-          >
+          <div class="relative game-canvas h-96 rounded-lg overflow-hidden mb-6">
             <div id="game-container" class="relative w-full h-full">
               <div class="bird" id="bird"></div>
               <div class="ground"></div>
               <div class="flex items-center justify-center h-full">
                 <div class="text-center">
-                  <h3 class="text-2xl font-bold text-gray-800 mb-4">
-                    Game Paused
-                  </h3>
-                  <button
-                    id="start-button"
-                    class="px-6 py-2 bg-primary text-white font-medium rounded-button shadow hover:bg-primary/90 transition whitespace-nowrap"
-                  >
+                  <h3 class="text-2xl font-bold text-gray-800 mb-4">Game Ready</h3>
+                  <button id="start-button" class="px-6 py-2 bg-primary text-white font-medium rounded-button shadow hover:bg-primary/90 transition whitespace-nowrap">
                     Start Game
                   </button>
                 </div>
@@ -206,9 +207,7 @@
             <div class="flex items-center space-x-6 mb-4 md:mb-0">
               <div class="text-center">
                 <p class="text-sm text-gray-500">Current Score</p>
-                <p id="current-score" class="text-2xl font-bold text-gray-900">
-                  0
-                </p>
+                <p id="current-score" class="text-2xl font-bold text-gray-900">0</p>
               </div>
               <div class="text-center">
                 <p class="text-sm text-gray-500">High Score</p>
@@ -216,145 +215,91 @@
               </div>
             </div>
             <div class="flex space-x-3">
-              <button
-                id="pause-button"
-                class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition"
-                disabled
-              >
-                <i class="ri-pause-line ri-lg text-gray-700"></i>
+              <button id="pause-button" class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition" disabled>
+                <i class="fas fa-pause text-gray-700"></i>
               </button>
-              <button
-                id="restart-button"
-                class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition"
-                disabled
-              >
-                <i class="ri-restart-line ri-lg text-gray-700"></i>
+              <button id="restart-button" class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition" disabled>
+                <i class="fas fa-redo text-gray-700"></i>
               </button>
-              <button
-                id="share-button"
-                class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition"
-              >
-                <i class="ri-share-line ri-lg text-gray-700"></i>
+              <button id="share-button" class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition">
+                <i class="fas fa-share-alt text-gray-700"></i>
               </button>
             </div>
           </div>
           <div class="bg-gray-50 rounded-lg p-6">
-            <h3 class="text-lg font-medium text-gray-900 mb-3">
-              Game Controls
-            </h3>
+            <h3 class="text-lg font-medium text-gray-900 mb-3">Game Controls</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="flex items-center">
-                <div
-                  class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md mr-3"
-                >
-                  <i class="ri-space-line ri-lg text-gray-700"></i>
+                <div class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md mr-3">
+                  <i class="fas fa-keyboard text-gray-700"></i>
                 </div>
-                <p class="text-gray-700">
-                  Press <span class="font-medium">Spacebar</span> to flap
-                </p>
+                <p class="text-gray-700">Press <span class="font-medium">Spacebar</span> to fly</p>
               </div>
               <div class="flex items-center">
-                <div
-                  class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md mr-3"
-                >
-                  <i class="ri-mouse-line ri-lg text-gray-700"></i>
+                <div class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md mr-3">
+                  <i class="fas fa-mouse-pointer text-gray-700"></i>
                 </div>
-                <p class="text-gray-700">
-                  <span class="font-medium">Click/Tap</span> to flap
-                </p>
+                <p class="text-gray-700"><span class="font-medium">Click/Tap</span> to fly</p>
               </div>
               <div class="flex items-center">
-                <div
-                  class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md mr-3"
-                >
-                  <i class="ri-pause-line ri-lg text-gray-700"></i>
+                <div class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md mr-3">
+                  <i class="fas fa-pause text-gray-700"></i>
                 </div>
-                <p class="text-gray-700">
-                  Press <span class="font-medium">P</span> to pause
-                </p>
+                <p class="text-gray-700">Press <span class="font-medium">P</span> to pause</p>
               </div>
               <div class="flex items-center">
-                <div
-                  class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md mr-3"
-                >
-                  <i class="ri-restart-line ri-lg text-gray-700"></i>
+                <div class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md mr-3">
+                  <i class="fas fa-redo text-gray-700"></i>
                 </div>
-                <p class="text-gray-700">
-                  Press <span class="font-medium">R</span> to restart
-                </p>
+                <p class="text-gray-700">Press <span class="font-medium">R</span> to restart</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+
     <!-- Developer Section -->
-    <section id="about" class="py-16 bg-gray-50">
+    <section id="about" class="py-16 bg-gray-50 section-spacing">
       <div class="container mx-auto px-4">
         <div class="max-w-5xl mx-auto">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="md:col-span-1">
               <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                <div
-                  class="h-48 bg-gradient-to-r from-primary to-secondary flex items-center justify-center"
-                >
-                  <div
-                    class="w-24 h-24 rounded-full bg-white flex items-center justify-center"
-                  >
-                    <i class="ri-user-line ri-2x text-primary"></i>
+                <div class="h-48 bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
+                  <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center">
+                    <i class="fas fa-user text-primary text-3xl"></i>
                   </div>
                 </div>
                 <div class="p-6">
-                  <h3 class="text-xl font-bold text-gray-900 mb-2">
-                    Sarthak Sharma
-                  </h3>
+                  <h3 class="text-xl font-bold text-gray-900 mb-2">Sarthak Sharma</h3>
                   <p class="text-gray-600 mb-4">Game Developer & Designer</p>
                   <div class="space-y-3 mb-6">
                     <div class="flex items-center">
-                      <div
-                        class="w-8 h-8 flex items-center justify-center text-primary"
-                      >
-                        <i class="ri-mail-line ri-lg"></i>
+                      <div class="w-8 h-8 flex items-center justify-center text-primary">
+                        <i class="fas fa-envelope"></i>
                       </div>
-                      <span class="text-gray-700 text-sm ml-2"
-                        >sarthaks42388434@gmail.com</span
-                      >
+                      <span class="text-gray-700 text-sm ml-2">sarthaks42388434@gmail.com</span>
                     </div>
                     <div class="flex items-center">
-                      <div
-                        class="w-8 h-8 flex items-center justify-center text-primary"
-                      >
-                        <i class="ri-map-pin-line ri-lg"></i>
+                      <div class="w-8 h-8 flex items-center justify-center text-primary">
+                        <i class="fas fa-map-marker-alt"></i>
                       </div>
-                      <span class="text-gray-700 text-sm ml-2"
-                        >Satna, Madhya Pradesh, India</span
-                      >
+                      <span class="text-gray-700 text-sm ml-2">Satna, Madhya Pradesh, India</span>
                     </div>
                   </div>
                   <div class="flex space-x-2">
-                    <a
-                      href="#"
-                      class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary hover:text-white transition"
-                    >
-                      <i class="ri-twitter-line"></i>
+                    <a href="https://twitter.com/sarthaksharma" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary hover:text-white transition">
+                      <i class="fab fa-twitter"></i>
                     </a>
-                    <a
-                      href="#"
-                      class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary hover:text-white transition"
-                    >
-                      <i class="ri-github-line"></i>
+                    <a href="https://github.com/sarthaksharma" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary hover:text-white transition">
+                      <i class="fab fa-github"></i>
                     </a>
-                    <a
-                      href="#"
-                      class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary hover:text-white transition"
-                    >
-                      <i class="ri-linkedin-line"></i>
+                    <a href="https://linkedin.com/in/sarthaksharma" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary hover:text-white transition">
+                      <i class="fab fa-linkedin"></i>
                     </a>
-                    <a
-                      href="#"
-                      class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary hover:text-white transition"
-                    >
-                      <i class="ri-instagram-line"></i>
+                    <a href="https://instagram.com/sarthaksharma" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary hover:text-white transition">
+                      <i class="fab fa-instagram"></i>
                     </a>
                   </div>
                 </div>
@@ -362,30 +307,17 @@
             </div>
             <div class="md:col-span-2">
               <div class="bg-white rounded-lg shadow-sm p-8">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">
-                  About the Developer
-                </h2>
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">About the Developer</h2>
                 <p class="text-gray-700 mb-4">
-                  Hello! I'm Sarthak Sharma, a passionate game developer and
-                  designer based in Satna, Madhya Pradesh, India. With a deep
-                  love for creating interactive experiences, I've dedicated my
-                  career to crafting engaging games that bring joy to players
-                  worldwide.
+                  Hello! I'm Sarthak Sharma, a passionate game developer and designer based in Satna, Madhya Pradesh, India. With over 5 years of experience in creating interactive experiences, I've dedicated my career to crafting engaging games that bring joy to players worldwide.
                 </p>
                 <p class="text-gray-700 mb-4">
-                  This Flappy Bird recreation is one of my projects aimed at
-                  preserving classic gaming experiences while adding my own
-                  creative touch. I believe in the power of simple yet
-                  challenging gameplay that keeps players coming back for more.
+                  SkyDash Wings represents my vision of modern arcade gaming - combining classic gameplay mechanics with contemporary design and smooth performance. I believe in creating games that are easy to learn but challenging to master, providing endless entertainment for players of all ages.
                 </p>
                 <p class="text-gray-700 mb-6">
-                  When I'm not coding or designing games, you can find me
-                  exploring new technologies, contributing to open-source
-                  projects, and sharing my knowledge through my blog posts.
+                  My expertise spans across HTML5 game development, JavaScript programming, responsive design, and user experience optimization. I'm constantly exploring new technologies and techniques to push the boundaries of browser-based gaming.
                 </p>
-                <h3 class="text-lg font-medium text-gray-900 mb-3">
-                  Skills & Expertise
-                </h3>
+                <h3 class="text-lg font-medium text-gray-900 mb-3">Skills & Expertise</h3>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
                   <div class="bg-gray-50 rounded p-3 text-center">
                     <p class="text-gray-800 font-medium">Game Development</p>
@@ -406,420 +338,944 @@
                     <p class="text-gray-800 font-medium">Responsive Design</p>
                   </div>
                 </div>
-                <a
-                  href="#contact"
-                  class="inline-block px-6 py-3 bg-primary text-white font-medium rounded-button hover:bg-primary/90 transition whitespace-nowrap"
-                  >Get in Touch</a
-                >
+                <a href="#contact" class="inline-block px-6 py-3 bg-primary text-white font-medium rounded-button hover:bg-primary/90 transition whitespace-nowrap">
+                  Get in Touch
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+
     <!-- Blog Section -->
-    <section id="blog" class="py-16 bg-white">
+    <section id="blog" class="py-16 bg-white section-spacing">
       <div class="container mx-auto px-4">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">
-            Latest from the Blog
-          </h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Game Development Blog</h2>
           <p class="text-gray-600 max-w-2xl mx-auto">
-            Explore articles about game development, design tips, and the world
-            of casual gaming.
+            Comprehensive articles about game development, programming tutorials, design insights, and industry trends.
           </p>
         </div>
-        <div class="mb-8">
-          <div class="flex flex-wrap items-center justify-between">
-            <div class="mb-4 md:mb-0">
-              <div class="inline-flex rounded-full bg-gray-100 p-1">
-                <button
-                  class="px-4 py-2 rounded-full bg-primary text-white whitespace-nowrap"
-                >
-                  All Posts
-                </button>
-                <button
-                  class="px-4 py-2 rounded-full text-gray-700 hover:bg-gray-200 transition whitespace-nowrap"
-                >
-                  Game Dev
-                </button>
-                <button
-                  class="px-4 py-2 rounded-full text-gray-700 hover:bg-gray-200 transition whitespace-nowrap"
-                >
-                  Design
-                </button>
-                <button
-                  class="px-4 py-2 rounded-full text-gray-700 hover:bg-gray-200 transition whitespace-nowrap"
-                >
-                  Tutorials
-                </button>
-              </div>
-            </div>
-            <div class="relative">
-              <input
-                type="text"
-                placeholder="Search blog posts..."
-                class="pl-10 pr-4 py-2 w-full md:w-64 bg-gray-100 rounded-full text-gray-700 text-sm focus:bg-white focus:ring-2 focus:ring-primary/20 transition border-none"
-              />
-              <div
-                class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-500"
-              >
-                <i class="ri-search-line"></i>
-              </div>
-            </div>
+
+        <!-- Blog Post 1 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-primary/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Game Development</span>
+            <span class="text-gray-500 text-sm">January 15, 2025 • 12 min read</span>
           </div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Blog Post 1 -->
-          <div class="blog-card bg-white rounded-lg shadow-sm overflow-hidden">
-            <div class="relative h-48 overflow-hidden">
-              <img
-                src="https://readdy.ai/api/search-image?query=A%20high-resolution%20image%20showing%20game%20development%20environment%20with%20code%20editor%20open%20displaying%20JavaScript%20code%20for%20a%20simple%202D%20game.%20The%20workspace%20should%20be%20clean%20and%20modern%20with%20multiple%20monitors.%20The%20image%20should%20be%20well-lit%20with%20natural%20lighting%20and%20have%20a%20professional%20appearance.&width=600&height=400&seq=2&orientation=landscape"
-                alt="The Evolution of Casual Gaming"
-                class="w-full h-full object-cover object-top"
-              />
-              <div class="absolute top-3 left-3">
-                <span
-                  class="inline-block bg-primary/90 text-white text-xs font-medium px-2 py-1 rounded"
-                  >Game Dev</span
-                >
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-2">
-                The Evolution of Casual Gaming
-              </h3>
-              <div class="flex items-center text-gray-500 text-sm mb-3">
-                <span>June 11, 2025</span>
-                <span class="mx-2">•</span>
-                <span>5 min read</span>
-              </div>
-              <p class="text-gray-600 mb-4">
-                Explore how casual games like Flappy Bird have transformed the
-                gaming industry and created new opportunities for indie
-                developers...
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">The Complete Guide to HTML5 Game Development</h3>
+          <p class="text-gray-700 mb-4">
+            HTML5 has revolutionized browser-based gaming, offering developers powerful tools to create engaging, cross-platform games without plugins. This comprehensive guide will walk you through everything you need to know about HTML5 game development, from basic concepts to advanced techniques.
+          </p>
+          <p class="text-gray-700 mb-4">
+            The foundation of HTML5 game development lies in understanding the Canvas API, which provides a drawing surface for creating 2D graphics programmatically. Unlike traditional DOM manipulation, Canvas offers pixel-level control and hardware-accelerated rendering, making it ideal for games requiring smooth animations and complex visual effects.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Getting started with Canvas is straightforward. You begin by creating a canvas element in your HTML and obtaining its 2D rendering context. From there, you can draw shapes, load images, handle user input, and implement game loops. The key to successful HTML5 game development is understanding how to optimize performance while maintaining cross-browser compatibility.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Game loops are the heart of any game, responsible for updating game state and rendering frames. A typical game loop consists of three phases: input handling, game logic updates, and rendering. Using requestAnimationFrame() ensures smooth 60fps gameplay while being battery-friendly on mobile devices.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Audio integration is crucial for immersive gaming experiences. The Web Audio API offers advanced audio processing capabilities, while the simpler HTML5 audio element works well for basic sound effects and background music. Consider implementing audio pooling to prevent memory leaks and ensure smooth audio playback.
+          </p>
+        </article>
+
+        <!-- Blog Post 2 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-secondary/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Tutorial</span>
+            <span class="text-gray-500 text-sm">January 12, 2025 • 15 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Building Physics Engines for Browser Games</h3>
+          <p class="text-gray-700 mb-4">
+            Creating realistic physics in browser games doesn't require a PhD in mathematics. This tutorial will guide you through building a simple yet effective physics engine that can handle gravity, collisions, and basic particle systems.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Physics simulation begins with understanding vectors and basic mechanics. In 2D games, every object has position, velocity, and acceleration vectors. Velocity represents how fast an object is moving and in which direction, while acceleration represents forces acting on the object, such as gravity or player input.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Implementing gravity is as simple as adding a constant downward acceleration to all objects. However, the challenge lies in collision detection and response. For simple games, axis-aligned bounding box (AABB) collision detection works well and is computationally efficient. More complex shapes require more sophisticated algorithms like the Separating Axis Theorem (SAT).
+          </p>
+          <p class="text-gray-700 mb-4">
+            Collision response involves determining how objects should behave when they collide. This includes calculating new velocities based on elasticity, friction, and conservation of momentum. For arcade-style games, simplified physics often feel better than realistic simulations.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Performance optimization is crucial when dealing with multiple physics objects. Spatial partitioning techniques like quadtrees can dramatically reduce collision detection overhead by limiting the number of objects that need to be checked against each other.
+          </p>
+        </article>
+
+        <!-- Blog Post 3 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-purple-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Design</span>
+            <span class="text-gray-500 text-sm">January 10, 2025 • 10 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Game UI/UX Design Principles for Mobile</h3>
+          <p class="text-gray-700 mb-4">
+            Mobile gaming has unique design challenges that desktop games don't face. From touch controls to varying screen sizes, creating an intuitive mobile game interface requires careful consideration of human factors and technical constraints.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Touch interface design starts with understanding thumb zones and comfortable reach areas. The majority of mobile users hold their phones with one hand, making certain screen areas easier to reach than others. Critical game controls should be placed within comfortable thumb reach, typically the bottom third of the screen.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Visual feedback is essential for touch interfaces since users don't have the tactile feedback of physical buttons. Every touch interaction should provide immediate visual confirmation through button states, animations, or sound effects. This helps users understand that their input has been registered.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Screen real estate is precious on mobile devices, so interface elements must be carefully prioritized. Use progressive disclosure to show only the most important information at any given time. Secondary information can be revealed through gestures or context menus.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Accessibility considerations are often overlooked but crucial for reaching a broader audience. Ensure sufficient color contrast, provide alternative text for images, and consider users with motor disabilities when designing touch targets and gesture controls.
+          </p>
+        </article>
+
+        <!-- Blog Post 4 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-orange-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Performance</span>
+            <span class="text-gray-500 text-sm">January 8, 2025 • 11 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Optimizing JavaScript Game Performance</h3>
+          <p class="text-gray-700 mb-4">
+            Performance optimization is crucial for creating smooth, engaging games that work well across different devices and browsers. This comprehensive guide covers proven techniques for optimizing JavaScript game performance.
+          </p>
+          <p class="text-gray-700 mb-4">
+            The game loop is where most performance optimization efforts should focus. Using requestAnimationFrame() instead of setInterval() provides better performance by synchronizing with the browser's refresh rate and pausing when the tab is not visible, saving battery life on mobile devices.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Object pooling is a powerful technique for reducing garbage collection pressure. Instead of creating and destroying objects frequently, maintain pools of reusable objects. This is particularly effective for bullets, particles, and other short-lived game objects that are created frequently.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Canvas rendering optimization involves minimizing draw calls and using appropriate drawing methods. Batch similar drawing operations together, use sprite sheets to reduce texture switches, and consider using WebGL for complex graphics operations. Dirty rectangle rendering can significantly improve performance by only redrawing portions of the screen that have changed.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Memory management becomes critical in long-running games. Avoid creating objects in tight loops, reuse variables where possible, and be mindful of closures that can create memory leaks. Use browser development tools to profile memory usage and identify potential issues before they become problems.
+          </p>
+        </article>
+
+        <!-- Blog Post 5 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-blue-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Programming</span>
+            <span class="text-gray-500 text-sm">January 5, 2025 • 13 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Advanced JavaScript Patterns for Game Development</h3>
+          <p class="text-gray-700 mb-4">
+            Modern JavaScript offers powerful patterns and features that can significantly improve game code organization, maintainability, and performance. This article explores advanced JavaScript techniques specifically applied to game development.
+          </p>
+          <p class="text-gray-700 mb-4">
+            The Module pattern is essential for organizing game code into logical units. ES6 modules provide native support for modular code organization, making it easier to manage dependencies and create reusable components. This is particularly important for larger games with multiple systems like physics, audio, and input handling.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Component-Entity systems represent a modern approach to game architecture. Instead of traditional inheritance hierarchies, objects are composed of components that define their behavior. This pattern provides greater flexibility and makes it easier to create complex game objects with multiple behaviors.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Promises and async/await patterns are valuable for handling asynchronous operations like asset loading, save games, and network communication. Proper error handling with try/catch blocks ensures graceful degradation when things go wrong.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Event-driven architecture using custom events can decouple game systems and make code more maintainable. The Observer pattern allows different game systems to communicate without tight coupling, making it easier to modify and extend functionality.
+          </p>
+        </article>
+
+        <!-- Blog Post 6 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-green-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Business</span>
+            <span class="text-gray-500 text-sm">January 3, 2025 • 14 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Monetization Strategies for Indie Game Developers</h3>
+          <p class="text-gray-700 mb-4">
+            Successful game monetization requires balancing revenue generation with player satisfaction. This comprehensive guide explores various monetization strategies and their implementation considerations for independent game developers.
+          </p>
+          <p class="text-gray-700 mb-4">
+            The freemium model has proven highly effective for casual games. Offering the core game experience for free while providing optional premium content or features creates a large player base with opportunities for conversion. The key is ensuring that free players can enjoy the full game without feeling pressured to pay.
+          </p>
+          <p class="text-gray-700 mb-4">
+            In-app purchases should focus on convenience, customization, and content rather than creating pay-to-win scenarios. Players appreciate cosmetic items, additional levels, and time-saving features. Avoid gating core gameplay mechanics behind paywalls, as this often leads to player frustration and negative reviews.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Advertisement integration can provide steady revenue when implemented thoughtfully. Rewarded video ads that offer in-game benefits create a positive player experience while generating revenue. Banner ads should be placed carefully to avoid disrupting gameplay flow.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Subscription models work well for games that provide ongoing content or services. This model requires consistent content updates and community engagement to maintain subscriber value. Consider offering different subscription tiers to accommodate various player preferences and budgets.
+          </p>
+        </article>
+
+        <!-- Blog Post 7 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-red-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Audio</span>
+            <span class="text-gray-500 text-sm">December 30, 2024 • 9 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Implementing Dynamic Audio in Web Games</h3>
+          <p class="text-gray-700 mb-4">
+            Audio design can make or break a gaming experience. This article covers everything from basic sound implementation to advanced dynamic audio systems that respond to gameplay events and player actions.
+          </p>
+          <p class="text-gray-700 mb-4">
+            The Web Audio API provides powerful tools for creating immersive audio experiences. Unlike the basic HTML5 audio element, the Web Audio API offers precise timing control, audio effects processing, and the ability to generate sounds programmatically.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Audio buffering and preloading are crucial for smooth gameplay. Loading all audio assets upfront prevents stuttering but increases initial load time. Consider implementing progressive loading where critical sounds are loaded first, followed by less important audio assets.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Dynamic music systems that adapt to gameplay create more engaging experiences. This can involve layering different musical elements based on game state, seamlessly transitioning between tracks, or adjusting tempo and intensity based on player actions.
+          </p>
+          <p class="text-gray-700 mb-4">
+            3D positional audio adds depth to games by simulating how sounds change based on distance and position. The Web Audio API's panner node makes it relatively easy to implement basic 3D audio effects that enhance immersion.
+          </p>
+        </article>
+
+        <!-- Blog Post 8 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-indigo-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Tools</span>
+            <span class="text-gray-500 text-sm">December 27, 2024 • 8 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Essential Tools for Modern Game Development</h3>
+          <p class="text-gray-700 mb-4">
+            The right tools can significantly speed up development and improve code quality. This article reviews essential tools for modern game development, from code editors to debugging utilities and asset management tools.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Modern code editors like Visual Studio Code offer excellent JavaScript support with features like IntelliSense, debugging, and extensive extension ecosystems. Extensions for game development include syntax highlighting for game engines, asset previews, and integrated debugging tools.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Version control systems like Git are essential for tracking changes and collaborating with others. Understanding branching strategies and commit best practices helps maintain clean project history and enables safe experimentation with new features.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Browser developer tools have evolved into powerful debugging platforms. Chrome DevTools, Firefox Developer Tools, and Safari Web Inspector offer JavaScript debugging, performance profiling, and network analysis capabilities specifically useful for game development.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Asset management tools help organize and optimize game resources. This includes image optimization tools, audio compression utilities, and sprite sheet generators. Automated build tools can streamline the asset processing pipeline and ensure consistent output quality.
+          </p>
+        </article>
+
+        <!-- Blog Post 9 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-yellow-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Marketing</span>
+            <span class="text-gray-500 text-sm">December 25, 2024 • 12 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Marketing Your Indie Game on a Budget</h3>
+          <p class="text-gray-700 mb-4">
+            Marketing is often overlooked by indie developers, but it's crucial for reaching your target audience. This comprehensive guide covers cost-effective marketing strategies that can help your game find its audience without breaking the bank.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Social media marketing starts with choosing the right platforms for your audience. Twitter is excellent for connecting with other developers and gaming communities. Instagram works well for sharing visual content and behind-the-scenes development updates. TikTok can be powerful for reaching younger audiences with short, engaging video content.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Content marketing through development blogs, tutorials, and behind-the-scenes content helps build an audience before your game launches. Sharing your development journey creates emotional investment in your project and can lead to valuable feedback from potential players.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Community engagement in gaming forums, Discord servers, and Reddit communities can provide valuable exposure. However, focus on being helpful and contributing to the community rather than just promoting your game. Authentic engagement builds trust and long-term relationships.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Press outreach to gaming blogs, YouTubers, and streamers can generate significant exposure if done correctly. Research your targets carefully, personalize your outreach, and make it easy for them to cover your game by providing quality assets and clear information.
+          </p>
+        </article>
+
+        <!-- Blog Post 10 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-pink-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Analytics</span>
+            <span class="text-gray-500 text-sm">December 22, 2024 • 10 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Game Analytics: Understanding Player Behavior</h3>
+          <p class="text-gray-700 mb-4">
+            Data-driven game development helps create better player experiences and improve game retention. This article covers implementing analytics systems and interpreting data to make informed design decisions.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Basic analytics should track key metrics like session duration, level completion rates, and points where players typically stop playing. This data helps identify friction points and areas for improvement in your game design.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Custom events allow tracking of specific game interactions. For example, tracking which power-ups players use most frequently, which levels cause the most failures, or how players discover different game features. This granular data provides insights into player preferences and behavior patterns.
+          </p>
+          <p class="text-gray-700 mb-4">
+            A/B testing different game elements helps optimize the player experience based on data rather than assumptions. This could involve testing different difficulty curves, user interface layouts, or monetization strategies to see what works best for your specific audience.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Privacy considerations are increasingly important in analytics implementation. Ensure compliance with regulations like GDPR and CCPA by implementing proper consent mechanisms and data handling procedures. Transparent communication about data collection builds trust with players.
+          </p>
+        </article>
+
+        <!-- Blog Post 11 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-teal-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Testing</span>
+            <span class="text-gray-500 text-sm">December 20, 2024 • 11 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Game Testing Strategies for Quality Assurance</h3>
+          <p class="text-gray-700 mb-4">
+            Quality assurance is crucial for delivering polished games that provide smooth player experiences. This comprehensive guide covers testing strategies, from automated testing to user feedback collection and bug tracking.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Automated testing for games presents unique challenges compared to traditional software testing. While unit testing can cover game logic and utility functions, integration testing becomes more complex due to real-time requirements and user input handling.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Performance testing ensures your game runs smoothly across different devices and browsers. This includes testing frame rate consistency, memory usage patterns, and load times. Automated performance testing can catch regressions that might not be immediately obvious during development.
+          </p>
+          <p class="text-gray-700 mb-4">
+            User testing provides invaluable insights into real player experiences. Observing how players interact with your game often reveals usability issues that developers miss. Consider both formal user testing sessions and informal feedback from beta testers.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Cross-platform testing ensures compatibility across different browsers, devices, and screen sizes. Pay special attention to touch controls on mobile devices, keyboard shortcuts on desktop, and performance differences between platforms.
+          </p>
+        </article>
+
+        <!-- Blog Post 12 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-gray-700/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Architecture</span>
+            <span class="text-gray-500 text-sm">December 18, 2024 • 13 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Scalable Game Architecture Patterns</h3>
+          <p class="text-gray-700 mb-4">
+            Building games that can grow in complexity without becoming unmaintainable requires careful architectural planning. This article explores proven architectural patterns that help create scalable, maintainable game codebases.
+          </p>
+          <p class="text-gray-700 mb-4">
+            The Model-View-Controller (MVC) pattern separates game logic from presentation, making code more modular and testable. In game development, this often translates to separating game state management, rendering, and input handling into distinct systems.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Component-based architecture allows for flexible object composition. Instead of deep inheritance hierarchies, game objects are composed of components that define their behavior. This makes it easy to create complex entities with mixed behaviors and simplifies testing.
+          </p>
+          <p class="text-gray-700 mb-4">
+            State machines help manage complex game states and ensure predictable behavior. Whether managing AI behavior, game flow, or animation states, well-designed state machines make code more understandable and debuggable.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Event-driven systems decouple different game components and make the codebase more flexible. Using custom events allows different systems to communicate without tight coupling, making it easier to modify and extend functionality.
+          </p>
+        </article>
+
+        <!-- Blog Post 13 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-cyan-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Accessibility</span>
+            <span class="text-gray-500 text-sm">December 15, 2024 • 9 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Making Games Accessible to All Players</h3>
+          <p class="text-gray-700 mb-4">
+            Game accessibility ensures that players with disabilities can enjoy gaming experiences. This article covers practical techniques for implementing accessibility features that make games more inclusive without sacrificing gameplay quality.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Visual accessibility includes considerations for colorblind players, low vision users, and those who need high contrast interfaces. Implementing colorblind-friendly palettes, scalable UI elements, and alternative visual indicators for color-coded information ensures broader accessibility.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Motor accessibility involves accommodating players with limited dexterity or mobility. This includes customizable control schemes, adjustable timing requirements, and alternative input methods. Consider implementing options like hold-to-toggle, adjustable difficulty, and pause-anywhere functionality.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Cognitive accessibility helps players with learning disabilities, attention disorders, or memory impairments. Clear navigation, consistent interface design, and optional tutorials or hints can make games more approachable for these players.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Hearing accessibility requires providing visual alternatives to audio cues. This includes captions for dialogue, visual indicators for sound effects, and ensuring that important game information isn't conveyed solely through audio.
+          </p>
+        </article>
+
+        <!-- Blog Post 14 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-lime-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Multiplayer</span>
+            <span class="text-gray-500 text-sm">December 12, 2024 • 16 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Building Real-time Multiplayer Web Games</h3>
+          <p class="text-gray-700 mb-4">
+            Real-time multiplayer games present unique technical challenges including network latency, synchronization, and cheat prevention. This comprehensive guide covers the fundamentals of building responsive multiplayer gaming experiences.
+          </p>
+          <p class="text-gray-700 mb-4">
+            WebSocket connections provide the foundation for real-time multiplayer communication. Understanding when to use WebSockets versus WebRTC for peer-to-peer connections helps choose the right architecture for your specific game requirements.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Client-side prediction and server reconciliation are essential techniques for creating responsive multiplayer experiences despite network latency. Players see immediate feedback for their actions while the server maintains authoritative game state.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Lag compensation techniques like interpolation and extrapolation help smooth out network irregularities. These methods ensure that gameplay feels smooth even when network conditions aren't perfect.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Cheat prevention requires careful consideration of what calculations happen on the client versus server. Critical game logic should be validated server-side while maintaining responsive client-side interactions for the best player experience.
+          </p>
+        </article>
+
+        <!-- Blog Post 15 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-rose-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">AI</span>
+            <span class="text-gray-500 text-sm">December 10, 2024 • 12 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Implementing Game AI with Finite State Machines</h3>
+          <p class="text-gray-700 mb-4">
+            Artificial intelligence in games doesn't need to be complex to be effective. This article explores how finite state machines can create engaging AI behaviors that feel natural and challenging to players.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Finite state machines (FSMs) provide a simple yet powerful way to model AI behavior. Each state represents a specific behavior or mode, with transitions between states triggered by game events or conditions. This approach is particularly effective for enemy AI, NPC behavior, and game flow management.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Designing effective AI states requires understanding the desired player experience. AI should be challenging but fair, predictable enough to allow player strategy but varied enough to remain interesting. Consider implementing multiple difficulty levels through parameter adjustments rather than completely different AI systems.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Hierarchical state machines allow for more complex behaviors while maintaining code organization. Sub-states can handle detailed behaviors while higher-level states manage overall AI strategy and goals.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Debugging AI behavior requires good visualization tools and logging systems. Implementing debug visualizations that show current AI states and decision-making processes helps identify and fix behavioral issues during development.
+          </p>
+        </article>
+
+        <!-- Blog Post 16 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-amber-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Graphics</span>
+            <span class="text-gray-500 text-sm">December 8, 2024 • 14 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Advanced Canvas Rendering Techniques</h3>
+          <p class="text-gray-700 mb-4">
+            The HTML5 Canvas API offers more sophisticated rendering capabilities than many developers realize. This article explores advanced techniques for creating impressive visual effects while maintaining good performance.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Layer-based rendering separates different visual elements into logical groups, making it easier to optimize drawing operations. Background elements that change infrequently can be drawn to separate canvases and composited together, reducing the need for expensive redraw operations.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Sprite batching reduces the number of individual draw calls by combining multiple sprites into single operations. This is particularly effective for particle systems and other effects that involve drawing many similar objects.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Canvas transforms enable complex visual effects like rotation, scaling, and skewing without manual coordinate calculations. Understanding how to effectively use the transformation matrix opens up possibilities for advanced visual effects and animations.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Pixel manipulation through ImageData objects allows for custom image processing effects. While computationally expensive, this technique enables unique visual effects that aren't possible through standard Canvas drawing operations.
+          </p>
+        </article>
+
+        <!-- Blog Post 17 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-emerald-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Security</span>
+            <span class="text-gray-500 text-sm">December 5, 2024 • 10 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Security Considerations in Web-Based Games</h3>
+          <p class="text-gray-700 mb-4">
+            Web games face unique security challenges that traditional games don't encounter. This article covers essential security practices for protecting both your game and your players from common threats and vulnerabilities.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Client-side validation should never be trusted for security-critical operations. All important game logic and score validation must happen server-side, with client-side validation used only for user experience improvements.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Cross-Site Scripting (XSS) prevention is crucial when handling user-generated content like usernames, messages, or custom levels. Proper input sanitization and output encoding prevent malicious script injection.
+          </p>
+          <p class="text-gray-700 mb-4">
+            API security involves implementing proper authentication and authorization for server endpoints. Rate limiting prevents abuse, while input validation ensures that only expected data is processed by your servers.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Data privacy considerations are increasingly important with regulations like GDPR and CCPA. Implement proper consent mechanisms for data collection and ensure that sensitive information is properly protected both in transit and at rest.
+          </p>
+        </article>
+
+        <!-- Blog Post 18 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-violet-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Animation</span>
+            <span class="text-gray-500 text-sm">December 3, 2024 • 11 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Creating Smooth Animations in JavaScript Games</h3>
+          <p class="text-gray-700 mb-4">
+            High-quality animations can significantly enhance the player experience in web games. This comprehensive guide covers animation techniques from basic tweening to complex procedural animations.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Easing functions add natural motion to animations by varying the rate of change over time. Instead of linear interpolation, easing functions like ease-in, ease-out, and bounce create more visually appealing and believable motion.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Sprite animation involves cycling through different images to create the illusion of motion. Efficient sprite sheet management and animation timing are crucial for smooth character animations and visual effects.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Procedural animation generates motion algorithmically rather than from pre-created assets. This technique is particularly useful for particle effects, environmental animations, and responsive character behaviors.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Performance optimization for animations involves minimizing expensive operations during animation loops. Use requestAnimationFrame for smooth timing, avoid DOM manipulations during animation, and consider using CSS animations for UI elements where appropriate.
+          </p>
+        </article>
+
+        <!-- Blog Post 19 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-sky-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Deployment</span>
+            <span class="text-gray-500 text-sm">November 30, 2024 • 9 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Deploying and Hosting Web Games</h3>
+          <p class="text-gray-700 mb-4">
+            Getting your web game online and accessible to players involves several technical considerations from hosting options to content delivery networks. This guide covers the deployment pipeline from development to production.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Static hosting services like Netlify, Vercel, and GitHub Pages are excellent for client-side games that don't require server-side logic. These services offer easy deployment, automatic SSL certificates, and global CDN distribution.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Asset optimization is crucial for fast loading times. Compress images using modern formats like WebP, minify JavaScript and CSS files, and implement proper caching headers to reduce bandwidth usage and improve player experience.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Content Delivery Networks (CDNs) improve game loading times by serving assets from geographically distributed servers. This is particularly important for games with large asset files or global audiences.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Progressive loading strategies can improve perceived performance by loading critical game assets first and loading additional content in the background. This allows players to start playing sooner while the game continues loading.
+          </p>
+        </article>
+
+        <!-- Blog Post 20 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-fuchsia-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Community</span>
+            <span class="text-gray-500 text-sm">November 28, 2024 • 8 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Building a Community Around Your Game</h3>
+          <p class="text-gray-700 mb-4">
+            A strong community can be the difference between a forgotten game and a lasting success. This article explores strategies for building and maintaining an engaged player community around your game.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Community platforms like Discord, Reddit, and game-specific forums provide spaces for players to connect, share experiences, and provide feedback. Choose platforms where your target audience is already active rather than trying to create new gathering places.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Regular communication with your community through development updates, behind-the-scenes content, and direct engagement helps build emotional investment in your game. Transparency about development challenges and successes creates a stronger connection with players.
+          </p>
+          <p class="text-gray-700 mb-4">
+            User-generated content opportunities like level editors, mod support, or community challenges can significantly extend your game's lifespan. Players who can create and share content become invested in your game's success.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Community moderation requires clear guidelines and consistent enforcement. Establishing positive community norms early helps create a welcoming environment that encourages constructive participation.
+          </p>
+        </article>
+
+        <!-- Blog Post 21 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-stone-500/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Localization</span>
+            <span class="text-gray-500 text-sm">November 25, 2024 • 10 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Internationalizing Your Web Game</h3>
+          <p class="text-gray-700 mb-4">
+            Reaching global audiences requires careful consideration of language, cultural differences, and technical implementation of internationalization. This guide covers the essential aspects of making your game accessible to international players.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Text externalization is the foundation of internationalization. Separating all text strings from code into resource files makes translation management much easier and allows for dynamic language switching without code changes.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Cultural adaptation goes beyond simple translation to consider cultural sensitivities, color symbolism, and gameplay preferences. What works in one culture may not resonate with players from different backgrounds.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Technical implementation involves handling different text encodings, right-to-left languages, and varying text lengths. UI layouts need to accommodate longer translations, and font selection must support the target languages' character sets.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Localization testing with native speakers is crucial for ensuring quality translations and appropriate cultural adaptation. Automated translation tools can provide a starting point but should never be the final solution for player-facing content.
+          </p>
+        </article>
+
+        <!-- Blog Post 22 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-neutral-600/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Optimization</span>
+            <span class="text-gray-500 text-sm">November 22, 2024 • 13 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Mobile Performance Optimization for Web Games</h3>
+          <p class="text-gray-700 mb-4">
+            Mobile devices present unique performance challenges for web games due to limited processing power, memory constraints, and battery considerations. This comprehensive guide covers optimization techniques specifically for mobile gaming.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Battery optimization is crucial for mobile games. Reducing unnecessary calculations, minimizing screen updates, and implementing efficient sleep states when the game is paused can significantly extend battery life and improve player experience.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Memory management becomes critical on mobile devices with limited RAM. Implement object pooling, optimize image sizes, and use appropriate data structures to minimize memory usage. Regular memory profiling helps identify and fix memory leaks.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Touch input optimization involves implementing proper touch handling, avoiding unnecessary event listeners, and providing appropriate feedback for touch interactions. Consider implementing custom gesture recognizers for game-specific interactions.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Adaptive quality settings allow games to adjust performance based on device capabilities. This might involve reducing particle effects, lowering frame rates, or simplifying graphics on lower-end devices while maintaining full quality on powerful hardware.
+          </p>
+        </article>
+
+        <!-- Blog Post 23 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-red-600/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Debugging</span>
+            <span class="text-gray-500 text-sm">November 20, 2024 • 11 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Advanced Debugging Techniques for Game Development</h3>
+          <p class="text-gray-700 mb-4">
+            Effective debugging is essential for creating polished games. This article covers advanced debugging techniques, tools, and strategies specifically tailored for game development challenges.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Console debugging goes beyond simple console.log statements to include proper logging levels, conditional logging, and structured error reporting. Implementing a robust logging system helps track down issues in production environments.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Visual debugging tools can help understand complex game state and object relationships. Implementing debug overlays that show collision boxes, AI states, or performance metrics provides valuable insights during development.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Performance profiling using browser developer tools helps identify bottlenecks and optimization opportunities. Understanding how to read flame graphs, analyze memory usage, and identify performance issues is crucial for maintaining smooth gameplay.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Remote debugging capabilities allow testing and debugging games on mobile devices and other platforms where traditional debugging tools aren't readily available. This is particularly important for cross-platform game development.
+          </p>
+        </article>
+
+        <!-- Blog Post 24 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-blue-600/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Frameworks</span>
+            <span class="text-gray-500 text-sm">November 18, 2024 • 12 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Choosing the Right Game Framework for Your Project</h3>
+          <p class="text-gray-700 mb-4">
+            The choice of game framework can significantly impact development speed, performance, and maintainability. This comprehensive comparison covers popular web game frameworks and their strengths and weaknesses.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Phaser.js is one of the most popular HTML5 game frameworks, offering a complete suite of tools for 2D game development. Its extensive plugin ecosystem and active community make it an excellent choice for developers who want a comprehensive solution.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Three.js excels at 3D graphics and WebGL applications. While not specifically designed for games, it provides powerful tools for creating 3D web experiences and can be excellent for games requiring advanced graphics capabilities.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Vanilla JavaScript offers complete control and minimal overhead but requires more development time. This approach is ideal for developers who want to understand every aspect of their game engine or have specific performance requirements.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Framework selection should consider factors like team expertise, project timeline, performance requirements, and long-term maintenance needs. Sometimes the best framework is the one your team already knows well.
+          </p>
+        </article>
+
+        <!-- Blog Post 25 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-green-600/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Industry</span>
+            <span class="text-gray-500 text-sm">November 15, 2024 • 14 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">The Future of Web-Based Gaming</h3>
+          <p class="text-gray-700 mb-4">
+            The web gaming industry continues to evolve rapidly with new technologies, platforms, and player expectations. This article explores emerging trends and technologies that will shape the future of web-based gaming.
+          </p>
+          <p class="text-gray-700 mb-4">
+            WebAssembly (WASM) is revolutionizing web game performance by allowing near-native execution speeds for computationally intensive games. This technology enables porting existing games to the web and creating more complex web-native games.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Progressive Web Apps (PWAs) blur the line between web and native applications. PWA games can be installed like native apps, work offline, and provide app-like experiences while maintaining the web's accessibility and distribution advantages.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Cloud gaming services are changing how players access games. While most focus on streaming AAA titles, there are opportunities for web games to integrate with cloud gaming platforms and leverage cloud computing for enhanced experiences.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Augmented and Virtual Reality support in web browsers is expanding through WebXR APIs. This opens up new possibilities for immersive web gaming experiences that don't require specialized apps or hardware beyond VR headsets.
+          </p>
+        </article>
+
+        <!-- Blog Post 26 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-purple-600/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Creativity</span>
+            <span class="text-gray-500 text-sm">November 12, 2024 • 10 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Overcoming Creative Blocks in Game Development</h3>
+          <p class="text-gray-700 mb-4">
+            Creative blocks are a common challenge in game development that can halt progress and diminish motivation. This article explores practical strategies for overcoming creative obstacles and maintaining productive momentum.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Prototype-driven development helps overcome analysis paralysis by focusing on creating playable experiences quickly. Building small, focused prototypes allows you to test ideas rapidly and discover unexpected gameplay possibilities.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Constraint-based creativity involves deliberately limiting yourself to spark innovation. Working within artificial constraints like limited colors, simple mechanics, or short development timeframes often leads to more creative solutions.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Inspiration gathering from diverse sources can provide fresh perspectives on game design challenges. This includes playing games outside your genre, studying other creative fields, and observing how people interact with technology in daily life.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Collaborative brainstorming with other developers, even for solo projects, can provide valuable outside perspectives. Game development communities, both online and offline, offer opportunities for creative collaboration and feedback.
+          </p>
+        </article>
+
+        <!-- Blog Post 27 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-orange-600/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">User Experience</span>
+            <span class="text-gray-500 text-sm">November 10, 2024 • 11 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Designing Intuitive Game Interfaces</h3>
+          <p class="text-gray-700 mb-4">
+            User interface design in games requires balancing functionality with aesthetics while maintaining immersion. This comprehensive guide covers principles and techniques for creating interfaces that enhance rather than hinder the gaming experience.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Visual hierarchy guides player attention to the most important interface elements. Using size, color, contrast, and positioning strategically ensures that critical information is immediately visible while secondary elements remain accessible but unobtrusive.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Consistency in interface design reduces cognitive load by establishing patterns that players can learn and rely on. This includes consistent button styles, icon meanings, and interaction patterns throughout the game experience.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Feedback systems inform players about their actions and game state changes. Every player action should have appropriate visual, audio, or haptic feedback to confirm that the input was received and processed correctly.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Accessibility considerations ensure that interfaces work for players with different abilities and preferences. This includes colorblind-friendly designs, scalable text, and alternative input methods for players with motor disabilities.
+          </p>
+        </article>
+
+        <!-- Blog Post 28 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-pink-600/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Data Management</span>
+            <span class="text-gray-500 text-sm">November 8, 2024 • 9 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Managing Game Data and Save Systems</h3>
+          <p class="text-gray-700 mb-4">
+            Effective data management ensures that player progress is preserved reliably while maintaining good performance. This article covers various approaches to implementing save systems, from simple local storage to cloud-based solutions.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Local storage options include localStorage, sessionStorage, and IndexedDB. Each has different capabilities and limitations regarding storage size, persistence, and browser support. Choose the appropriate storage mechanism based on your game's data requirements.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Data serialization converts complex game objects into storable formats. JSON is commonly used for its simplicity, but binary formats might be necessary for games with large amounts of save data or performance requirements.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Cloud save systems allow players to access their progress across multiple devices. This requires server infrastructure and careful consideration of data synchronization, conflict resolution, and offline functionality.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Backup and recovery systems protect against data loss from browser clearing, device failures, or corruption. Implementing multiple save slots and automatic backup systems provides players with recovery options when things go wrong.
+          </p>
+        </article>
+
+        <!-- Blog Post 29 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8 mb-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-indigo-600/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Career</span>
+            <span class="text-gray-500 text-sm">November 5, 2024 • 13 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Building a Career in Indie Game Development</h3>
+          <p class="text-gray-700 mb-4">
+            The indie game development landscape offers both opportunities and challenges for aspiring developers. This comprehensive guide covers strategies for building a sustainable career in independent game development.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Skill development should focus on both technical abilities and business acumen. While programming and design skills are essential, understanding marketing, project management, and financial planning is equally important for indie success.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Portfolio building requires showcasing not just finished games but also development process, problem-solving abilities, and growth over time. Document your projects thoroughly and be prepared to discuss both successes and failures.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Financial planning for indie developers involves managing irregular income, planning for development cycles, and understanding the economics of game development. This includes budgeting for marketing, tools, and living expenses during development periods.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Networking within the game development community provides opportunities for collaboration, learning, and career advancement. Attend game development events, participate in online communities, and contribute to open-source projects to build relationships and reputation.
+          </p>
+        </article>
+
+        <!-- Blog Post 30 -->
+        <article class="blog-post-full bg-white rounded-lg shadow-sm p-8">
+          <div class="flex items-center mb-4">
+            <span class="inline-block bg-teal-600/90 text-white text-xs font-medium px-2 py-1 rounded mr-3">Reflection</span>
+            <span class="text-gray-500 text-sm">November 3, 2024 • 12 min read</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Lessons Learned from SkyDash Wings Development</h3>
+          <p class="text-gray-700 mb-4">
+            Reflecting on the development journey of SkyDash Wings provides valuable insights for future projects and other developers. This retrospective covers the challenges faced, solutions discovered, and lessons learned throughout the development process.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Technical challenges included optimizing game performance across different devices, implementing smooth physics simulation, and creating responsive controls that work well on both touch and keyboard inputs. Each challenge required research, experimentation, and iterative refinement.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Design decisions evolved through player feedback and testing. Initial concepts often needed significant revision based on actual player behavior and preferences. This highlighted the importance of early prototyping and regular user testing throughout development.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Project management lessons included the importance of setting realistic timelines, maintaining clear documentation, and balancing feature scope with quality. Feature creep was a constant challenge that required disciplined prioritization.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Community engagement proved crucial for project success. Building an audience during development, sharing progress updates, and incorporating feedback created a invested community that supported the game's launch and continued development. The relationship between developer and players is fundamental to indie game success.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Legal Section -->
+    <section id="legal" class="py-16 bg-gray-50 section-spacing">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Legal Information</h2>
+            <p class="text-gray-600">Important legal documents and policies for SkyDash Wings</p>
+          </div>
+
+          <!-- Privacy Policy -->
+          <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Privacy Policy</h3>
+            <div class="legal-content">
+              <p class="text-gray-700 mb-4"><strong>Last updated:</strong> January 15, 2025</p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">1. Information We Collect</h4>
+              <p class="text-gray-700 mb-4">
+                We collect information you provide directly to us, such as when you create an account, contact us, or use our services. This may include your name, email address, and game progress data.
               </p>
-              <div class="flex justify-between items-center">
-                <a href="#" class="text-primary font-medium hover:underline"
-                  >Read More</a
-                >
-                <div class="flex space-x-2">
-                  <button
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
-                  >
-                    <i class="ri-heart-line"></i>
-                  </button>
-                  <button
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
-                  >
-                    <i class="ri-share-line"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Blog Post 2 -->
-          <div class="blog-card bg-white rounded-lg shadow-sm overflow-hidden">
-            <div class="relative h-48 overflow-hidden">
-              <img
-                src="https://readdy.ai/api/search-image?query=A%20high-resolution%20image%20showing%20HTML5%20Canvas%20development%20with%20game%20physics%20being%20implemented.%20The%20screen%20should%20show%20code%20and%20a%20simple%20game%20prototype%20with%20gravity%20effects.%20The%20workspace%20should%20be%20modern%20with%20good%20lighting%20and%20professional%20appearance.&width=600&height=400&seq=3&orientation=landscape"
-                alt="Mastering HTML5 Canvas for Game Development"
-                class="w-full h-full object-cover object-top"
-              />
-              <div class="absolute top-3 left-3">
-                <span
-                  class="inline-block bg-secondary/90 text-white text-xs font-medium px-2 py-1 rounded"
-                  >Tutorial</span
-                >
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-2">
-                Mastering HTML5 Canvas for Game Development
-              </h3>
-              <div class="flex items-center text-gray-500 text-sm mb-3">
-                <span>June 9, 2025</span>
-                <span class="mx-2">•</span>
-                <span>8 min read</span>
-              </div>
-              <p class="text-gray-600 mb-4">
-                Learn how to leverage the power of HTML5 Canvas to create
-                smooth, responsive browser-based games with optimal
-                performance...
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">2. How We Use Your Information</h4>
+              <p class="text-gray-700 mb-4">
+                We use the information we collect to provide, maintain, and improve our services, process transactions, send communications, and comply with legal obligations.
               </p>
-              <div class="flex justify-between items-center">
-                <a href="#" class="text-primary font-medium hover:underline"
-                  >Read More</a
-                >
-                <div class="flex space-x-2">
-                  <button
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
-                  >
-                    <i class="ri-heart-line"></i>
-                  </button>
-                  <button
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
-                  >
-                    <i class="ri-share-line"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Blog Post 3 -->
-          <div class="blog-card bg-white rounded-lg shadow-sm overflow-hidden">
-            <div class="relative h-48 overflow-hidden">
-              <img
-                src="https://readdy.ai/api/search-image?query=A%20high-resolution%20image%20showing%20game%20monetization%20strategies%20with%20charts%20and%20graphs%20on%20a%20computer%20screen.%20The%20workspace%20should%20include%20mobile%20devices%20showing%20in-app%20purchases.%20The%20image%20should%20be%20professional%20with%20clean%2C%20modern%20aesthetics%20and%20good%20lighting.&width=600&height=400&seq=4&orientation=landscape"
-                alt="Monetization Strategies for Indie Game Developers"
-                class="w-full h-full object-cover object-top"
-              />
-              <div class="absolute top-3 left-3">
-                <span
-                  class="inline-block bg-orange-500/90 text-white text-xs font-medium px-2 py-1 rounded"
-                  >Business</span
-                >
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-2">
-                Monetization Strategies for Indie Game Developers
-              </h3>
-              <div class="flex items-center text-gray-500 text-sm mb-3">
-                <span>June 7, 2025</span>
-                <span class="mx-2">•</span>
-                <span>6 min read</span>
-              </div>
-              <p class="text-gray-600 mb-4">
-                Discover effective ways to generate revenue from your indie
-                games without compromising player experience or game
-                integrity...
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">3. Information Sharing</h4>
+              <p class="text-gray-700 mb-4">
+                We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy.
               </p>
-              <div class="flex justify-between items-center">
-                <a href="#" class="text-primary font-medium hover:underline"
-                  >Read More</a
-                >
-                <div class="flex space-x-2">
-                  <button
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
-                  >
-                    <i class="ri-heart-line"></i>
-                  </button>
-                  <button
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
-                  >
-                    <i class="ri-share-line"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Blog Post 4 -->
-          <div class="blog-card bg-white rounded-lg shadow-sm overflow-hidden">
-            <div class="relative h-48 overflow-hidden">
-              <img
-                src="https://readdy.ai/api/search-image?query=A%20high-resolution%20image%20showing%20game%20physics%20implementation%20with%20diagrams%20of%20collision%20detection%20and%20gravity%20effects.%20The%20workspace%20should%20include%20code%20editor%20and%20a%20simple%20game%20prototype.%20Professional%20lighting%20and%20modern%20setup%20with%20clean%20aesthetics.&width=600&height=400&seq=5&orientation=landscape"
-                alt="Implementing Physics in Browser Games"
-                class="w-full h-full object-cover object-top"
-              />
-              <div class="absolute top-3 left-3">
-                <span
-                  class="inline-block bg-secondary/90 text-white text-xs font-medium px-2 py-1 rounded"
-                  >Tutorial</span
-                >
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-2">
-                Implementing Physics in Browser Games
-              </h3>
-              <div class="flex items-center text-gray-500 text-sm mb-3">
-                <span>June 5, 2025</span>
-                <span class="mx-2">•</span>
-                <span>7 min read</span>
-              </div>
-              <p class="text-gray-600 mb-4">
-                A deep dive into creating realistic physics for browser-based
-                games, including gravity, collision detection, and response
-                systems...
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">4. Data Security</h4>
+              <p class="text-gray-700 mb-4">
+                We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
               </p>
-              <div class="flex justify-between items-center">
-                <a href="#" class="text-primary font-medium hover:underline"
-                  >Read More</a
-                >
-                <div class="flex space-x-2">
-                  <button
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
-                  >
-                    <i class="ri-heart-line"></i>
-                  </button>
-                  <button
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
-                  >
-                    <i class="ri-share-line"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Blog Post 5 -->
-          <div class="blog-card bg-white rounded-lg shadow-sm overflow-hidden">
-            <div class="relative h-48 overflow-hidden">
-              <img
-                src="https://readdy.ai/api/search-image?query=A%20high-resolution%20image%20showing%20game%20UI%2FUX%20design%20process%20with%20wireframes%20and%20mockups%20for%20mobile%20games.%20The%20workspace%20should%20include%20design%20software%2C%20color%20palettes%2C%20and%20prototype%20screens.%20Professional%20lighting%20with%20modern%20aesthetics.&width=600&height=400&seq=6&orientation=landscape"
-                alt="UI/UX Best Practices for Mobile Games"
-                class="w-full h-full object-cover object-top"
-              />
-              <div class="absolute top-3 left-3">
-                <span
-                  class="inline-block bg-purple-500/90 text-white text-xs font-medium px-2 py-1 rounded"
-                  >Design</span
-                >
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-2">
-                UI/UX Best Practices for Mobile Games
-              </h3>
-              <div class="flex items-center text-gray-500 text-sm mb-3">
-                <span>June 3, 2025</span>
-                <span class="mx-2">•</span>
-                <span>6 min read</span>
-              </div>
-              <p class="text-gray-600 mb-4">
-                Explore essential design principles that make mobile games more
-                intuitive, engaging, and accessible to players of all skill
-                levels...
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">5. Your Rights</h4>
+              <p class="text-gray-700 mb-4">
+                You have the right to access, update, or delete your personal information. You may also opt out of certain communications from us.
               </p>
-              <div class="flex justify-between items-center">
-                <a href="#" class="text-primary font-medium hover:underline"
-                  >Read More</a
-                >
-                <div class="flex space-x-2">
-                  <button
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
-                  >
-                    <i class="ri-heart-line"></i>
-                  </button>
-                  <button
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
-                  >
-                    <i class="ri-share-line"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Blog Post 6 -->
-          <div class="blog-card bg-white rounded-lg shadow-sm overflow-hidden">
-            <div class="relative h-48 overflow-hidden">
-              <img
-                src="https://readdy.ai/api/search-image?query=A%20high-resolution%20image%20showing%20cross-platform%20game%20development%20with%20multiple%20devices%20%28mobile%20phones%2C%20tablets%2C%20laptops%29%20running%20the%20same%20game.%20The%20workspace%20should%20include%20code%20and%20development%20tools.%20Professional%20lighting%20with%20modern%20aesthetics.&width=600&height=400&seq=7&orientation=landscape"
-                alt="Cross-Platform Game Development Guide"
-                class="w-full h-full object-cover object-top"
-              />
-              <div class="absolute top-3 left-3">
-                <span
-                  class="inline-block bg-primary/90 text-white text-xs font-medium px-2 py-1 rounded"
-                  >Game Dev</span
-                >
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-2">
-                Cross-Platform Game Development Guide
-              </h3>
-              <div class="flex items-center text-gray-500 text-sm mb-3">
-                <span>June 1, 2025</span>
-                <span class="mx-2">•</span>
-                <span>9 min read</span>
-              </div>
-              <p class="text-gray-600 mb-4">
-                Learn strategies for developing games that work seamlessly
-                across multiple platforms, from mobile devices to desktop
-                browsers...
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">6. Contact Us</h4>
+              <p class="text-gray-700">
+                If you have any questions about this Privacy Policy, please contact us at sarthaks42388434@gmail.com.
               </p>
-              <div class="flex justify-between items-center">
-                <a href="#" class="text-primary font-medium hover:underline"
-                  >Read More</a
-                >
-                <div class="flex space-x-2">
-                  <button
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
-                  >
-                    <i class="ri-heart-line"></i>
-                  </button>
-                  <button
-                    class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
-                  >
-                    <i class="ri-share-line"></i>
-                  </button>
-                </div>
-              </div>
             </div>
           </div>
-        </div>
-        <div class="mt-12 flex justify-center">
-          <nav class="inline-flex rounded-md shadow-sm">
-            <a
-              href="#"
-              class="w-10 h-10 flex items-center justify-center rounded-l-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50"
-            >
-              <i class="ri-arrow-left-s-line"></i>
-            </a>
-            <a
-              href="#"
-              class="w-10 h-10 flex items-center justify-center border-t border-b border-gray-300 bg-primary text-white"
-              >1</a
-            >
-            <a
-              href="#"
-              class="w-10 h-10 flex items-center justify-center border-t border-b border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-              >2</a
-            >
-            <a
-              href="#"
-              class="w-10 h-10 flex items-center justify-center border-t border-b border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-              >3</a
-            >
-            <a
-              href="#"
-              class="w-10 h-10 flex items-center justify-center border-t border-b border-r border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-              >4</a
-            >
-            <a
-              href="#"
-              class="w-10 h-10 flex items-center justify-center rounded-r-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50"
-            >
-              <i class="ri-arrow-right-s-line"></i>
-            </a>
-          </nav>
+
+          <!-- Terms of Service -->
+          <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Terms of Service</h3>
+            <div class="legal-content">
+              <p class="text-gray-700 mb-4"><strong>Last updated:</strong> January 15, 2025</p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">1. Acceptance of Terms</h4>
+              <p class="text-gray-700 mb-4">
+                By accessing and using SkyDash Wings, you accept and agree to be bound by the terms and provision of this agreement.
+              </p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">2. Use License</h4>
+              <p class="text-gray-700 mb-4">
+                Permission is granted to temporarily download one copy of SkyDash Wings for personal, non-commercial transitory viewing only.
+              </p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">3. Disclaimer</h4>
+              <p class="text-gray-700 mb-4">
+                The materials on SkyDash Wings are provided on an 'as is' basis. We make no warranties, expressed or implied, and hereby disclaim all other warranties.
+              </p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">4. Limitations</h4>
+              <p class="text-gray-700 mb-4">
+                In no event shall SkyDash Wings or its suppliers be liable for any damages arising out of the use or inability to use the materials on the game.
+              </p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">5. Accuracy of Materials</h4>
+              <p class="text-gray-700 mb-4">
+                The materials appearing in SkyDash Wings could include technical, typographical, or photographic errors. We do not warrant that any of the materials are accurate, complete, or current.
+              </p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">6. Modifications</h4>
+              <p class="text-gray-700">
+                We may revise these terms of service at any time without notice. By using SkyDash Wings, you agree to be bound by the current version of these terms.
+              </p>
+            </div>
+          </div>
+
+          <!-- Cookie Policy -->
+          <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Cookie Policy</h3>
+            <div class="legal-content">
+              <p class="text-gray-700 mb-4"><strong>Last updated:</strong> January 15, 2025</p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">What are Cookies?</h4>
+              <p class="text-gray-700 mb-4">
+                Cookies are small text files that are placed on your computer or mobile device when you visit a website. They are widely used to make websites work more efficiently and provide information to site owners.
+              </p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">How We Use Cookies</h4>
+              <p class="text-gray-700 mb-4">
+                We use cookies to save your game progress, remember your preferences, and improve your gaming experience. These cookies are essential for the proper functioning of SkyDash Wings.
+              </p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Types of Cookies We Use</h4>
+              <ul class="list-disc list-inside text-gray-700 mb-4">
+                <li>Essential cookies: Required for the game to function properly</li>
+                <li>Performance cookies: Help us understand how you interact with the game</li>
+                <li>Preference cookies: Remember your settings and preferences</li>
+              </ul>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Managing Cookies</h4>
+              <p class="text-gray-700">
+                Most web browsers allow you to control cookies through their settings. However, disabling cookies may affect the functionality of SkyDash Wings.
+              </p>
+            </div>
+          </div>
+
+          <!-- DMCA Policy -->
+          <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">DMCA Policy</h3>
+            <div class="legal-content">
+              <p class="text-gray-700 mb-4"><strong>Last updated:</strong> January 15, 2025</p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Copyright Infringement Claims</h4>
+              <p class="text-gray-700 mb-4">
+                We respect the intellectual property rights of others and expect our users to do the same. If you believe that content on SkyDash Wings infringes your copyright, please contact us with the following information:
+              </p>
+              
+              <ul class="list-disc list-inside text-gray-700 mb-4">
+                <li>A description of the copyrighted work that you claim has been infringed</li>
+                <li>A description of where the allegedly infringing material is located</li>
+                <li>Your contact information</li>
+                <li>A statement that you have a good faith belief that the use is not authorized</li>
+                <li>A statement that the information in your notice is accurate</li>
+                <li>Your physical or electronic signature</li>
+              </ul>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Counter-Notification</h4>
+              <p class="text-gray-700 mb-4">
+                If you believe that content you posted was removed in error, you may submit a counter-notification containing the required information as specified by the DMCA.
+              </p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Contact Information</h4>
+              <p class="text-gray-700">
+                DMCA notices should be sent to: sarthaks42388434@gmail.com
+              </p>
+            </div>
+          </div>
+
+          <!-- Refund Policy -->
+          <div class="bg-white rounded-lg shadow-sm p-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Refund Policy</h3>
+            <div class="legal-content">
+              <p class="text-gray-700 mb-4"><strong>Last updated:</strong> January 15, 2025</p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Free Game Policy</h4>
+              <p class="text-gray-700 mb-4">
+                SkyDash Wings is currently offered as a free game. Since no payment is required to play the core game, traditional refund policies do not apply.
+              </p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Future Paid Features</h4>
+              <p class="text-gray-700 mb-4">
+                Should we introduce paid features or premium content in the future, we will update this policy to include appropriate refund terms and conditions.
+              </p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Technical Issues</h4>
+              <p class="text-gray-700 mb-4">
+                If you experience technical issues that prevent you from enjoying the game, please contact our support team at sarthaks42388434@gmail.com. We will work to resolve any problems.
+              </p>
+              
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Contact Support</h4>
+              <p class="text-gray-700">
+                For any questions or concerns about our policies, please contact us at sarthaks42388434@gmail.com.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-50">
+    <section id="contact" class="py-16 bg-white section-spacing">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
           <div class="text-center mb-12">
             <h2 class="text-3xl font-bold text-gray-900 mb-4">Get in Touch</h2>
             <p class="text-gray-600 max-w-2xl mx-auto">
-              Have questions about the game or interested in collaboration? Feel
-              free to reach out!
+              Have questions about SkyDash Wings or interested in collaboration? Feel free to reach out!
             </p>
           </div>
           <div class="bg-white rounded-lg shadow-sm overflow-hidden">
             <div class="grid grid-cols-1 md:grid-cols-5">
-              <div
-                class="md:col-span-2 bg-gradient-to-br from-primary to-secondary p-8 text-white"
-              >
+              <div class="md:col-span-2 bg-gradient-to-br from-primary to-secondary p-8 text-white">
                 <h3 class="text-xl font-bold mb-6">Contact Information</h3>
                 <div class="space-y-6 mb-8">
                   <div class="flex items-start">
-                    <div
-                      class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 mr-4 mt-1"
-                    >
-                      <i class="ri-mail-line text-white"></i>
+                    <div class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 mr-4 mt-1">
+                      <i class="fas fa-envelope text-white"></i>
                     </div>
                     <div>
                       <p class="font-medium mb-1">Email</p>
@@ -827,10 +1283,8 @@
                     </div>
                   </div>
                   <div class="flex items-start">
-                    <div
-                      class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 mr-4 mt-1"
-                    >
-                      <i class="ri-map-pin-line text-white"></i>
+                    <div class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 mr-4 mt-1">
+                      <i class="fas fa-map-marker-alt text-white"></i>
                     </div>
                     <div>
                       <p class="font-medium mb-1">Location</p>
@@ -838,106 +1292,51 @@
                     </div>
                   </div>
                   <div class="flex items-start">
-                    <div
-                      class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 mr-4 mt-1"
-                    >
-                      <i class="ri-time-line text-white"></i>
+                    <div class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 mr-4 mt-1">
+                      <i class="fas fa-clock text-white"></i>
                     </div>
                     <div>
                       <p class="font-medium mb-1">Working Hours</p>
-                      <p class="text-white/80">
-                        Monday - Friday, 9AM - 6PM IST
-                      </p>
+                      <p class="text-white/80">Monday - Friday, 9AM - 6PM IST</p>
                     </div>
                   </div>
                 </div>
                 <div class="flex space-x-3 mt-8">
-                  <a
-                    href="#"
-                    class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 transition"
-                  >
-                    <i class="ri-twitter-line"></i>
+                  <a href="https://twitter.com/sarthaksharma" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 transition">
+                    <i class="fab fa-twitter"></i>
                   </a>
-                  <a
-                    href="#"
-                    class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 transition"
-                  >
-                    <i class="ri-github-line"></i>
+                  <a href="https://github.com/sarthaksharma" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 transition">
+                    <i class="fab fa-github"></i>
                   </a>
-                  <a
-                    href="#"
-                    class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 transition"
-                  >
-                    <i class="ri-linkedin-line"></i>
+                  <a href="https://linkedin.com/in/sarthaksharma" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 transition">
+                    <i class="fab fa-linkedin"></i>
                   </a>
-                  <a
-                    href="#"
-                    class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 transition"
-                  >
-                    <i class="ri-instagram-line"></i>
+                  <a href="https://instagram.com/sarthaksharma" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30 transition">
+                    <i class="fab fa-instagram"></i>
                   </a>
                 </div>
               </div>
               <div class="md:col-span-3 p-8">
-                <form>
+                <form id="contact-form">
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                      <label
-                        for="name"
-                        class="block text-sm font-medium text-gray-700 mb-2"
-                        >Your Name</label
-                      >
-                      <input
-                        type="text"
-                        id="name"
-                        class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
-                        placeholder="John Doe"
-                      />
+                      <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                      <input type="text" id="name" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary/30 focus:border-primary transition" placeholder="John Doe" />
                     </div>
                     <div>
-                      <label
-                        for="email"
-                        class="block text-sm font-medium text-gray-700 mb-2"
-                        >Email Address</label
-                      >
-                      <input
-                        type="email"
-                        id="email"
-                        class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
-                        placeholder="john@example.com"
-                      />
+                      <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                      <input type="email" id="email" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary/30 focus:border-primary transition" placeholder="john@example.com" />
                     </div>
                   </div>
                   <div class="mb-6">
-                    <label
-                      for="subject"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >Subject</label
-                    >
-                    <input
-                      type="text"
-                      id="subject"
-                      class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
-                      placeholder="How can I help you?"
-                    />
+                    <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                    <input type="text" id="subject" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary/30 focus:border-primary transition" placeholder="How can I help you?" />
                   </div>
                   <div class="mb-6">
-                    <label
-                      for="message"
-                      class="block text-sm font-medium text-gray-700 mb-2"
-                      >Message</label
-                    >
-                    <textarea
-                      id="message"
-                      rows="5"
-                      class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
-                      placeholder="Your message here..."
-                    ></textarea>
+                    <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                    <textarea id="message" rows="5" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary/30 focus:border-primary transition" placeholder="Your message here..."></textarea>
                   </div>
-                  <button
-                    type="submit"
-                    class="px-6 py-3 bg-primary text-white font-medium rounded-button hover:bg-primary/90 transition whitespace-nowrap"
-                  >
+                  <button type="submit" class="px-6 py-3 bg-primary text-white font-medium rounded-button hover:bg-primary/90 transition whitespace-nowrap">
                     Send Message
                   </button>
                 </form>
@@ -947,32 +1346,21 @@
         </div>
       </div>
     </section>
+
     <!-- Newsletter Section -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-gray-50 section-spacing">
       <div class="container mx-auto px-4">
-        <div
-          class="max-w-4xl mx-auto bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-8 md:p-12"
-        >
+        <div class="max-w-4xl mx-auto bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-8 md:p-12">
           <div class="text-center mb-8">
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-              Subscribe to Our Newsletter
-            </h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Subscribe to Our Newsletter</h2>
             <p class="text-gray-600 max-w-2xl mx-auto">
-              Stay updated with the latest game updates, tutorials, and
-              exclusive content delivered straight to your inbox.
+              Stay updated with the latest game updates, development tutorials, and exclusive content delivered straight to your inbox.
             </p>
           </div>
-          <form class="max-w-xl mx-auto">
+          <form id="newsletter-form" class="max-w-xl mx-auto">
             <div class="flex flex-col md:flex-row gap-4">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                class="flex-1 px-4 py-3 border border-gray-300 rounded-button focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
-              />
-              <button
-                type="submit"
-                class="px-6 py-3 bg-primary text-white font-medium rounded-button hover:bg-primary/90 transition whitespace-nowrap"
-              >
+              <input type="email" id="newsletter-email" required placeholder="Enter your email address" class="flex-1 px-4 py-3 border border-gray-300 rounded-button focus:ring-2 focus:ring-primary/30 focus:border-primary transition" />
+              <button type="submit" class="px-6 py-3 bg-primary text-white font-medium rounded-button hover:bg-primary/90 transition whitespace-nowrap">
                 Subscribe
               </button>
             </div>
@@ -983,148 +1371,76 @@
         </div>
       </div>
     </section>
+
     <!-- Footer -->
     <footer class="bg-gray-900 text-white pt-16 pb-8">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div>
             <div class="flex items-center space-x-2 mb-6">
-              <div
-                class="w-10 h-10 flex items-center justify-center bg-primary rounded-full"
-              >
-                <i class="ri-gamepad-line text-white ri-lg"></i>
+              <div class="w-10 h-10 flex items-center justify-center bg-primary rounded-full">
+                <i class="fas fa-feather text-white"></i>
               </div>
-              <span class="text-xl font-['Pacifico'] text-white"
-                >Flappy Bird Game</span
-              >
+              <span class="text-xl font-['Pacifico'] text-white">SkyDash Wings</span>
             </div>
             <p class="text-gray-400 mb-6">
-              A modern recreation of the classic Flappy Bird game, designed and
-              developed by Sarthak Sharma.
+              A modern aerial adventure game featuring engaging gameplay, smooth controls, and challenging obstacles. Designed and developed by Sarthak Sharma.
             </p>
             <div class="flex space-x-4">
-              <a
-                href="#"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-primary hover:text-white transition"
-              >
-                <i class="ri-twitter-line"></i>
+              <a href="https://twitter.com/sarthaksharma" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-primary hover:text-white transition">
+                <i class="fab fa-twitter"></i>
               </a>
-              <a
-                href="#"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-primary hover:text-white transition"
-              >
-                <i class="ri-github-line"></i>
+              <a href="https://github.com/sarthaksharma" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-primary hover:text-white transition">
+                <i class="fab fa-github"></i>
               </a>
-              <a
-                href="#"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-primary hover:text-white transition"
-              >
-                <i class="ri-linkedin-line"></i>
+              <a href="https://linkedin.com/in/sarthaksharma" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-primary hover:text-white transition">
+                <i class="fab fa-linkedin"></i>
               </a>
-              <a
-                href="#"
-                class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-primary hover:text-white transition"
-              >
-                <i class="ri-instagram-line"></i>
+              <a href="https://instagram.com/sarthaksharma" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-primary hover:text-white transition">
+                <i class="fab fa-instagram"></i>
               </a>
             </div>
           </div>
           <div>
             <h3 class="text-lg font-bold mb-6">Quick Links</h3>
             <ul class="space-y-3">
-              <li>
-                <a href="#" class="text-gray-400 hover:text-white transition"
-                  >Home</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#game"
-                  class="text-gray-400 hover:text-white transition"
-                  >Play Game</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#blog"
-                  class="text-gray-400 hover:text-white transition"
-                  >Blog</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#about"
-                  class="text-gray-400 hover:text-white transition"
-                  >About Developer</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#contact"
-                  class="text-gray-400 hover:text-white transition"
-                  >Contact</a
-                >
-              </li>
+              <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+              <li><a href="#game" class="text-gray-400 hover:text-white transition">Play Game</a></li>
+              <li><a href="#blog" class="text-gray-400 hover:text-white transition">Blog</a></li>
+              <li><a href="#about" class="text-gray-400 hover:text-white transition">About Developer</a></li>
+              <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
             </ul>
           </div>
           <div>
-            <h3 class="text-lg font-bold mb-6">Resources</h3>
+            <h3 class="text-lg font-bold mb-6">Legal</h3>
             <ul class="space-y-3">
-              <li>
-                <a href="#" class="text-gray-400 hover:text-white transition"
-                  >Game Development Tutorials</a
-                >
-              </li>
-              <li>
-                <a href="#" class="text-gray-400 hover:text-white transition"
-                  >HTML5 Canvas Documentation</a
-                >
-              </li>
-              <li>
-                <a href="#" class="text-gray-400 hover:text-white transition"
-                  >JavaScript Game Frameworks</a
-                >
-              </li>
-              <li>
-                <a href="#" class="text-gray-400 hover:text-white transition"
-                  >Game Design Resources</a
-                >
-              </li>
-              <li>
-                <a href="#" class="text-gray-400 hover:text-white transition"
-                  >Developer Community</a
-                >
-              </li>
+              <li><a href="#legal" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+              <li><a href="#legal" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+              <li><a href="#legal" class="text-gray-400 hover:text-white transition">Cookie Policy</a></li>
+              <li><a href="#legal" class="text-gray-400 hover:text-white transition">DMCA Policy</a></li>
+              <li><a href="#legal" class="text-gray-400 hover:text-white transition">Refund Policy</a></li>
             </ul>
           </div>
           <div>
             <h3 class="text-lg font-bold mb-6">Contact</h3>
             <ul class="space-y-3">
               <li class="flex items-start">
-                <div
-                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1"
-                >
-                  <i class="ri-mail-line"></i>
+                <div class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1">
+                  <i class="fas fa-envelope"></i>
                 </div>
                 <span class="text-gray-400">sarthaks42388434@gmail.com</span>
               </li>
               <li class="flex items-start">
-                <div
-                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1"
-                >
-                  <i class="ri-map-pin-line"></i>
+                <div class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1">
+                  <i class="fas fa-map-marker-alt"></i>
                 </div>
                 <span class="text-gray-400">Satna, Madhya Pradesh, India</span>
               </li>
               <li class="flex items-start">
-                <div
-                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1"
-                >
-                  <i class="ri-time-line"></i>
+                <div class="w-5 h-5 flex items-center justify-center text-gray-400 mr-3 mt-1">
+                  <i class="fas fa-clock"></i>
                 </div>
-                <span class="text-gray-400"
-                  >Monday - Friday, 9AM - 6PM IST</span
-                >
+                <span class="text-gray-400">Monday - Friday, 9AM - 6PM IST</span>
               </li>
             </ul>
           </div>
@@ -1132,33 +1448,25 @@
         <div class="border-t border-gray-800 pt-8">
           <div class="flex flex-col md:flex-row justify-between items-center">
             <p class="text-gray-500 mb-4 md:mb-0">
-              © 2025 Flappy Bird Game. All rights reserved. Designed by Sarthak
-              Sharma.
+              © 2025 SkyDash Wings. All rights reserved. Designed and developed by Sarthak Sharma.
             </p>
             <div class="flex space-x-6">
-              <a href="#" class="text-gray-500 hover:text-white transition"
-                >Privacy Policy</a
-              >
-              <a href="#" class="text-gray-500 hover:text-white transition"
-                >Terms of Service</a
-              >
-              <a href="#" class="text-gray-500 hover:text-white transition"
-                >Cookie Policy</a
-              >
+              <a href="#legal" class="text-gray-500 hover:text-white transition">Privacy Policy</a>
+              <a href="#legal" class="text-gray-500 hover:text-white transition">Terms of Service</a>
+              <a href="#legal" class="text-gray-500 hover:text-white transition">Cookie Policy</a>
             </div>
           </div>
         </div>
       </div>
     </footer>
+
     <!-- Back to top button -->
-    <button
-      id="back-to-top"
-      class="fixed bottom-6 right-6 w-12 h-12 bg-primary rounded-full text-white shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300"
-    >
-      <i class="ri-arrow-up-line ri-lg"></i>
+    <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-primary rounded-full text-white shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 no-print">
+      <i class="fas fa-arrow-up"></i>
     </button>
+
     <!-- Game Logic Script -->
-    <script id="game-logic">
+    <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Game variables
         const gameContainer = document.getElementById("game-container");
@@ -1169,16 +1477,18 @@
         const shareButton = document.getElementById("share-button");
         const currentScoreElement = document.getElementById("current-score");
         const highScoreElement = document.getElementById("high-score");
+        
         let gameRunning = false;
         let gamePaused = false;
         let birdY = 150;
         let birdVelocity = 0;
         let gravity = 0.6;
         let score = 0;
-        let highScore = localStorage.getItem("flappyBirdHighScore") || 0;
+        let highScore = localStorage.getItem("skyDashWingsHighScore") || 0;
         let pipes = [];
         let gameLoop;
         let pipeInterval;
+        
         const GAME_WIDTH = gameContainer.clientWidth;
         const GAME_HEIGHT = gameContainer.clientHeight;
         const BIRD_WIDTH = 34;
@@ -1186,20 +1496,29 @@
         const PIPE_WIDTH = 52;
         const PIPE_GAP = 150;
         const GROUND_HEIGHT = 20;
+
         // Initialize bird position
         bird.style.position = "absolute";
         bird.style.width = BIRD_WIDTH + "px";
         bird.style.height = BIRD_HEIGHT + "px";
         bird.style.left = "50px";
         bird.style.transition = "transform 0.1s";
+        
         // Set initial high score
         highScoreElement.textContent = highScore;
+        
         // Set bird appearance
-        bird.style.backgroundImage =
-          'url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 24"><path fill="%23FFC107" d="M34,12c0,6.6-7.6,12-17,12S0,18.6,0,12S7.6,0,17,0S34,5.4,34,12z"/><circle fill="%23FFFFFF" cx="25" cy="9" r="4"/><circle fill="%23000000" cx="25" cy="9" r="2"/><path fill="%23FF6F00" d="M8,12c0,1.1-0.9,2-2,2s-2-0.9-2-2s0.9-2,2-2S8,10.9,8,12z"/></svg>\')';
+        bird.style.backgroundImage = 'url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 24"><path fill="%234F46E5" d="M34,12c0,6.6-7.6,12-17,12S0,18.6,0,12S7.6,0,17,0S34,5.4,34,12z"/><circle fill="%23FFFFFF" cx="25" cy="9" r="4"/><circle fill="%23000000" cx="25" cy="9" r="2"/><path fill="%23F59E0B" d="M8,12c0,1.1-0.9,2-2,2s-2-0.9-2-2s0.9-2,2-2S8,10.9,8,12z"/></svg>\')';
+
         // Game functions
         function startGame() {
           if (gameRunning) return;
+
+          // Remove any existing game over message
+          const existingMessage = gameContainer.querySelector(".game-over-message");
+          if (existingMessage) {
+            existingMessage.remove();
+          }
 
           // Reset game state
           gameRunning = true;
@@ -1237,6 +1556,7 @@
           // Create initial pipe
           createPipe();
         }
+
         function updateGame() {
           if (gamePaused) return;
 
@@ -1269,10 +1589,11 @@
             birdY = 0;
             birdVelocity = 2;
           }
+
           // Update pipes
           for (let i = pipes.length - 1; i >= 0; i--) {
             const pipe = pipes[i];
-            pipe.x -= 3; // Slightly faster pipe movement
+            pipe.x -= 3;
 
             // Update pipe positions
             pipe.topElement.style.left = pipe.x + "px";
@@ -1294,8 +1615,6 @@
               pipe.passed = true;
               score++;
               currentScoreElement.textContent = score;
-
-              // Play score sound or add visual feedback here
             }
 
             // Remove off-screen pipes
@@ -1306,14 +1625,14 @@
             }
           }
         }
+
         function createPipe() {
           if (!gameRunning || gamePaused) return;
 
           // Calculate pipe dimensions
-          const minHeight = 50; // Minimum pipe height
+          const minHeight = 50;
           const maxHeight = GAME_HEIGHT - PIPE_GAP - minHeight - GROUND_HEIGHT;
-          const topHeight =
-            Math.floor(Math.random() * (maxHeight - minHeight)) + minHeight;
+          const topHeight = Math.floor(Math.random() * (maxHeight - minHeight)) + minHeight;
 
           // Create top pipe
           const topPipe = document.createElement("div");
@@ -1331,8 +1650,7 @@
           bottomPipe.className = "pipe";
           bottomPipe.style.position = "absolute";
           bottomPipe.style.width = PIPE_WIDTH + "px";
-          bottomPipe.style.height =
-            GAME_HEIGHT - topHeight - PIPE_GAP - GROUND_HEIGHT + "px";
+          bottomPipe.style.height = GAME_HEIGHT - topHeight - PIPE_GAP - GROUND_HEIGHT + "px";
           bottomPipe.style.bottom = GROUND_HEIGHT + "px";
           bottomPipe.style.backgroundColor = "#10B981";
           bottomPipe.style.border = "2px solid #065f46";
@@ -1358,20 +1676,21 @@
           topPipe.style.left = GAME_WIDTH + "px";
           bottomPipe.style.left = GAME_WIDTH + "px";
         }
+
         function flapBird() {
           if (!gameRunning || gamePaused) return;
           birdVelocity = -8.5;
-
-          // Add flap animation
           bird.style.transform = "rotate(-20deg)";
         }
+
         function pauseGame() {
           if (!gameRunning) return;
           gamePaused = !gamePaused;
           pauseButton.innerHTML = gamePaused
-            ? '<i class="ri-play-line ri-lg text-gray-700"></i>'
-            : '<i class="ri-pause-line ri-lg text-gray-700"></i>';
+            ? '<i class="fas fa-play text-gray-700"></i>'
+            : '<i class="fas fa-pause text-gray-700"></i>';
         }
+
         function endGame() {
           gameRunning = false;
 
@@ -1383,47 +1702,76 @@
           if (score > highScore) {
             highScore = score;
             highScoreElement.textContent = highScore;
-            localStorage.setItem("flappyBirdHighScore", highScore);
+            localStorage.setItem("skyDashWingsHighScore", highScore);
           }
 
           // Reset button states
           pauseButton.disabled = true;
           restartButton.disabled = false;
-          pauseButton.innerHTML = '<i class="ri-pause-line ri-lg text-gray-700"></i>';
+          pauseButton.innerHTML = '<i class="fas fa-pause text-gray-700"></i>';
+
+          // Remove any existing game over message
+          const existingMessage = gameContainer.querySelector(".game-over-message");
+          if (existingMessage) {
+            existingMessage.remove();
+          }
 
           // Show game over message
           const gameOverMessage = document.createElement("div");
-          gameOverMessage.className =
-            "text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/90 p-6 rounded-lg shadow-lg";
+          gameOverMessage.className = "game-over-message";
           gameOverMessage.innerHTML = `
-              <h3 class="text-2xl font-bold text-gray-800 mb-4">Game Over!</h3>
-              <p class="text-gray-600 mb-4">Score: ${score}</p>
-              <button onclick="startGame()" class="px-6 py-2 bg-primary text-white font-medium rounded-button shadow hover:bg-primary/90 transition whitespace-nowrap">Play Again</button>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Flight Ended!</h3>
+            <p class="text-gray-600 mb-4">Score: ${score}</p>
+            ${score > 0 ? `<p class="text-sm text-gray-500 mb-4">High Score: ${highScore}</p>` : ''}
+            <button onclick="restartGameFromMessage()" class="px-6 py-2 bg-primary text-white font-medium rounded-button shadow hover:bg-primary/90 transition whitespace-nowrap">Fly Again</button>
           `;
           gameContainer.appendChild(gameOverMessage);
 
           // Add falling animation to bird
           bird.style.transform = "rotate(90deg)";
         }
+
+        function restartGameFromMessage() {
+          const gameOverMessage = gameContainer.querySelector(".game-over-message");
+          if (gameOverMessage) {
+            gameOverMessage.remove();
+          }
+          startGame();
+        }
+
+        // Make global for onclick handler
+        window.restartGameFromMessage = restartGameFromMessage;
+
         function shareScore() {
           if (navigator.share) {
             navigator.share({
-              title: "Flappy Bird Game",
-              text: `I scored ${score} points in Flappy Bird! Can you beat my score?`,
+              title: "SkyDash Wings",
+              text: `I scored ${score} points in SkyDash Wings! Can you beat my score?`,
               url: window.location.href,
             });
           } else {
-            alert(`I scored ${score} points in Flappy Bird! Can you beat my score?`);
+            // Fallback for browsers that don't support Web Share API
+            const shareText = `I scored ${score} points in SkyDash Wings! Can you beat my score? Play at ${window.location.href}`;
+            if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(shareText).then(() => {
+                alert("Score shared to clipboard!");
+              });
+            } else {
+              alert(shareText);
+            }
           }
         }
+
         // Event listeners
         startButton.addEventListener("click", startGame);
         pauseButton.addEventListener("click", pauseGame);
         restartButton.addEventListener("click", startGame);
         shareButton.addEventListener("click", shareScore);
         gameContainer.addEventListener("click", flapBird);
+        
         document.addEventListener("keydown", function (e) {
           if (e.code === "Space") {
+            e.preventDefault();
             flapBird();
           } else if (e.code === "KeyP") {
             pauseGame();
@@ -1431,17 +1779,17 @@
             startGame();
           }
         });
-        // Make bird look in movement direction
-        setInterval(() => {
-          if (gameRunning && !gamePaused) {
-            const rotation = birdVelocity * 2;
-            bird.style.transform = `rotate(${rotation}deg)`;
-          }
-        }, 50);
+
+        // Touch events for mobile
+        gameContainer.addEventListener("touchstart", function(e) {
+          e.preventDefault();
+          flapBird();
+        });
       });
     </script>
+
     <!-- UI Interaction Script -->
-    <script id="ui-interaction">
+    <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Back to top button
         const backToTopButton = document.getElementById("back-to-top");
@@ -1454,12 +1802,14 @@
             backToTopButton.classList.add("opacity-0", "invisible");
           }
         });
+        
         backToTopButton.addEventListener("click", function () {
           window.scrollTo({
             top: 0,
             behavior: "smooth",
           });
         });
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
           anchor.addEventListener("click", function (e) {
@@ -1474,70 +1824,102 @@
             }
           });
         });
-        // Mobile menu toggle (simplified version)
-        const mobileMenuButton = document.querySelector("button.md\\:hidden");
-        if (mobileMenuButton) {
-          mobileMenuButton.addEventListener("click", function () {
-            alert("Mobile menu would toggle here in a complete implementation");
-          });
-        }
-        // Add loading animation to blog images
-        document.querySelectorAll(".blog-card img").forEach((img) => {
-          img.classList.add("transition-opacity", "duration-500", "opacity-0");
-          img.onload = function () {
-            img.classList.remove("opacity-0");
-            img.classList.add("opacity-100");
-          };
-        });
-        // Form validation for contact form
-        const contactForm = document.querySelector("#contact form");
+
+        // Contact form handling
+        const contactForm = document.getElementById("contact-form");
         if (contactForm) {
           contactForm.addEventListener("submit", function (e) {
             e.preventDefault();
             const nameInput = document.getElementById("name");
             const emailInput = document.getElementById("email");
+            const subjectInput = document.getElementById("subject");
             const messageInput = document.getElementById("message");
+            
             let isValid = true;
+            
+            // Validate name
             if (!nameInput.value.trim()) {
               nameInput.classList.add("border-red-500");
               isValid = false;
             } else {
               nameInput.classList.remove("border-red-500");
             }
+            
+            // Validate email
             if (!emailInput.value.trim() || !emailInput.value.includes("@")) {
               emailInput.classList.add("border-red-500");
               isValid = false;
             } else {
               emailInput.classList.remove("border-red-500");
             }
+            
+            // Validate subject
+            if (!subjectInput.value.trim()) {
+              subjectInput.classList.add("border-red-500");
+              isValid = false;
+            } else {
+              subjectInput.classList.remove("border-red-500");
+            }
+            
+            // Validate message
             if (!messageInput.value.trim()) {
               messageInput.classList.add("border-red-500");
               isValid = false;
             } else {
               messageInput.classList.remove("border-red-500");
             }
+            
             if (isValid) {
-              alert("Thank you for your message! We will get back to you soon.");
+              // Create mailto link
+              const subject = encodeURIComponent(subjectInput.value);
+              const body = encodeURIComponent(`Name: ${nameInput.value}\nEmail: ${emailInput.value}\n\nMessage:\n${messageInput.value}`);
+              const mailtoLink = `mailto:sarthaks42388434@gmail.com?subject=${subject}&body=${body}`;
+              
+              // Open email client
+              window.location.href = mailtoLink;
+              
+              // Show success message
+              alert("Thank you for your message! Your email client will open to send the message.");
               contactForm.reset();
             } else {
               alert("Please fill in all required fields correctly.");
             }
           });
         }
-        // Newsletter form
-        const newsletterForm = document.querySelector("section:nth-of-type(5) form");
+
+        // Newsletter form handling
+        const newsletterForm = document.getElementById("newsletter-form");
         if (newsletterForm) {
           newsletterForm.addEventListener("submit", function (e) {
             e.preventDefault();
-            const emailInput = this.querySelector('input[type="email"]');
+            const emailInput = document.getElementById("newsletter-email");
+            
             if (!emailInput.value.trim() || !emailInput.value.includes("@")) {
               emailInput.classList.add("border-red-500");
               alert("Please enter a valid email address.");
             } else {
               emailInput.classList.remove("border-red-500");
-              alert("Thank you for subscribing to our newsletter!");
+              
+              // Simulate newsletter subscription
+              const subject = encodeURIComponent("Newsletter Subscription Request");
+              const body = encodeURIComponent(`I would like to subscribe to the SkyDash Wings newsletter.\n\nEmail: ${emailInput.value}`);
+              const mailtoLink = `mailto:sarthaks42388434@gmail.com?subject=${subject}&body=${body}`;
+              
+              window.location.href = mailtoLink;
+              
+              alert("Thank you for subscribing! Your email client will open to confirm your subscription.");
               newsletterForm.reset();
             }
+          });
+        }
+
+        // Mobile menu toggle (basic implementation)
+        const mobileMenuButton = document.querySelector("button.md\\:hidden");
+        if (mobileMenuButton) {
+          mobileMenuButton.addEventListener("click", function () {
+            // For a full implementation, you would toggle a mobile menu
+            // For now, we'll just scroll to the navigation
+            document.querySelector("nav").scrollIntoView({ behavior: "smooth" });
           });
         }
       });
